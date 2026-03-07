@@ -125,7 +125,31 @@ const jsonLd = [
         name: "Do I need to install anything?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. This is a web-based tool. Just open the website in any modern browser and start creating invoices.",
+          text: "No. This is a web-based tool that works in any modern browser — Chrome, Firefox, Safari, or Edge — on desktop, tablet, or mobile. No downloads, no plugins, no extensions.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How is the PDF generated?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The PDF is generated entirely in your browser using react-pdf, a library that creates vector-quality PDFs with JavaScript. The resulting file is crisp at any zoom level and can be printed on any paper size.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I include my company logo?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Logo support is on our roadmap and will be available in a future update. Currently you can include your business name, address, and contact information in the invoice header.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is this tool suitable for tax purposes?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Our generator includes standard invoice fields that satisfy most business requirements. However, tax regulations vary by jurisdiction, so we recommend consulting a qualified accountant or tax professional to ensure your invoices meet local legal requirements.",
         },
       },
     ],
@@ -176,6 +200,7 @@ export default function RootLayout({
               </Link>
               <nav className="hidden sm:flex items-center gap-6 text-sm text-gray-600">
                 <Link href="/" className="hover:text-blue-600 transition">Invoice Generator</Link>
+                <Link href="/blog" className="hover:text-blue-600 transition">Blog</Link>
                 <Link href="/about" className="hover:text-blue-600 transition">About</Link>
                 <Link href="/contact" className="hover:text-blue-600 transition">Contact</Link>
               </nav>
@@ -207,6 +232,7 @@ export default function RootLayout({
                 <h4 className="font-semibold text-white mb-3 text-sm">Tools</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/" className="hover:text-white transition">Invoice Generator</Link></li>
+                  <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
                 </ul>
               </div>
               <div>
