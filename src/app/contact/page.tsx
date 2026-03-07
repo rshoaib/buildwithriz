@@ -4,6 +4,12 @@ import { Mail, Globe } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Contact — BuildWithRiz',
   description: 'Get in touch with BuildWithRiz. We are happy to hear your feedback.',
+  alternates: { canonical: 'https://buildwithriz.com/contact' },
+  openGraph: {
+    title: 'Contact — BuildWithRiz',
+    description: 'Get in touch with BuildWithRiz for questions and feedback.',
+    url: 'https://buildwithriz.com/contact',
+  },
 };
 
 export default function Contact() {

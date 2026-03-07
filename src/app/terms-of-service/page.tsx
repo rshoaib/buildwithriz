@@ -3,6 +3,12 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Service — BuildWithRiz',
   description: 'Terms of Service for BuildWithRiz free invoice generator.',
+  alternates: { canonical: 'https://buildwithriz.com/terms-of-service' },
+  openGraph: {
+    title: 'Terms of Service — BuildWithRiz',
+    description: 'Terms of Service for BuildWithRiz free invoice generator.',
+    url: 'https://buildwithriz.com/terms-of-service',
+  },
 };
 
 export default function TermsOfService() {

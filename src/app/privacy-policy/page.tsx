@@ -3,6 +3,12 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy — BuildWithRiz',
   description: 'Privacy Policy for BuildWithRiz free invoice generator. No data is collected or stored.',
+  alternates: { canonical: 'https://buildwithriz.com/privacy-policy' },
+  openGraph: {
+    title: 'Privacy Policy — BuildWithRiz',
+    description: 'Privacy Policy for BuildWithRiz free invoice generator.',
+    url: 'https://buildwithriz.com/privacy-policy',
+  },
 };
 
 export default function PrivacyPolicy() {

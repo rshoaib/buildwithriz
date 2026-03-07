@@ -49,28 +49,88 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "BuildWithRiz Free Invoice Generator",
-  url: "https://buildwithriz.com",
-  description: "Create professional invoices for free. No signup, no data stored.",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Any",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "BuildWithRiz Free Invoice Generator",
+    url: "https://buildwithriz.com",
+    description: "Create professional invoices for free. No signup, no data stored.",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    featureList: [
+      "Free PDF invoice generation",
+      "No signup required",
+      "Multiple currency support",
+      "Professional templates",
+      "Client-side processing",
+      "Privacy-friendly",
+    ],
   },
-  featureList: [
-    "Free PDF invoice generation",
-    "No signup required",
-    "Multiple currency support",
-    "Professional templates",
-    "Client-side processing",
-    "Privacy-friendly",
-  ],
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BuildWithRiz",
+    url: "https://buildwithriz.com",
+    logo: "https://buildwithriz.com/favicon.ico",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "contact@buildwithriz.com",
+      contactType: "customer service",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is this invoice generator really free?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, 100% free. No hidden charges, no premium plans, no signup required. Create unlimited invoices.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is my data safe?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Absolutely. All processing happens in your browser. We never receive, store, or transmit your invoice data. Your information stays on your device.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I use this for my business?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes! Our invoices are professional-grade PDFs suitable for freelancers, small businesses, and contractors.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What currencies are supported?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We support 30+ currencies including USD, EUR, GBP, SAR, AED, INR, PKR, CAD, AUD, JPY, and many more.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do I need to install anything?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No. This is a web-based tool. Just open the website in any modern browser and start creating invoices.",
+        },
+      },
+    ],
+  },
+];
 
 export default function RootLayout({
   children,
