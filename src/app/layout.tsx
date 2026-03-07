@@ -140,6 +140,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Search engine verification */}
+        <meta name="google-site-verification" content="gd1HokZ0LOnSrmttQWVKSOi19cqAR_7pM2nRmYnUHxo" />
+        <meta name="msvalidate.01" content="2CB41F3C9BFB4BC82DDE00AF8D97B0A6" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
