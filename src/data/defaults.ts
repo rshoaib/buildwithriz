@@ -1,6 +1,8 @@
 import { InvoiceData } from '@/types/invoice';
 
 export const defaultInvoice: InvoiceData = {
+    logo: '',
+    language: 'en',
     fromName: '',
     fromEmail: '',
     fromAddress: '',

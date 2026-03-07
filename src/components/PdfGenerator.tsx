@@ -3,11 +3,13 @@
 import { InvoiceData } from '@/types/invoice';
 import { getCurrencySymbol } from '@/data/currencies';
 import { calculateSubtotal, calculateTax, calculateDiscount, calculateTotal } from '@/data/defaults';
+import { getLabels } from '@/data/languages';
 import {
   Document as PDFDoc,
   Page as PDFPage,
   View as PDFView,
   Text as PDFText,
+  Image as PDFImage,
   StyleSheet as PDFStyleSheet,
   PDFDownloadLink,
 } from '@react-pdf/renderer';
@@ -16,8 +18,9 @@ import { Download } from 'lucide-react';
 const styles = PDFStyleSheet.create({
   page: { padding: 40, fontSize: 10, fontFamily: 'Helvetica', color: '#1a1a1a' },
   header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30 },
-  headerLeft: {},
+  headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   headerRight: { textAlign: 'right' },
+  logo: { width: 50, height: 50, objectFit: 'contain' as const },
   title: { fontSize: 24, fontWeight: 'bold', color: '#2563eb' },
   companyName: { fontSize: 14, fontWeight: 'bold', marginBottom: 2 },
   smallText: { fontSize: 8, color: '#6b7280' },
@@ -54,6 +57,7 @@ function InvoicePDF({ data }: { data: InvoiceData }) {
   const tax = calculateTax(subtotal, data.taxRate);
   const discount = calculateDiscount(subtotal, data.discountRate);
   const total = calculateTotal(data.items, data.taxRate, data.discountRate);
+  const labels = getLabels(data.language);
 
   return (
     <PDFDoc>
@@ -61,13 +65,18 @@ function InvoicePDF({ data }: { data: InvoiceData }) {
         {/* Header */}
         <PDFView style={styles.header}>
           <PDFView style={styles.headerLeft}>
-            <PDFText style={styles.companyName}>{data.fromName || 'Your Company'}</PDFText>
-            {data.fromEmail ? <PDFText style={styles.smallText}>{data.fromEmail}</PDFText> : null}
-            {data.fromPhone ? <PDFText style={styles.smallText}>{data.fromPhone}</PDFText> : null}
-            {data.fromAddress ? <PDFText style={styles.smallText}>{data.fromAddress}</PDFText> : null}
+            {data.logo ? (
+              <PDFImage src={data.logo} style={styles.logo} />
+            ) : null}
+            <PDFView>
+              <PDFText style={styles.companyName}>{data.fromName || 'Your Company'}</PDFText>
+              {data.fromEmail ? <PDFText style={styles.smallText}>{data.fromEmail}</PDFText> : null}
+              {data.fromPhone ? <PDFText style={styles.smallText}>{data.fromPhone}</PDFText> : null}
+              {data.fromAddress ? <PDFText style={styles.smallText}>{data.fromAddress}</PDFText> : null}
+            </PDFView>
           </PDFView>
           <PDFView style={styles.headerRight}>
-            <PDFText style={styles.title}>INVOICE</PDFText>
+            <PDFText style={styles.title}>{labels.invoice}</PDFText>
             <PDFText style={styles.smallText}>#{data.invoiceNumber}</PDFText>
           </PDFView>
         </PDFView>
@@ -75,21 +84,21 @@ function InvoicePDF({ data }: { data: InvoiceData }) {
         {/* Details */}
         <PDFView style={styles.section}>
           <PDFView style={styles.sectionCol}>
-            <PDFText style={styles.sectionLabel}>Bill To</PDFText>
+            <PDFText style={styles.sectionLabel}>{labels.billTo}</PDFText>
             <PDFText style={styles.sectionValue}>{data.toName || '—'}</PDFText>
             {data.toEmail ? <PDFText style={styles.smallText}>{data.toEmail}</PDFText> : null}
             {data.toAddress ? <PDFText style={styles.smallText}>{data.toAddress}</PDFText> : null}
           </PDFView>
           <PDFView style={styles.sectionCol}>
-            <PDFText style={styles.sectionLabel}>Date</PDFText>
+            <PDFText style={styles.sectionLabel}>{labels.date}</PDFText>
             <PDFText style={styles.sectionValue}>{data.invoiceDate}</PDFText>
-            <PDFText style={{ ...styles.sectionLabel, marginTop: 8 }}>Due Date</PDFText>
+            <PDFText style={{ ...styles.sectionLabel, marginTop: 8 }}>{labels.dueDate}</PDFText>
             <PDFText style={styles.sectionValue}>{data.dueDate}</PDFText>
           </PDFView>
           <PDFView style={styles.sectionCol}>
-            <PDFText style={styles.sectionLabel}>Payment Terms</PDFText>
+            <PDFText style={styles.sectionLabel}>{labels.paymentTerms}</PDFText>
             <PDFText style={styles.sectionValue}>{data.paymentTerms || 'Net 30'}</PDFText>
-            <PDFText style={{ ...styles.sectionLabel, marginTop: 8 }}>Currency</PDFText>
+            <PDFText style={{ ...styles.sectionLabel, marginTop: 8 }}>{labels.currency}</PDFText>
             <PDFText style={styles.sectionValue}>{data.currency}</PDFText>
           </PDFView>
         </PDFView>
@@ -97,10 +106,10 @@ function InvoicePDF({ data }: { data: InvoiceData }) {
         {/* Items Table */}
         <PDFView style={styles.table}>
           <PDFView style={styles.tableHeader}>
-            <PDFText style={{ ...styles.tableHeaderCell, ...styles.descCol }}>Description</PDFText>
-            <PDFText style={{ ...styles.tableHeaderCell, ...styles.qtyCol }}>Qty</PDFText>
-            <PDFText style={{ ...styles.tableHeaderCell, ...styles.rateCol }}>Rate</PDFText>
-            <PDFText style={{ ...styles.tableHeaderCell, ...styles.amountCol }}>Amount</PDFText>
+            <PDFText style={{ ...styles.tableHeaderCell, ...styles.descCol }}>{labels.description}</PDFText>
+            <PDFText style={{ ...styles.tableHeaderCell, ...styles.qtyCol }}>{labels.qty}</PDFText>
+            <PDFText style={{ ...styles.tableHeaderCell, ...styles.rateCol }}>{labels.rate}</PDFText>
+            <PDFText style={{ ...styles.tableHeaderCell, ...styles.amountCol }}>{labels.amount}</PDFText>
           </PDFView>
           {data.items.map((item) => (
             <PDFView key={item.id} style={styles.tableRow}>
@@ -115,23 +124,23 @@ function InvoicePDF({ data }: { data: InvoiceData }) {
         {/* Totals */}
         <PDFView style={styles.totalsContainer}>
           <PDFView style={styles.totalsRow}>
-            <PDFText style={styles.totalsLabel}>Subtotal</PDFText>
+            <PDFText style={styles.totalsLabel}>{labels.subtotal}</PDFText>
             <PDFText style={styles.totalsValue}>{symbol}{subtotal.toFixed(2)}</PDFText>
           </PDFView>
           {data.taxRate > 0 && (
             <PDFView style={styles.totalsRow}>
-              <PDFText style={styles.totalsLabel}>Tax ({data.taxRate}%)</PDFText>
+              <PDFText style={styles.totalsLabel}>{labels.tax} ({data.taxRate}%)</PDFText>
               <PDFText style={styles.totalsValue}>+{symbol}{tax.toFixed(2)}</PDFText>
             </PDFView>
           )}
           {data.discountRate > 0 && (
             <PDFView style={styles.totalsRow}>
-              <PDFText style={styles.totalsLabel}>Discount ({data.discountRate}%)</PDFText>
+              <PDFText style={styles.totalsLabel}>{labels.discount} ({data.discountRate}%)</PDFText>
               <PDFText style={{ ...styles.totalsValue, color: '#16a34a' }}>-{symbol}{discount.toFixed(2)}</PDFText>
             </PDFView>
           )}
           <PDFView style={styles.totalRow}>
-            <PDFText style={styles.totalLabel}>Total</PDFText>
+            <PDFText style={styles.totalLabel}>{labels.total}</PDFText>
             <PDFText style={styles.totalValue}>{symbol}{total.toFixed(2)}</PDFText>
           </PDFView>
         </PDFView>
@@ -139,7 +148,7 @@ function InvoicePDF({ data }: { data: InvoiceData }) {
         {/* Notes */}
         {data.notes ? (
           <PDFView style={styles.notes}>
-            <PDFText style={styles.notesLabel}>Notes</PDFText>
+            <PDFText style={styles.notesLabel}>{labels.notes}</PDFText>
             <PDFText style={styles.notesText}>{data.notes}</PDFText>
           </PDFView>
         ) : null}

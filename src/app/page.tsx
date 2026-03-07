@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import InvoiceForm from '@/components/InvoiceForm';
 import InvoicePreview from '@/components/InvoicePreview';
 import dynamic from 'next/dynamic';
 import { defaultInvoice } from '@/data/defaults';
-import { InvoiceData } from '@/types/invoice';
+import { InvoiceData, SavedTemplate } from '@/types/invoice';
 import {
   Shield,
   Zap,
@@ -19,7 +19,13 @@ import {
   Users,
   Clock,
   TrendingUp,
+  Save,
+  FolderOpen,
+  Trash2,
+  RotateCcw,
 } from 'lucide-react';
+
+const TEMPLATES_KEY = 'buildwithriz-templates';
 
 const PdfGenerator = dynamic(() => import('@/components/PdfGenerator'), {
   ssr: false,
@@ -33,6 +39,57 @@ const PdfGenerator = dynamic(() => import('@/components/PdfGenerator'), {
 export default function Home() {
   const [invoice, setInvoice] = useState<InvoiceData>(defaultInvoice);
   const [activeTab, setActiveTab] = useState<'form' | 'preview'>('form');
+  const [templates, setTemplates] = useState<SavedTemplate[]>([]);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [templateName, setTemplateName] = useState('');
+  const [showTemplates, setShowTemplates] = useState(false);
+
+  // Load templates from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(TEMPLATES_KEY);
+      if (stored) {
+        setTemplates(JSON.parse(stored));
+      }
+    } catch {
+      // Ignore errors from localStorage
+    }
+  }, []);
+
+  const saveTemplates = useCallback((newTemplates: SavedTemplate[]) => {
+    setTemplates(newTemplates);
+    try {
+      localStorage.setItem(TEMPLATES_KEY, JSON.stringify(newTemplates));
+    } catch {
+      // localStorage full or unavailable
+    }
+  }, []);
+
+  const handleSaveTemplate = () => {
+    if (!templateName.trim()) return;
+    const newTemplate: SavedTemplate = {
+      id: String(Date.now()),
+      name: templateName.trim(),
+      data: { ...invoice },
+      createdAt: new Date().toISOString(),
+    };
+    saveTemplates([newTemplate, ...templates]);
+    setTemplateName('');
+    setShowSaveDialog(false);
+  };
+
+  const handleLoadTemplate = (template: SavedTemplate) => {
+    setInvoice({ ...template.data });
+    setShowTemplates(false);
+  };
+
+  const handleDeleteTemplate = (id: string) => {
+    saveTemplates(templates.filter((t) => t.id !== id));
+  };
+
+  const handleResetInvoice = () => {
+    setInvoice({ ...defaultInvoice, invoiceNumber: `INV-${String(Date.now()).slice(-6)}` });
+  };
 
   return (
     <main className="min-h-screen">
@@ -105,6 +162,102 @@ export default function Home() {
 
       {/* Invoice Builder */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        {/* Templates Toolbar */}
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          {/* Save */}
+          {showSaveDialog ? (
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                placeholder="Template name..."
+                value={templateName}
+                onChange={(e) => setTemplateName(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSaveTemplate()}
+                autoFocus
+              />
+              <button
+                onClick={handleSaveTemplate}
+                disabled={!templateName.trim()}
+                className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition disabled:opacity-50"
+              >
+                <Save size={12} />
+                Save
+              </button>
+              <button
+                onClick={() => { setShowSaveDialog(false); setTemplateName(''); }}
+                className="text-xs text-gray-500 hover:text-gray-700 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowSaveDialog(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-50 transition"
+            >
+              <Save size={12} />
+              Save as Template
+            </button>
+          )}
+
+          {/* Load */}
+          <div className="relative">
+            <button
+              onClick={() => setShowTemplates(!showTemplates)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-50 transition"
+            >
+              <FolderOpen size={12} />
+              Load Template
+              {templates.length > 0 && (
+                <span className="bg-blue-100 text-blue-700 text-[10px] font-semibold px-1.5 py-0.5 rounded-full ml-1">
+                  {templates.length}
+                </span>
+              )}
+            </button>
+            {showTemplates && (
+              <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl border border-gray-200 shadow-xl z-50 overflow-hidden">
+                {templates.length === 0 ? (
+                  <p className="px-4 py-3 text-xs text-gray-400 text-center">No saved templates yet</p>
+                ) : (
+                  <div className="max-h-48 overflow-y-auto divide-y divide-gray-50">
+                    {templates.map((t) => (
+                      <div
+                        key={t.id}
+                        className="flex items-center justify-between px-3 py-2 hover:bg-gray-50 transition group"
+                      >
+                        <button
+                          onClick={() => handleLoadTemplate(t)}
+                          className="flex-1 text-left"
+                        >
+                          <p className="text-xs font-medium text-gray-800">{t.name}</p>
+                          <p className="text-[10px] text-gray-400">
+                            {new Date(t.createdAt).toLocaleDateString()}
+                          </p>
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleDeleteTemplate(t.id); }}
+                          className="p-1 text-gray-300 hover:text-red-500 transition opacity-0 group-hover:opacity-100"
+                        >
+                          <Trash2 size={12} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Reset */}
+          <button
+            onClick={handleResetInvoice}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition"
+          >
+            <RotateCcw size={12} />
+            Reset
+          </button>
+        </div>
         {/* Mobile tabs */}
         <div className="flex lg:hidden mb-4 bg-gray-100 rounded-xl p-1">
           <button

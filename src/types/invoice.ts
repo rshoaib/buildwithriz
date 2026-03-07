@@ -6,6 +6,12 @@ export interface LineItem {
 }
 
 export interface InvoiceData {
+    // Logo
+    logo: string;
+
+    // Language
+    language: string;
+
     // From
     fromName: string;
     fromEmail: string;
@@ -39,4 +45,11 @@ export interface Currency {
     code: string;
     symbol: string;
     name: string;
+}
+
+export interface SavedTemplate {
+    id: string;
+    name: string;
+    data: InvoiceData;
+    createdAt: string;
 }

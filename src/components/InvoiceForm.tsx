@@ -2,7 +2,9 @@
 
 import { InvoiceData } from '@/types/invoice';
 import { currencies } from '@/data/currencies';
-import { Plus, Trash2 } from 'lucide-react';
+import { languages } from '@/data/languages';
+import { Plus, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react';
+import { useRef } from 'react';
 
 interface InvoiceFormProps {
   data: InvoiceData;
@@ -10,6 +12,8 @@ interface InvoiceFormProps {
 }
 
 export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const update = (fields: Partial<InvoiceData>) => {
     onChange({ ...data, ...fields });
   };
@@ -34,12 +38,84 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
     update({ items: data.items.filter((_, i) => i !== index) });
   };
 
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (2MB max)
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Logo must be smaller than 2MB');
+      return;
+    }
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file (PNG, JPG, or SVG)');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result as string;
+      update({ logo: result });
+    };
+    reader.readAsDataURL(file);
+
+    // Reset input so the same file can be re-uploaded
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const removeLogo = () => {
+    update({ logo: '' });
+  };
+
   const inputClass =
     'w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20';
   const labelClass = 'block text-xs font-medium text-gray-500 mb-1';
 
   return (
     <div className="space-y-6">
+      {/* Logo Upload */}
+      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
+        <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Logo</h3>
+        {data.logo ? (
+          <div className="flex items-center gap-3">
+            <div className="relative w-20 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={data.logo}
+                alt="Logo"
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
+            <button
+              onClick={removeLogo}
+              className="flex items-center gap-1 text-xs text-red-500 hover:text-red-600 transition"
+            >
+              <X size={12} />
+              Remove
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="flex items-center gap-2 px-3 py-2 border border-dashed border-gray-300 rounded-lg text-sm text-gray-500 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/50 transition w-full justify-center"
+          >
+            <Upload size={14} />
+            Upload Logo (PNG, JPG — max 2MB)
+          </button>
+        )}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/png,image/jpeg,image/svg+xml,image/webp"
+          className="hidden"
+          onChange={handleLogoUpload}
+        />
+      </div>
+
       {/* From & To */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* From */}
@@ -123,7 +199,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
       {/* Invoice Details */}
       <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4">
         <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">Invoice Details</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           <div>
             <label className={labelClass}>Invoice #</label>
             <input
@@ -160,6 +236,25 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
               {currencies.map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.symbol} {c.code} — {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>
+              <span className="flex items-center gap-1">
+                <ImageIcon size={10} />
+                Invoice Language
+              </span>
+            </label>
+            <select
+              className={inputClass}
+              value={data.language}
+              onChange={(e) => update({ language: e.target.value })}
+            >
+              {languages.map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.nativeName} ({l.name})
                 </option>
               ))}
             </select>
