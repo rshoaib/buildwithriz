@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useState, useEffect, useCallback, Suspense, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import InvoiceForm from '@/components/InvoiceForm';
 import InvoicePreview from '@/components/InvoicePreview';
@@ -30,6 +30,8 @@ import {
 
 const TEMPLATES_KEY = 'buildwithriz-templates';
 const THEME_KEY = 'buildwithriz-theme';
+const DRAFT_KEY = 'buildwithriz-draft';
+const LAST_INV_NUM_KEY = 'buildwithriz-last-inv-num';
 
 const PdfGenerator = dynamic(() => import('@/components/PdfGenerator'), {
   ssr: false,
@@ -50,8 +52,10 @@ function HomeContent() {
   const [selectedTheme, setSelectedTheme] = useState<TemplateStyle>('modern');
   const [templateBanner, setTemplateBanner] = useState<string | null>(null);
   const searchParams = useSearchParams();
+  const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isFirstLoad = useRef(true);
 
-  // Load templates and theme from localStorage on mount
+  // Load templates, theme, and draft from localStorage on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(TEMPLATES_KEY);
@@ -62,10 +66,67 @@ function HomeContent() {
       if (savedTheme) {
         setSelectedTheme(savedTheme as TemplateStyle);
       }
+      // Restore auto-saved draft (only if no URL template)
+      const templateSlug = new URLSearchParams(window.location.search).get('template');
+      if (!templateSlug) {
+        const draft = localStorage.getItem(DRAFT_KEY);
+        if (draft) {
+          setInvoice(JSON.parse(draft));
+        }
+      }
+      // Auto-increment invoice number
+      const lastNum = localStorage.getItem(LAST_INV_NUM_KEY);
+      if (lastNum && !templateSlug) {
+        const match = lastNum.match(/(\d+)$/);
+        if (match) {
+          const nextNum = String(Number(match[1]) + 1).padStart(match[1].length, '0');
+          const prefix = lastNum.slice(0, lastNum.length - match[1].length);
+          setInvoice(prev => ({ ...prev, invoiceNumber: `${prefix}${nextNum}` }));
+        }
+      }
     } catch {
       // Ignore errors from localStorage
     }
+    isFirstLoad.current = false;
   }, []);
+
+  // Auto-save draft every 5 seconds
+  useEffect(() => {
+    if (isFirstLoad.current) return;
+    if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current);
+    autoSaveTimerRef.current = setTimeout(() => {
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(invoice));
+      } catch { /* full */ }
+    }, 5000);
+    return () => {
+      if (autoSaveTimerRef.current) clearTimeout(autoSaveTimerRef.current);
+    };
+  }, [invoice]);
+
+  // Due date auto-calculation from payment terms
+  useEffect(() => {
+    const terms = invoice.paymentTerms.trim().toLowerCase();
+    let days: number | null = null;
+    if (terms === 'due on receipt' || terms === 'due upon receipt') {
+      days = 0;
+    } else {
+      const match = terms.match(/^net\s*(\d+)$/i);
+      if (match) {
+        days = parseInt(match[1], 10);
+      }
+    }
+    if (days !== null && invoice.invoiceDate) {
+      const baseDate = new Date(invoice.invoiceDate + 'T00:00:00');
+      if (!isNaN(baseDate.getTime())) {
+        const dueDate = new Date(baseDate.getTime() + days * 24 * 60 * 60 * 1000);
+        const dueDateStr = dueDate.toISOString().split('T')[0];
+        if (dueDateStr !== invoice.dueDate) {
+          setInvoice(prev => ({ ...prev, dueDate: dueDateStr }));
+        }
+      }
+    }
+  }, [invoice.paymentTerms, invoice.invoiceDate]);
 
   // Load industry template from URL params
   useEffect(() => {
@@ -129,7 +190,19 @@ function HomeContent() {
   };
 
   const handleResetInvoice = () => {
-    setInvoice({ ...defaultInvoice, invoiceNumber: `INV-${String(Date.now()).slice(-6)}` });
+    // Save the current invoice number for auto-increment
+    try {
+      localStorage.setItem(LAST_INV_NUM_KEY, invoice.invoiceNumber);
+      localStorage.removeItem(DRAFT_KEY);
+    } catch { /* ignore */ }
+    const match = invoice.invoiceNumber.match(/(\d+)$/);
+    let nextNumber = `INV-${String(Date.now()).slice(-6)}`;
+    if (match) {
+      const nextNum = String(Number(match[1]) + 1).padStart(match[1].length, '0');
+      const prefix = invoice.invoiceNumber.slice(0, invoice.invoiceNumber.length - match[1].length);
+      nextNumber = `${prefix}${nextNum}`;
+    }
+    setInvoice({ ...defaultInvoice, invoiceNumber: nextNumber });
   };
 
   return (

@@ -3,8 +3,9 @@
 import { InvoiceData } from '@/types/invoice';
 import { currencies } from '@/data/currencies';
 import { languages } from '@/data/languages';
-import { Plus, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react';
+import { Plus, Trash2, Upload, X, Image as ImageIcon, Copy } from 'lucide-react';
 import { useRef } from 'react';
+import { calculateSubtotal, calculateTax, calculateDiscount, calculateTotal } from '@/data/defaults';
 
 interface InvoiceFormProps {
   data: InvoiceData;
@@ -36,6 +37,13 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
   const removeItem = (index: number) => {
     if (data.items.length <= 1) return;
     update({ items: data.items.filter((_, i) => i !== index) });
+  };
+
+  const duplicateItem = (index: number) => {
+    const items = [...data.items];
+    const original = items[index];
+    items.splice(index + 1, 0, { ...original, id: String(Date.now()) });
+    update({ items });
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -308,7 +316,14 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
               <div className="col-span-2 md:col-span-1 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
                 {(item.quantity * item.rate).toFixed(2)}
               </div>
-              <div className="col-span-1 flex justify-end">
+              <div className="col-span-1 flex justify-end gap-0.5">
+                <button
+                  onClick={() => duplicateItem(index)}
+                  className="p-1.5 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                  title="Duplicate item"
+                >
+                  <Copy size={13} />
+                </button>
                 <button
                   onClick={() => removeItem(index)}
                   className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
@@ -380,6 +395,43 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
           />
         </div>
       </div>
+
+      {/* Running Total */}
+      {(() => {
+        const currencyObj = currencies.find(c => c.code === data.currency);
+        const sym = currencyObj?.symbol || '$';
+        const subtotal = calculateSubtotal(data.items);
+        const tax = calculateTax(subtotal, data.taxRate);
+        const discount = calculateDiscount(subtotal, data.discountRate);
+        const total = calculateTotal(data.items, data.taxRate, data.discountRate);
+        return (
+          <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">Summary</h3>
+            <div className="space-y-1.5 text-sm">
+              <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                <span>Subtotal</span>
+                <span>{sym}{subtotal.toFixed(2)}</span>
+              </div>
+              {data.taxRate > 0 && (
+                <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                  <span>Tax ({data.taxRate}%)</span>
+                  <span>+{sym}{tax.toFixed(2)}</span>
+                </div>
+              )}
+              {data.discountRate > 0 && (
+                <div className="flex justify-between text-green-600 dark:text-green-400">
+                  <span>Discount ({data.discountRate}%)</span>
+                  <span>-{sym}{discount.toFixed(2)}</span>
+                </div>
+              )}
+              <div className="flex justify-between font-bold text-gray-900 dark:text-white pt-1.5 border-t border-gray-200 dark:border-gray-600">
+                <span>Total</span>
+                <span>{sym}{total.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
