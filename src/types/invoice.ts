@@ -39,7 +39,7 @@ export interface InvoiceData {
     paymentTerms: string;
 }
 
-export type TemplateStyle = 'classic' | 'modern' | 'minimal';
+export type TemplateStyle = 'modern' | 'classic' | 'minimal' | 'bold' | 'forest';
 
 export interface Currency {
     code: string;

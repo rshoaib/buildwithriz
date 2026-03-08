@@ -3,9 +3,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import InvoiceForm from '@/components/InvoiceForm';
 import InvoicePreview from '@/components/InvoicePreview';
+import ThemeSelector from '@/components/ThemeSelector';
 import dynamic from 'next/dynamic';
 import { defaultInvoice } from '@/data/defaults';
-import { InvoiceData, SavedTemplate } from '@/types/invoice';
+import { InvoiceData, SavedTemplate, TemplateStyle } from '@/types/invoice';
 import {
   Shield,
   Zap,
@@ -26,6 +27,7 @@ import {
 } from 'lucide-react';
 
 const TEMPLATES_KEY = 'buildwithriz-templates';
+const THEME_KEY = 'buildwithriz-theme';
 
 const PdfGenerator = dynamic(() => import('@/components/PdfGenerator'), {
   ssr: false,
@@ -43,16 +45,30 @@ export default function Home() {
   const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [templateName, setTemplateName] = useState('');
   const [showTemplates, setShowTemplates] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState<TemplateStyle>('modern');
 
-  // Load templates from localStorage on mount
+  // Load templates and theme from localStorage on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(TEMPLATES_KEY);
       if (stored) {
         setTemplates(JSON.parse(stored));
       }
+      const savedTheme = localStorage.getItem(THEME_KEY);
+      if (savedTheme) {
+        setSelectedTheme(savedTheme as TemplateStyle);
+      }
     } catch {
       // Ignore errors from localStorage
+    }
+  }, []);
+
+  const handleThemeChange = useCallback((theme: TemplateStyle) => {
+    setSelectedTheme(theme);
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      // localStorage full or unavailable
     }
   }, []);
 
@@ -293,9 +309,10 @@ export default function Home() {
           {/* Preview + Download */}
           <div className={`space-y-4 ${activeTab === 'form' ? 'hidden lg:block' : ''}`}>
             <div className="sticky top-20">
-              <InvoicePreview data={invoice} />
+              <ThemeSelector selected={selectedTheme} onChange={handleThemeChange} />
+              <InvoicePreview data={invoice} theme={selectedTheme} />
               <div className="mt-4">
-                <PdfGenerator data={invoice} />
+                <PdfGenerator data={invoice} theme={selectedTheme} />
               </div>
             </div>
           </div>
@@ -449,8 +466,8 @@ export default function Home() {
               a: 'The PDF is generated entirely in your browser using react-pdf, a library that creates vector-quality PDFs with JavaScript. The resulting file is crisp at any zoom level and can be printed on any paper size.',
             },
             {
-              q: 'Can I include my company logo?',
-              a: 'Logo support is on our roadmap and will be available in a future update. Currently you can include your business name, address, and contact information in the invoice header.',
+              q: 'Can I customize the look of my invoice?',
+              a: 'Yes! BuildWithRiz offers 5 professional themes — Modern (blue), Classic (dark), Minimal (clean white), Bold (purple), and Forest (green). Select a theme above the preview and it applies to both the live preview and the downloaded PDF.',
             },
             {
               q: 'Is this tool suitable for tax purposes?',

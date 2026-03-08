@@ -1,50 +1,75 @@
 'use client';
 
-import { InvoiceData } from '@/types/invoice';
+import { InvoiceData, TemplateStyle } from '@/types/invoice';
 import { getCurrencySymbol, formatCurrency } from '@/data/currencies';
 import { calculateSubtotal, calculateTax, calculateDiscount, calculateTotal } from '@/data/defaults';
 import { getLabels } from '@/data/languages';
+import { getTheme } from '@/data/themes';
 
 interface InvoicePreviewProps {
   data: InvoiceData;
+  theme?: TemplateStyle;
 }
 
-export default function InvoicePreview({ data }: InvoicePreviewProps) {
+export default function InvoicePreview({ data, theme = 'modern' }: InvoicePreviewProps) {
   const symbol = getCurrencySymbol(data.currency);
   const subtotal = calculateSubtotal(data.items);
   const tax = calculateTax(subtotal, data.taxRate);
   const discount = calculateDiscount(subtotal, data.discountRate);
   const total = calculateTotal(data.items, data.taxRate, data.discountRate);
   const labels = getLabels(data.language);
+  const t = getTheme(theme).preview;
 
   return (
     <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
       {/* Header Bar */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
-        <div className="flex justify-between items-start">
-          <div className="flex items-center gap-3">
-            {data.logo && (
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={data.logo}
-                  alt="Logo"
-                  className="max-w-full max-h-full object-contain"
-                />
+      {t.noHeaderBar ? (
+        /* Minimal: no colored header, clean top section */
+        <div className="px-6 py-5 border-b border-gray-100">
+          <div className="flex justify-between items-start">
+            <div className="flex items-center gap-3">
+              {data.logo && (
+                <div className={`w-12 h-12 ${t.logoBg} rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={data.logo} alt="Logo" className="max-w-full max-h-full object-contain" />
+                </div>
+              )}
+              <div>
+                <h2 className={`text-xl font-bold ${t.headerText}`}>{data.fromName || 'Your Company'}</h2>
+                {data.fromEmail && <p className="text-gray-500 text-xs mt-0.5">{data.fromEmail}</p>}
+                {data.fromPhone && <p className="text-gray-500 text-xs">{data.fromPhone}</p>}
               </div>
-            )}
-            <div>
-              <h2 className="text-xl font-bold text-white">{data.fromName || 'Your Company'}</h2>
-              {data.fromEmail && <p className="text-blue-100 text-xs mt-0.5">{data.fromEmail}</p>}
-              {data.fromPhone && <p className="text-blue-100 text-xs">{data.fromPhone}</p>}
+            </div>
+            <div className="text-right">
+              <p className={`text-2xl font-bold ${t.accentText} tracking-wide`}>{labels.invoice}</p>
+              <p className="text-gray-400 text-xs mt-0.5">#{data.invoiceNumber}</p>
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold text-white tracking-wide">{labels.invoice}</p>
-            <p className="text-blue-100 text-xs mt-0.5">#{data.invoiceNumber}</p>
+        </div>
+      ) : (
+        /* Standard: colored header bar */
+        <div className={`${t.headerBg} px-6 py-4`}>
+          <div className="flex justify-between items-start">
+            <div className="flex items-center gap-3">
+              {data.logo && (
+                <div className={`w-12 h-12 ${t.logoBg} rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={data.logo} alt="Logo" className="max-w-full max-h-full object-contain" />
+                </div>
+              )}
+              <div>
+                <h2 className={`text-xl font-bold ${t.headerText}`}>{data.fromName || 'Your Company'}</h2>
+                {data.fromEmail && <p className={`${t.headerSubtext} text-xs mt-0.5`}>{data.fromEmail}</p>}
+                {data.fromPhone && <p className={`${t.headerSubtext} text-xs`}>{data.fromPhone}</p>}
+              </div>
+            </div>
+            <div className="text-right">
+              <p className={`text-2xl font-bold ${t.headerText} tracking-wide`}>{labels.invoice}</p>
+              <p className={`${t.headerSubtext} text-xs mt-0.5`}>#{data.invoiceNumber}</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <div className="p-6 space-y-5">
         {/* From / To / Details row */}
@@ -83,10 +108,10 @@ export default function InvoicePreview({ data }: InvoicePreviewProps) {
         </div>
 
         {/* Items Table */}
-        <div className="border border-gray-100 rounded-lg overflow-hidden">
+        <div className={`${t.noHeaderBar ? 'border-t border-b border-gray-100' : 'border border-gray-100 rounded-lg'} overflow-hidden`}>
           <table className="w-full text-xs">
             <thead>
-              <tr className="bg-gray-50 text-gray-500 uppercase tracking-wider">
+              <tr className={`${t.tableHeaderBg} text-gray-500 uppercase tracking-wider`}>
                 <th className="text-left py-2 px-3 font-semibold">{labels.description}</th>
                 <th className="text-center py-2 px-3 font-semibold w-16">{labels.qty}</th>
                 <th className="text-right py-2 px-3 font-semibold w-24">{labels.rate}</th>
@@ -95,7 +120,7 @@ export default function InvoicePreview({ data }: InvoicePreviewProps) {
             </thead>
             <tbody>
               {data.items.map((item, i) => (
-                <tr key={item.id} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
+                <tr key={item.id} className={i % 2 === 0 ? 'bg-white' : t.tableAltBg}>
                   <td className="py-2 px-3 text-gray-800">{item.description || '—'}</td>
                   <td className="py-2 px-3 text-center text-gray-600">{item.quantity}</td>
                   <td className="py-2 px-3 text-right text-gray-600">
@@ -129,9 +154,9 @@ export default function InvoicePreview({ data }: InvoicePreviewProps) {
                 <span>-{formatCurrency(discount, data.currency)}</span>
               </div>
             )}
-            <div className="border-t border-gray-200 pt-1.5 flex justify-between font-bold text-sm text-gray-900">
-              <span>{labels.total}</span>
-              <span>{formatCurrency(total, data.currency)}</span>
+            <div className={`border-t ${t.totalBorder} pt-1.5 flex justify-between font-bold text-sm`}>
+              <span className="text-gray-900">{labels.total}</span>
+              <span className={t.totalValueColor}>{formatCurrency(total, data.currency)}</span>
             </div>
           </div>
         </div>
