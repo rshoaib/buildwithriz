@@ -142,17 +142,17 @@ function HomeContent() {
         </div>
       )}
       {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-10 sm:py-14">
+      <section className="bg-gradient-to-b from-blue-50 dark:from-gray-900 to-white dark:to-gray-900 py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full mb-4">
+          <div className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-medium px-3 py-1 rounded-full mb-4">
             <Shield size={12} />
             100% Free — No Signup Required
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
             Create Professional Invoices{' '}
-            <span className="text-blue-600">in Seconds</span>
+            <span className="text-blue-600 dark:text-blue-400">in Seconds</span>
           </h1>
-          <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 mt-3 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             Fill in your details, preview instantly, and download as a polished PDF.
             No signup, no login, no data stored — everything runs securely in your browser.
             Whether you are a freelancer sending your first invoice or a small business
@@ -163,10 +163,10 @@ function HomeContent() {
 
       {/* How It Works */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-2">
           How It Works
         </h2>
-        <p className="text-gray-500 text-sm text-center mb-8 max-w-xl mx-auto">
+        <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-8 max-w-xl mx-auto">
           Creating a professional invoice takes less than two minutes. Follow these three simple steps
           and download your invoice as a crisp, print-ready PDF.
         </p>
@@ -193,16 +193,16 @@ function HomeContent() {
           ].map((item) => (
             <div
               key={item.step}
-              className="relative bg-white rounded-xl border border-gray-100 p-6 text-center hover:shadow-md transition"
+              className="relative bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-6 text-center hover:shadow-md transition"
             >
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-sm">
                 {item.step}
               </div>
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3 mt-2">
-                <item.icon size={22} className="text-blue-600" />
+              <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mx-auto mb-3 mt-2">
+                <item.icon size={22} className="text-blue-600 dark:text-blue-400" />
               </div>
-              <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
-              <p className="text-gray-500 text-xs mt-1.5 leading-relaxed">{item.desc}</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{item.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mt-1.5 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -217,7 +217,7 @@ function HomeContent() {
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                className="rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 px-3 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:text-gray-100"
                 placeholder="Template name..."
                 value={templateName}
                 onChange={(e) => setTemplateName(e.target.value)}
@@ -242,7 +242,7 @@ function HomeContent() {
           ) : (
             <button
               onClick={() => setShowSaveDialog(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-50 transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
             >
               <Save size={12} />
               Save as Template
@@ -253,7 +253,7 @@ function HomeContent() {
           <div className="relative">
             <button
               onClick={() => setShowTemplates(!showTemplates)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 hover:bg-gray-50 transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
             >
               <FolderOpen size={12} />
               Load Template
@@ -264,7 +264,7 @@ function HomeContent() {
               )}
             </button>
             {showTemplates && (
-              <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl border border-gray-200 shadow-xl z-50 overflow-hidden">
+              <div className="absolute top-full left-0 mt-1 w-64 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xl z-50 overflow-hidden">
                 {templates.length === 0 ? (
                   <p className="px-4 py-3 text-xs text-gray-400 text-center">No saved templates yet</p>
                 ) : (
@@ -272,13 +272,13 @@ function HomeContent() {
                     {templates.map((t) => (
                       <div
                         key={t.id}
-                        className="flex items-center justify-between px-3 py-2 hover:bg-gray-50 transition group"
+                        className="flex items-center justify-between px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition group"
                       >
                         <button
                           onClick={() => handleLoadTemplate(t)}
                           className="flex-1 text-left"
                         >
-                          <p className="text-xs font-medium text-gray-800">{t.name}</p>
+                          <p className="text-xs font-medium text-gray-800 dark:text-gray-200">{t.name}</p>
                           <p className="text-[10px] text-gray-400">
                             {new Date(t.createdAt).toLocaleDateString()}
                           </p>
@@ -300,20 +300,20 @@ function HomeContent() {
           {/* Reset */}
           <button
             onClick={handleResetInvoice}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs font-medium text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-red-600 hover:border-red-200 hover:bg-red-50 dark:hover:bg-red-900/20 transition"
           >
             <RotateCcw size={12} />
             Reset
           </button>
         </div>
         {/* Mobile tabs */}
-        <div className="flex lg:hidden mb-4 bg-gray-100 rounded-xl p-1">
+        <div className="flex lg:hidden mb-4 bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
           <button
             onClick={() => setActiveTab('form')}
             className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-medium transition ${
               activeTab === 'form'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-500'
+                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-500 dark:text-gray-400'
             }`}
           >
             <FileText size={14} />
@@ -323,8 +323,8 @@ function HomeContent() {
             onClick={() => setActiveTab('preview')}
             className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-medium transition ${
               activeTab === 'preview'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-500'
+                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-500 dark:text-gray-400'
             }`}
           >
             <Eye size={14} />
@@ -352,12 +352,12 @@ function HomeContent() {
       </section>
 
       {/* Why Proper Invoicing Matters */}
-      <section className="bg-gradient-to-b from-white to-blue-50 py-14">
+      <section className="bg-gradient-to-b from-white dark:from-gray-900 to-blue-50 dark:to-gray-800 py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-3">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-3">
             Why Professional Invoicing Matters
           </h2>
-          <p className="text-gray-600 text-sm text-center max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 text-sm text-center max-w-2xl mx-auto mb-8 leading-relaxed">
             Whether you are a solo freelancer or a growing agency, well-crafted invoices are
             the backbone of healthy cash flow and professional client relationships.
           </p>
@@ -379,12 +379,12 @@ function HomeContent() {
                 desc: 'A branded, professional invoice reflects the quality of your work. It shows clients that you take your business seriously, leading to stronger relationships, repeat projects, and referrals.',
               },
             ].map((item) => (
-              <div key={item.title} className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition">
-                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
-                  <item.icon size={20} className="text-blue-600" />
+              <div key={item.title} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 hover:shadow-md transition">
+                <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3">
+                  <item.icon size={20} className="text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="font-semibold text-gray-900 text-sm">{item.title}</h3>
-                <p className="text-gray-500 text-xs mt-1.5 leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{item.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs mt-1.5 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -403,11 +403,11 @@ function HomeContent() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="bg-gray-50 rounded-xl p-4 border border-gray-100"
+                className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700"
               >
-                <stat.icon size={18} className="text-blue-600 mx-auto mb-1.5" />
-                <div className="text-xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-gray-500 text-xs mt-0.5">{stat.label}</div>
+                <stat.icon size={18} className="text-blue-600 dark:text-blue-400 mx-auto mb-1.5" />
+                <div className="text-xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+                <div className="text-gray-500 dark:text-gray-400 text-xs mt-0.5">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -415,12 +415,12 @@ function HomeContent() {
       </section>
 
       {/* Features */}
-      <section className="bg-gray-50 py-14">
+      <section className="bg-gray-50 dark:bg-gray-800/50 py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-2">
             Why Use Our Free Invoice Generator?
           </h2>
-          <p className="text-gray-500 text-sm text-center mb-8 max-w-xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-8 max-w-xl mx-auto">
             BuildWithRiz combines privacy, speed, and professional quality into a tool that
             rivals paid invoice software — completely free of charge.
           </p>
@@ -449,13 +449,13 @@ function HomeContent() {
             ].map((feature) => (
               <div
                 key={feature.title}
-                className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition"
+                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 p-5 hover:shadow-md transition"
               >
-                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
-                  <feature.icon size={20} className="text-blue-600" />
+                <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3">
+                  <feature.icon size={20} className="text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="font-semibold text-gray-900 text-sm">{feature.title}</h3>
-                <p className="text-gray-500 text-xs mt-1 leading-relaxed">{feature.desc}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{feature.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs mt-1 leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -464,10 +464,10 @@ function HomeContent() {
 
       {/* FAQ */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-2">
           Frequently Asked Questions
         </h2>
-        <p className="text-gray-500 text-sm text-center mb-8 max-w-lg mx-auto">
+        <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-8 max-w-lg mx-auto">
           Got questions? Here are the answers to the most common things people ask
           about our free invoice generator.
         </p>
@@ -508,15 +508,15 @@ function HomeContent() {
           ].map((faq) => (
             <details
               key={faq.q}
-              className="bg-white rounded-xl border border-gray-100 overflow-hidden group"
+              className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden group"
             >
-              <summary className="cursor-pointer px-5 py-4 text-sm font-medium text-gray-900 hover:bg-gray-50 transition list-none flex items-center justify-between">
+              <summary className="cursor-pointer px-5 py-4 text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50 transition list-none flex items-center justify-between">
                 {faq.q}
                 <span className="text-gray-400 group-open:rotate-180 transition-transform text-lg">
                   ▾
                 </span>
               </summary>
-              <div className="px-5 pb-4 text-sm text-gray-600 leading-relaxed">
+              <div className="px-5 pb-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 {faq.a}
               </div>
             </details>
@@ -526,7 +526,7 @@ function HomeContent() {
 
       {/* Disclaimer */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
-        <div className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-xs text-amber-800 leading-relaxed">
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-5 py-4 text-xs text-amber-800 dark:text-amber-200 leading-relaxed">
           <strong>Disclaimer:</strong> Invoices generated by BuildWithRiz are for informational and
           business documentation purposes. They do not constitute legal, tax, or financial advice.
           Please consult a qualified accountant or legal professional for compliance with your local

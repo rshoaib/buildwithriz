@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FileText } from "lucide-react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -171,6 +172,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Prevent dark mode flash */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('buildwithriz-dark')==='true')document.documentElement.classList.add('dark')}catch(e){}` }} />
       </head>
       <body className={`${inter.variable} antialiased`}>
         {/* Google Analytics 4 */}
@@ -187,23 +190,24 @@ export default function RootLayout({
           />
         )}
         {/* Header */}
-        <header className="no-print sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+        <header className="no-print sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-14">
               <Link href="/" className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
                   <FileText size={16} className="text-white" />
                 </div>
-                <span className="font-bold text-gray-900 text-lg">
-                  Build<span className="text-blue-600">WithRiz</span>
+                <span className="font-bold text-gray-900 dark:text-white text-lg">
+                  Build<span className="text-blue-600 dark:text-blue-400">WithRiz</span>
                 </span>
               </Link>
-              <nav className="hidden sm:flex items-center gap-6 text-sm text-gray-600">
-                <Link href="/" className="hover:text-blue-600 transition">Invoice Generator</Link>
-                <Link href="/invoice-template/web-designer" className="hover:text-blue-600 transition">Templates</Link>
-                <Link href="/blog" className="hover:text-blue-600 transition">Blog</Link>
-                <Link href="/about" className="hover:text-blue-600 transition">About</Link>
-                <Link href="/contact" className="hover:text-blue-600 transition">Contact</Link>
+              <nav className="hidden sm:flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
+                <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Invoice Generator</Link>
+                <Link href="/invoice-template/web-designer" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Templates</Link>
+                <Link href="/blog" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Blog</Link>
+                <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400 transition">About</Link>
+                <Link href="/contact" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Contact</Link>
+                <DarkModeToggle />
               </nav>
             </div>
           </div>
@@ -213,7 +217,7 @@ export default function RootLayout({
         {children}
 
         {/* Footer */}
-        <footer className="no-print bg-gray-900 text-gray-400 mt-16">
+        <footer className="no-print bg-gray-900 dark:bg-gray-950 text-gray-400 mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
@@ -247,7 +251,7 @@ export default function RootLayout({
                 </ul>
               </div>
             </div>
-            <div className="border-t border-gray-800 mt-8 pt-6 text-center text-xs">
+            <div className="border-t border-gray-800 dark:border-gray-700 mt-8 pt-6 text-center text-xs">
               <p>&copy; {new Date().getFullYear()} BuildWithRiz. All rights reserved. No user data is collected or stored.</p>
             </div>
           </div>

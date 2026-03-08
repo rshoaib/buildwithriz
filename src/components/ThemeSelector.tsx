@@ -12,7 +12,7 @@ interface ThemeSelectorProps {
 export default function ThemeSelector({ selected, onChange }: ThemeSelectorProps) {
     return (
         <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">Theme</span>
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Theme</span>
             <div className="flex items-center gap-2">
                 {themes.map((theme) => (
                     <button

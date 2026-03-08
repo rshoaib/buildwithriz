@@ -72,17 +72,17 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
   };
 
   const inputClass =
-    'w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20';
-  const labelClass = 'block text-xs font-medium text-gray-500 mb-1';
+    'w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-gray-100 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20';
+  const labelClass = 'block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1';
 
   return (
     <div className="space-y-6">
       {/* Logo Upload */}
-      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
-        <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Logo</h3>
+      <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
+        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Logo</h3>
         {data.logo ? (
           <div className="flex items-center gap-3">
-            <div className="relative w-20 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden">
+            <div className="relative w-20 h-12 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={data.logo}
@@ -101,7 +101,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
         ) : (
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-2 px-3 py-2 border border-dashed border-gray-300 rounded-lg text-sm text-gray-500 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/50 transition w-full justify-center"
+            className="flex items-center gap-2 px-3 py-2 border border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-sm text-gray-500 dark:text-gray-400 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition w-full justify-center"
           >
             <Upload size={14} />
             Upload Logo (PNG, JPG — max 2MB)
@@ -119,8 +119,8 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
       {/* From & To */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* From */}
-        <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">From</h3>
+        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">From</h3>
           <div>
             <label className={labelClass}>Your Name / Company</label>
             <input
@@ -162,8 +162,8 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
         </div>
 
         {/* To */}
-        <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Bill To</h3>
+        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Bill To</h3>
           <div>
             <label className={labelClass}>Client Name / Company</label>
             <input
@@ -197,8 +197,8 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
       </div>
 
       {/* Invoice Details */}
-      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4">
-        <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">Invoice Details</h3>
+      <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4">
+        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">Invoice Details</h3>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           <div>
             <label className={labelClass}>Invoice #</label>
@@ -263,8 +263,8 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
       </div>
 
       {/* Line Items */}
-      <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4">
-        <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">Items</h3>
+      <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4">
+        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">Items</h3>
         <div className="space-y-2">
           {/* Header */}
           <div className="hidden md:grid grid-cols-12 gap-2 text-xs font-medium text-gray-500 px-1">
@@ -305,13 +305,13 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                   onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
                 />
               </div>
-              <div className="col-span-2 md:col-span-1 text-right text-sm font-medium text-gray-700">
+              <div className="col-span-2 md:col-span-1 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
                 {(item.quantity * item.rate).toFixed(2)}
               </div>
               <div className="col-span-1 flex justify-end">
                 <button
                   onClick={() => removeItem(index)}
-                  className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50"
+                  className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
                   disabled={data.items.length <= 1}
                 >
                   <Trash2 size={14} />
@@ -331,8 +331,8 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
 
       {/* Tax, Discount, Notes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Extras</h3>
+        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Extras</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className={labelClass}>Tax Rate (%)</label>
@@ -369,8 +369,8 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
             />
           </div>
         </div>
-        <div className="rounded-xl border border-gray-100 bg-gray-50/50 p-4 space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Notes</h3>
+        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Notes</h3>
           <textarea
             className={`${inputClass} resize-none`}
             rows={4}
