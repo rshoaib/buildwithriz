@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import InvoiceForm from '@/components/InvoiceForm';
 import InvoicePreview from '@/components/InvoicePreview';
 import ThemeSelector from '@/components/ThemeSelector';
 import dynamic from 'next/dynamic';
 import { defaultInvoice } from '@/data/defaults';
+import { getIndustry } from '@/data/industries';
 import { InvoiceData, SavedTemplate, TemplateStyle } from '@/types/invoice';
 import {
   Shield,
@@ -38,7 +40,7 @@ const PdfGenerator = dynamic(() => import('@/components/PdfGenerator'), {
   ),
 });
 
-export default function Home() {
+function HomeContent() {
   const [invoice, setInvoice] = useState<InvoiceData>(defaultInvoice);
   const [activeTab, setActiveTab] = useState<'form' | 'preview'>('form');
   const [templates, setTemplates] = useState<SavedTemplate[]>([]);
@@ -46,6 +48,8 @@ export default function Home() {
   const [templateName, setTemplateName] = useState('');
   const [showTemplates, setShowTemplates] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<TemplateStyle>('modern');
+  const [templateBanner, setTemplateBanner] = useState<string | null>(null);
+  const searchParams = useSearchParams();
 
   // Load templates and theme from localStorage on mount
   useEffect(() => {
@@ -62,6 +66,27 @@ export default function Home() {
       // Ignore errors from localStorage
     }
   }, []);
+
+  // Load industry template from URL params
+  useEffect(() => {
+    const templateSlug = searchParams.get('template');
+    if (templateSlug) {
+      const ind = getIndustry(templateSlug);
+      if (ind && ind.sampleInvoice) {
+        const now = new Date();
+        const due = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+        setInvoice({
+          ...defaultInvoice,
+          ...ind.sampleInvoice,
+          invoiceNumber: `INV-${String(Date.now()).slice(-6)}`,
+          invoiceDate: now.toISOString().split('T')[0],
+          dueDate: due.toISOString().split('T')[0],
+        } as InvoiceData);
+        setTemplateBanner(`Loaded ${ind.name} template — customize and download!`);
+        setTimeout(() => setTemplateBanner(null), 5000);
+      }
+    }
+  }, [searchParams]);
 
   const handleThemeChange = useCallback((theme: TemplateStyle) => {
     setSelectedTheme(theme);
@@ -109,6 +134,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
+      {/* Template loaded banner */}
+      {templateBanner && (
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-green-600 text-white px-5 py-2.5 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2 animate-bounce">
+          <CheckCircle size={16} />
+          {templateBanner}
+        </div>
+      )}
       {/* Hero */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -502,5 +534,13 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }

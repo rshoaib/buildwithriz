@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { articles } from '@/data/articles';
+import { industries } from '@/data/industries';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://buildwithriz.com';
@@ -50,5 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
-    return [...staticPages, ...blogPages];
+    const templatePages: MetadataRoute.Sitemap = industries.map((ind) => ({
+        url: `${baseUrl}/invoice-template/${ind.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+    }));
+
+    return [...staticPages, ...blogPages, ...templatePages];
 }

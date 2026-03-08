@@ -200,6 +200,7 @@ export default function RootLayout({
               </Link>
               <nav className="hidden sm:flex items-center gap-6 text-sm text-gray-600">
                 <Link href="/" className="hover:text-blue-600 transition">Invoice Generator</Link>
+                <Link href="/invoice-template/web-designer" className="hover:text-blue-600 transition">Templates</Link>
                 <Link href="/blog" className="hover:text-blue-600 transition">Blog</Link>
                 <Link href="/about" className="hover:text-blue-600 transition">About</Link>
                 <Link href="/contact" className="hover:text-blue-600 transition">Contact</Link>
@@ -232,6 +233,7 @@ export default function RootLayout({
                 <h4 className="font-semibold text-white mb-3 text-sm">Tools</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/" className="hover:text-white transition">Invoice Generator</Link></li>
+                  <li><Link href="/invoice-template/web-designer" className="hover:text-white transition">Invoice Templates</Link></li>
                   <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
                 </ul>
               </div>
