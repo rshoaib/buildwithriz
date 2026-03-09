@@ -3,7 +3,7 @@
 import { InvoiceData } from '@/types/invoice';
 import { currencies } from '@/data/currencies';
 import { languages } from '@/data/languages';
-import { Plus, Trash2, Upload, X, Image as ImageIcon, Copy } from 'lucide-react';
+import { Plus, Trash2, Upload, X, Globe, Copy } from 'lucide-react';
 import { useRef } from 'react';
 import { calculateSubtotal, calculateTax, calculateDiscount, calculateTotal } from '@/data/defaults';
 
@@ -91,7 +91,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
         {data.logo ? (
           <div className="flex items-center gap-3">
             <div className="relative w-20 h-12 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 flex items-center justify-center overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* eslint-disable-next-line @next/next/no-img-element -- Logo is a base64 data URL from FileReader, which next/image cannot handle */}
               <img
                 src={data.logo}
                 alt="Logo"
@@ -251,7 +251,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
           <div>
             <label className={labelClass}>
               <span className="flex items-center gap-1">
-                <ImageIcon size={10} />
+                <Globe size={10} />
                 Invoice Language
               </span>
             </label>
@@ -321,6 +321,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                   onClick={() => duplicateItem(index)}
                   className="p-1.5 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
                   title="Duplicate item"
+                  aria-label={`Duplicate item ${index + 1}`}
                 >
                   <Copy size={13} />
                 </button>
@@ -328,6 +329,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                   onClick={() => removeItem(index)}
                   className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
                   disabled={data.items.length <= 1}
+                  aria-label={`Remove item ${index + 1}`}
                 >
                   <Trash2 size={14} />
                 </button>

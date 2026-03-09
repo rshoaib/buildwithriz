@@ -6,9 +6,10 @@ import { FileText } from "lucide-react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import MobileNav from "@/components/MobileNav";
 
 const inter = Inter({
-  variable: "--font-geist-sans",
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -142,7 +143,7 @@ const jsonLd = [
         name: "Can I include my company logo?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Logo support is on our roadmap and will be available in a future update. Currently you can include your business name, address, and contact information in the invoice header.",
+          text: "Yes! You can upload your company logo (PNG, JPG, or SVG, up to 2MB) directly in the invoice generator. It will appear on both the live preview and the downloaded PDF.",
         },
       },
       {
@@ -209,6 +210,7 @@ export default function RootLayout({
                 <Link href="/contact" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Contact</Link>
                 <DarkModeToggle />
               </nav>
+              <MobileNav />
             </div>
           </div>
         </header>

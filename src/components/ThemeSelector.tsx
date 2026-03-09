@@ -19,6 +19,7 @@ export default function ThemeSelector({ selected, onChange }: ThemeSelectorProps
                         key={theme.id}
                         onClick={() => onChange(theme.id)}
                         title={theme.name}
+                        aria-label={`Select ${theme.name} theme`}
                         className={`relative w-8 h-8 rounded-full ${theme.swatch} transition-all duration-200 flex items-center justify-center ${
                             selected === theme.id
                                 ? 'ring-2 ring-offset-2 ring-gray-400 scale-110'

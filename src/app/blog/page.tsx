@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 export default function Blog() {
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Blog</h1>
-      <p className="text-gray-600 mb-8 text-base leading-relaxed">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Blog</h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-8 text-base leading-relaxed">
         Practical guides on invoicing, freelancing, and running a small business.
         Learn how to create professional invoices, get paid faster, and grow your business.
       </p>
@@ -30,7 +30,7 @@ export default function Blog() {
           <Link
             key={article.slug}
             href={`/blog/${article.slug}`}
-            className="group block bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition"
+            className="group block bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-lg transition"
           >
             <div className="sm:flex">
               <div className="sm:w-64 sm:flex-shrink-0">
@@ -44,7 +44,7 @@ export default function Blog() {
                 </div>
               </div>
               <div className="p-5 flex-1">
-                <div className="flex items-center gap-3 text-xs text-gray-500 mb-2">
+                <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mb-2">
                   <span className="flex items-center gap-1">
                     <Calendar size={12} />
                     {new Date(article.date).toLocaleDateString('en-US', {
@@ -58,13 +58,13 @@ export default function Blog() {
                     {article.readTime}
                   </span>
                 </div>
-                <h2 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-blue-600 transition leading-snug">
+                <h2 className="font-bold text-gray-900 dark:text-white text-lg mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition leading-snug">
                   {article.title}
                 </h2>
-                <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3 line-clamp-2">
                   {article.description}
                 </p>
-                <span className="inline-flex items-center gap-1 text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 text-sm font-medium group-hover:gap-2 transition-all">
                   Read article <ArrowRight size={14} />
                 </span>
               </div>

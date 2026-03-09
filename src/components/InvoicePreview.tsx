@@ -30,7 +30,7 @@ export default function InvoicePreview({ data, theme = 'modern' }: InvoicePrevie
             <div className="flex items-center gap-3">
               {data.logo && (
                 <div className={`w-12 h-12 ${t.logoBg} rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {/* eslint-disable-next-line @next/next/no-img-element -- Logo is a base64 data URL from FileReader, which next/image cannot handle */}
                   <img src={data.logo} alt="Logo" className="max-w-full max-h-full object-contain" />
                 </div>
               )}
@@ -53,7 +53,7 @@ export default function InvoicePreview({ data, theme = 'modern' }: InvoicePrevie
             <div className="flex items-center gap-3">
               {data.logo && (
                 <div className={`w-12 h-12 ${t.logoBg} rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {/* eslint-disable-next-line @next/next/no-img-element -- Logo is a base64 data URL from FileReader, which next/image cannot handle */}
                   <img src={data.logo} alt="Logo" className="max-w-full max-h-full object-contain" />
                 </div>
               )}
