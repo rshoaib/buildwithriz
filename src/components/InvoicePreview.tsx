@@ -73,7 +73,7 @@ export default function InvoicePreview({ data, theme = 'modern' }: InvoicePrevie
 
       <div className="p-6 space-y-5">
         {/* From / To / Details row */}
-        <div className="grid grid-cols-3 gap-4 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
           <div>
             <p className="font-semibold text-gray-500 uppercase tracking-wider mb-1">{labels.from}</p>
             <p className="font-medium text-gray-900">{data.fromName || '—'}</p>

@@ -207,7 +207,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
       {/* Invoice Details */}
       <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4">
         <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">Invoice Details</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           <div>
             <label className={labelClass}>Invoice #</label>
             <input
@@ -283,56 +283,118 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
           </div>
 
           {data.items.map((item, index) => (
-            <div key={item.id} className="grid grid-cols-12 gap-2 items-center">
-              <div className="col-span-12 md:col-span-5">
+            <div key={item.id}>
+              {/* Desktop: grid row */}
+              <div className="hidden md:grid grid-cols-12 gap-2 items-center">
+                <div className="col-span-5">
+                  <input
+                    className={inputClass}
+                    placeholder="Item description"
+                    value={item.description}
+                    onChange={(e) => updateItem(index, 'description', e.target.value)}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <input
+                    className={inputClass}
+                    type="number"
+                    min="1"
+                    placeholder="Qty"
+                    value={item.quantity || ''}
+                    onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
+                  />
+                </div>
+                <div className="col-span-3">
+                  <input
+                    className={inputClass}
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Rate"
+                    value={item.rate || ''}
+                    onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
+                  />
+                </div>
+                <div className="col-span-1 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {(item.quantity * item.rate).toFixed(2)}
+                </div>
+                <div className="col-span-1 flex justify-end gap-0.5">
+                  <button
+                    onClick={() => duplicateItem(index)}
+                    className="p-1.5 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                    title="Duplicate item"
+                    aria-label={`Duplicate item ${index + 1}`}
+                  >
+                    <Copy size={13} />
+                  </button>
+                  <button
+                    onClick={() => removeItem(index)}
+                    className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                    disabled={data.items.length <= 1}
+                    aria-label={`Remove item ${index + 1}`}
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile: stacked card layout */}
+              <div className="md:hidden bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 space-y-2">
                 <input
                   className={inputClass}
                   placeholder="Item description"
                   value={item.description}
                   onChange={(e) => updateItem(index, 'description', e.target.value)}
                 />
-              </div>
-              <div className="col-span-4 md:col-span-2">
-                <input
-                  className={inputClass}
-                  type="number"
-                  min="1"
-                  placeholder="Qty"
-                  value={item.quantity || ''}
-                  onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
-                />
-              </div>
-              <div className="col-span-5 md:col-span-3">
-                <input
-                  className={inputClass}
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  placeholder="Rate"
-                  value={item.rate || ''}
-                  onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
-                />
-              </div>
-              <div className="col-span-2 md:col-span-1 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
-                {(item.quantity * item.rate).toFixed(2)}
-              </div>
-              <div className="col-span-1 flex justify-end gap-0.5">
-                <button
-                  onClick={() => duplicateItem(index)}
-                  className="p-1.5 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                  title="Duplicate item"
-                  aria-label={`Duplicate item ${index + 1}`}
-                >
-                  <Copy size={13} />
-                </button>
-                <button
-                  onClick={() => removeItem(index)}
-                  className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  disabled={data.items.length <= 1}
-                  aria-label={`Remove item ${index + 1}`}
-                >
-                  <Trash2 size={14} />
-                </button>
+                <div className="grid grid-cols-3 gap-2">
+                  <div>
+                    <label className="block text-[10px] text-gray-400 mb-0.5">Qty</label>
+                    <input
+                      className={inputClass}
+                      type="number"
+                      min="1"
+                      placeholder="1"
+                      value={item.quantity || ''}
+                      onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-gray-400 mb-0.5">Rate</label>
+                    <input
+                      className={inputClass}
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      placeholder="0.00"
+                      value={item.rate || ''}
+                      onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="block text-[10px] text-gray-400 mb-0.5">Amount</label>
+                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 py-2 text-center">
+                      {(item.quantity * item.rate).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex justify-end gap-1 border-t border-gray-100 dark:border-gray-700 pt-2">
+                  <button
+                    onClick={() => duplicateItem(index)}
+                    className="p-2 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                    title="Duplicate item"
+                    aria-label={`Duplicate item ${index + 1}`}
+                  >
+                    <Copy size={14} />
+                  </button>
+                  <button
+                    onClick={() => removeItem(index)}
+                    className="p-2 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                    disabled={data.items.length <= 1}
+                    aria-label={`Remove item ${index + 1}`}
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
