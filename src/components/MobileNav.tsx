@@ -8,6 +8,7 @@ import DarkModeToggle from './DarkModeToggle';
 
 const NAV_LINKS = [
   { href: '/', label: 'Invoice Generator' },
+  { href: '/receipt-generator', label: 'Receipt Generator' },
   { href: '/invoice-template/web-designer', label: 'Templates' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },

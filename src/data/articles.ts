@@ -14,6 +14,110 @@ export interface BlogArticle {
 
 export const articles: BlogArticle[] = [
     {
+        slug: 'how-to-write-invoice-freelance-work',
+        title: 'How to Write an Invoice for Freelance Work (Free Template & Guide)',
+        description:
+            'A complete guide on how to write a professional freelance invoice. Learn exactly what to include to get paid faster, avoid common mistakes, and use our free generator.',
+        date: '2026-03-10',
+        readTime: '8 min read',
+        keywords: [
+            'how to write an invoice for freelance work',
+            'freelance invoice template',
+            'how to invoice a client',
+            'freelancer invoice guide',
+            'create freelance invoice',
+            'what to include on an invoice',
+        ],
+        heroImage: '/images/blog/freelance_invoice_guide_hero.png',
+        icon: FileText,
+        content: `
+## Why Your Freelance Invoice Matters
+
+As a freelancer, your invoice is the final touchpoint of your project. It is not just about asking for money—it is a professional document that reflects your brand, establishes legal clarity, and dictates how quickly you get paid. 
+
+A vague, poorly formatted invoice almost guarantees payment delays because it forces the client's accounting department to ask follow-up questions. A crisp, detailed invoice, on the other hand, sails smoothly through the payment process.
+
+---
+
+## 7 Essential Things to Include on a Freelance Invoice
+
+To write an effective invoice for freelance work, you must include the following key elements to ensure clarity and timely payment:
+
+### 1. Your Information
+Make it incredibly easy for the client to know who sent the invoice. Include:
+- Your full name or business name
+- Your mailing address
+- Your phone number and professional email address
+- Your business logo (highly recommended for a professional look)
+- Your Tax ID or business registration number (if required by your local laws)
+
+### 2. The Client's Information
+Address the invoice to the specific person or department responsible for paying you. Include:
+- The client's full name or company name
+- The client's billing address
+- The contact person's name and email
+- Any specific company requirements, such as a **Purchase Order (PO) number**. (Always ask your client if they require a PO number before sending your invoice!)
+
+### 3. Invoice Specifics
+Every invoice must be easily identifiable and legally compliant. Ensure you have:
+- **A Clear Label:** The document should literally have the word "INVOICE" written prominently at the top.
+- **A Unique Invoice Number:** Assign a unique, sequential number to each invoice (e.g., \`INV-001\`, \`INV-002\`) to make tracking and tax preparation easier.
+- **Invoice Date:** The exact date you issued the document.
+- **Payment Due Date:** Do not just write "Net 30." Write the exact calendar date the payment is due (e.g., "Due on April 9, 2026") to eliminate any confusion.
+
+### 4. Itemized Services
+Never use vague terms like "Freelance Services." Break down the work meticulously by task:
+- Describe the specific type of service (e.g., "UI/UX Design for Homepage Layout").
+- Include the quantity or hours worked.
+- State your rate (hourly or project-based).
+- Specify the project milestones or clear deliverables achieved.
+
+### 5. Financial Details
+The math must be perfect. Display:
+- **Subtotal:** The cost of services before any taxes.
+- **Taxes:** If you are required to charge VAT or sales tax, list it clearly on its own line.
+- **Discounts:** If you offered a discount, show it explicitly so the client sees the value they received.
+- **Total Amount Due:** The final, bolded amount the client needs to pay.
+
+### 6. Payment Terms and Methods
+Clearly state *how* you expect to be paid. Provide step-by-step instructions:
+- List your accepted payment methods (e.g., Bank Transfer, PayPal, Stripe).
+- Provide the exact routing and account numbers for bank transfers.
+- Mention your late payment policy (e.g., "A 1.5% late fee applies per month after the due date").
+
+### 7. A Professional Thank You Note
+A simple "Thank you for your business! It was a pleasure working with you on this project." goes a long way in building long-term client relationships.
+
+---
+
+## The Best Payment Terms for Freelancers
+
+If you are just starting out, you might be wondering when to actually make your invoices due. 
+
+- **Due on Receipt:** Payment is expected immediately. Excellent for small, one-off projects.
+- **Net 15:** Payment is due within 15 days. *This is the recommended standard for most freelancers.*
+- **Net 30:** Payment is due within 30 days. Common with larger corporate clients, but can strain a freelancer's cash flow.
+
+Whenever possible, push for Net 15 terms. If a client insists on Net 30, it is highly recommended to request a **50% upfront deposit** before starting the work.
+
+*(For a deeper dive into this, read our comprehensive guide on [Invoice Payment Terms Explained](/blog/invoice-payment-terms-explained).)*
+
+---
+
+## The Fastest Way to Create a Freelance Invoice
+
+You don't need expensive accounting software to write a professional invoice. Utilizing a professional template ensures consistency and saves you hours of formatting in Word or Google Docs.
+
+Our **[free invoice generator](/)** is built specifically for freelancers and independent contractors. It allows you to:
+- Instantly generate a massive, clean PDF.
+- Add your own custom logo.
+- Calculate taxes and subtotals automatically.
+- Do it all 100% securely in your browser—no signup required, and your financial data is never stored on a server.
+
+**[Create Your Freelance Invoice Now →](/)**
+    `,
+    },
+    {
         slug: 'how-to-create-professional-invoice',
         title: 'How to Create a Professional Invoice: Complete Guide for Freelancers (2026)',
         description:
