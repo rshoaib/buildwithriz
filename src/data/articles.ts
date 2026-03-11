@@ -323,9 +323,9 @@ Ready to send your first professional invoice? Our **[free invoice generator](/)
     },
     {
         slug: 'invoice-payment-terms-explained',
-        title: 'Invoice Payment Terms Explained: Net 15 vs Net 30 vs Due on Receipt (2026)',
+        title: 'Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster',
         description:
-            'Understand every invoice payment term — Net 15, Net 30, Net 60, Due on Receipt, and more. Includes a comparison table, tips for freelancers, and a free invoice generator.',
+            'Tired of late freelancer payments? Master invoice payment terms like Net 15 vs Net 30. Discover proven billing strategies to instantly boost your cash flow.',
         date: '2026-03-08',
         readTime: '9 min read',
         keywords: [
