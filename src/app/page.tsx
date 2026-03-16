@@ -13,7 +13,7 @@ import FeaturesSection from '@/components/sections/FeaturesSection';
 import FAQSection from '@/components/sections/FAQSection';
 import DisclaimerSection from '@/components/sections/DisclaimerSection';
 import dynamic from 'next/dynamic';
-import { defaultInvoice } from '@/data/defaults';
+import { defaultInvoice, calculateTotal } from '@/data/defaults';
 import { getIndustry } from '@/data/industries';
 import { InvoiceData, SavedTemplate, TemplateStyle } from '@/types/invoice';
 import {
@@ -24,6 +24,7 @@ import {
   RotateCcw,
   FileText,
   Eye,
+  Mail,
 } from 'lucide-react';
 
 const TEMPLATES_KEY = 'buildwithriz-templates';
@@ -217,6 +218,12 @@ function HomeContent() {
     setInvoice({ ...defaultInvoice, invoiceNumber: nextNumber });
   };
 
+  const handleDraftEmail = () => {
+    const subject = encodeURIComponent(`${invoice.fromName || 'Invoice'} - #${invoice.invoiceNumber}`);
+    const body = encodeURIComponent(`Hi ${invoice.toName || 'there'},\n\nPlease find attached the invoice #${invoice.invoiceNumber} for ${invoice.currency} ${calculateTotal(invoice.items, invoice.taxRate, invoice.discountRate).toFixed(2)}.\n\nThank you for your business!\n\nBest regards,\n${invoice.fromName}`);
+    window.location.href = `mailto:${invoice.toEmail}?subject=${subject}&body=${body}`;
+  };
+
   return (
     <main className="min-h-screen">
       {/* Template loaded banner */}
@@ -367,8 +374,15 @@ function HomeContent() {
             <div className="sticky top-20">
               <ThemeSelector selected={selectedTheme} onChange={handleThemeChange} />
               <InvoicePreview data={invoice} theme={selectedTheme} />
-              <div className="mt-4">
+              <div className="mt-4 flex flex-col gap-2">
                 <PdfGenerator data={invoice} theme={selectedTheme} />
+                <button
+                  onClick={handleDraftEmail}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 transition"
+                >
+                  <Mail size={18} />
+                  Draft Email
+                </button>
               </div>
             </div>
           </div>

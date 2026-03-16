@@ -3,9 +3,12 @@
 import { InvoiceData } from '@/types/invoice';
 import { currencies } from '@/data/currencies';
 import { languages } from '@/data/languages';
-import { Plus, Trash2, Upload, X, Globe, Copy } from 'lucide-react';
+import { Plus, Trash2, Upload, X, Globe, Copy, GripVertical } from 'lucide-react';
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useRef } from 'react';
 import { calculateSubtotal, calculateTax, calculateDiscount, calculateTotal } from '@/data/defaults';
+import ClientAddressBook from './ClientAddressBook';
+import SignaturePad from './SignaturePad';
 
 interface InvoiceFormProps {
   data: InvoiceData;
@@ -44,6 +47,20 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
     const original = items[index];
     items.splice(index + 1, 0, { ...original, id: String(Date.now()) });
     update({ items });
+  };
+
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) return;
+    const startIndex = result.source.index;
+    const endIndex = result.destination.index;
+    
+    if (startIndex === endIndex) return;
+
+    const newItems = Array.from(data.items);
+    const [removed] = newItems.splice(startIndex, 1);
+    newItems.splice(endIndex, 0, removed);
+
+    update({ items: newItems });
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,8 +187,14 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
         </div>
 
         {/* To */}
-        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Bill To</h3>
+        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3 relative">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Bill To</h3>
+          </div>
+          <ClientAddressBook 
+            currentClient={{ name: data.toName, email: data.toEmail, address: data.toAddress }} 
+            onSelectClient={(c) => update({ toName: c.name, toEmail: c.email, toAddress: c.address })} 
+          />
           <div>
             <label className={labelClass}>Client Name / Company</label>
             <input
@@ -267,138 +290,190 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
               ))}
             </select>
           </div>
+          <div>
+            <label className={labelClass}>Status</label>
+            <select
+              className={inputClass}
+              value={data.status || 'unpaid'}
+              onChange={(e) => update({ status: e.target.value as 'unpaid' | 'paid' })}
+            >
+              <option value="unpaid">Unpaid</option>
+              <option value="paid">Paid</option>
+            </select>
+          </div>
         </div>
       </div>
 
       {/* Line Items */}
       <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4">
         <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">Items</h3>
-        <div className="space-y-2">
-          {/* Header */}
-          <div className="hidden md:grid grid-cols-12 gap-2 text-xs font-medium text-gray-500 px-1">
-            <div className="col-span-5">Description</div>
-            <div className="col-span-2">Qty</div>
-            <div className="col-span-3">Rate</div>
-            <div className="col-span-2 text-right">Amount</div>
-          </div>
+        
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="invoice-items">
+            {(provided) => (
+              <div 
+                className="space-y-2"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {/* Header */}
+                <div className="hidden md:flex items-center gap-2 text-xs font-medium text-gray-500 px-1 pl-8">
+                  <div className="w-[42%]">Description</div>
+                  <div className="w-[16%]">Qty</div>
+                  <div className="w-[25%]">Rate</div>
+                  <div className="flex-1 text-right pr-[4.5rem]">Amount</div>
+                </div>
 
-          {data.items.map((item, index) => (
-            <div key={item.id}>
-              {/* Desktop: grid row */}
-              <div className="hidden md:grid grid-cols-12 gap-2 items-center">
-                <div className="col-span-5">
-                  <input
-                    className={inputClass}
-                    placeholder="Item description"
-                    value={item.description}
-                    onChange={(e) => updateItem(index, 'description', e.target.value)}
-                  />
-                </div>
-                <div className="col-span-2">
-                  <input
-                    className={inputClass}
-                    type="number"
-                    min="1"
-                    placeholder="Qty"
-                    value={item.quantity || ''}
-                    onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
-                  />
-                </div>
-                <div className="col-span-3">
-                  <input
-                    className={inputClass}
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    placeholder="Rate"
-                    value={item.rate || ''}
-                    onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
-                  />
-                </div>
-                <div className="col-span-1 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {(item.quantity * item.rate).toFixed(2)}
-                </div>
-                <div className="col-span-1 flex justify-end gap-0.5">
-                  <button
-                    onClick={() => duplicateItem(index)}
-                    className="p-1.5 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                    title="Duplicate item"
-                    aria-label={`Duplicate item ${index + 1}`}
-                  >
-                    <Copy size={13} />
-                  </button>
-                  <button
-                    onClick={() => removeItem(index)}
-                    className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                    disabled={data.items.length <= 1}
-                    aria-label={`Remove item ${index + 1}`}
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              </div>
+                {data.items.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided) => (
+                      <div 
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        className="group bg-white dark:bg-gray-800 rounded-lg border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition"
+                      >
+                        <div className="flex items-center gap-2">
+                          <div 
+                            {...provided.dragHandleProps}
+                            className="hidden md:flex text-gray-300 hover:text-gray-500 cursor-grab active:cursor-grabbing p-1 -ml-1"
+                          >
+                            <GripVertical size={16} />
+                          </div>
+                          
+                          <div className="flex-1 w-full">
+                            {/* Desktop: grid row */}
+                            <div className="hidden md:grid grid-cols-12 gap-2 items-center w-full">
+                              <div className="col-span-5">
+                                <input
+                                  className={inputClass}
+                                  placeholder="Item description"
+                                  value={item.description}
+                                  onChange={(e) => updateItem(index, 'description', e.target.value)}
+                                />
+                              </div>
+                              <div className="col-span-2">
+                                <input
+                                  className={inputClass}
+                                  type="number"
+                                  min="1"
+                                  placeholder="Qty"
+                                  value={item.quantity || ''}
+                                  onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
+                                />
+                              </div>
+                              <div className="col-span-3">
+                                <input
+                                  className={inputClass}
+                                  type="number"
+                                  min="0"
+                                  step="0.01"
+                                  placeholder="Rate"
+                                  value={item.rate || ''}
+                                  onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
+                                />
+                              </div>
+                              <div className="col-span-1 text-right text-sm font-medium text-gray-700 dark:text-gray-300">
+                                {(item.quantity * item.rate).toFixed(2)}
+                              </div>
+                              <div className="col-span-1 flex justify-end gap-0.5">
+                                <button
+                                  onClick={() => duplicateItem(index)}
+                                  className="p-1.5 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                                  title="Duplicate item"
+                                  aria-label={`Duplicate item ${index + 1}`}
+                                >
+                                  <Copy size={13} />
+                                </button>
+                                <button
+                                  onClick={() => removeItem(index)}
+                                  className="p-1.5 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                                  disabled={data.items.length <= 1}
+                                  aria-label={`Remove item ${index + 1}`}
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </div>
+                            </div>
 
-              {/* Mobile: stacked card layout */}
-              <div className="md:hidden bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 space-y-2">
-                <input
-                  className={inputClass}
-                  placeholder="Item description"
-                  value={item.description}
-                  onChange={(e) => updateItem(index, 'description', e.target.value)}
-                />
-                <div className="grid grid-cols-3 gap-2">
-                  <div>
-                    <label className="block text-[10px] text-gray-400 mb-0.5">Qty</label>
-                    <input
-                      className={inputClass}
-                      type="number"
-                      min="1"
-                      placeholder="1"
-                      value={item.quantity || ''}
-                      onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-gray-400 mb-0.5">Rate</label>
-                    <input
-                      className={inputClass}
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      placeholder="0.00"
-                      value={item.rate || ''}
-                      onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label className="block text-[10px] text-gray-400 mb-0.5">Amount</label>
-                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 py-2 text-center">
-                      {(item.quantity * item.rate).toFixed(2)}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex justify-end gap-1 border-t border-gray-100 dark:border-gray-700 pt-2">
-                  <button
-                    onClick={() => duplicateItem(index)}
-                    className="p-2 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                    title="Duplicate item"
-                    aria-label={`Duplicate item ${index + 1}`}
-                  >
-                    <Copy size={14} />
-                  </button>
-                  <button
-                    onClick={() => removeItem(index)}
-                    className="p-2 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                    disabled={data.items.length <= 1}
-                    aria-label={`Remove item ${index + 1}`}
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
+                            {/* Mobile: stacked card layout */}
+                            <div className="md:hidden bg-white dark:bg-gray-800 rounded-lg p-2 border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 space-y-2 mt-2 -ml-2 -mr-2">
+                              <div className="flex gap-2 items-start">
+                                <div 
+                                  {...provided.dragHandleProps}
+                                  className="text-gray-300 hover:text-gray-500 cursor-grab active:cursor-grabbing p-2 mt-1"
+                                >
+                                  <GripVertical size={16} />
+                                </div>
+                                <div className="flex-1 space-y-2">
+                                  <input
+                                    className={inputClass}
+                                    placeholder="Item description"
+                                    value={item.description}
+                                    onChange={(e) => updateItem(index, 'description', e.target.value)}
+                                  />
+                                  <div className="grid grid-cols-3 gap-2">
+                                    <div>
+                                      <label className="block text-[10px] text-gray-400 mb-0.5">Qty</label>
+                                      <input
+                                        className={inputClass}
+                                        type="number"
+                                        min="1"
+                                        placeholder="1"
+                                        value={item.quantity || ''}
+                                        onChange={(e) => updateItem(index, 'quantity', Number(e.target.value))}
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="block text-[10px] text-gray-400 mb-0.5">Rate</label>
+                                      <input
+                                        className={inputClass}
+                                        type="number"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0.00"
+                                        value={item.rate || ''}
+                                        onChange={(e) => updateItem(index, 'rate', Number(e.target.value))}
+                                      />
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <label className="block text-[10px] text-gray-400 mb-0.5">Amount</label>
+                                      <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 py-2 text-center">
+                                        {(item.quantity * item.rate).toFixed(2)}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="flex justify-end gap-1 border-t border-gray-100 dark:border-gray-700 pt-2">
+                                    <button
+                                      onClick={() => duplicateItem(index)}
+                                      className="p-2 text-gray-400 hover:text-blue-500 transition rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                                      title="Duplicate item"
+                                      aria-label={`Duplicate item ${index + 1}`}
+                                    >
+                                      <Copy size={14} />
+                                    </button>
+                                    <button
+                                      onClick={() => removeItem(index)}
+                                      className="p-2 text-gray-400 hover:text-red-500 transition rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                                      disabled={data.items.length <= 1}
+                                      aria-label={`Remove item ${index + 1}`}
+                                    >
+                                      <Trash2 size={14} />
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
               </div>
-            </div>
-          ))}
-        </div>
+            )}
+          </Droppable>
+        </DragDropContext>
         <button
           onClick={addItem}
           className="mt-3 flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition"
@@ -408,7 +483,7 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
         </button>
       </div>
 
-      {/* Tax, Discount, Notes */}
+      {/* Extras & Bank Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
           <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Extras</h3>
@@ -447,15 +522,88 @@ export default function InvoiceForm({ data, onChange }: InvoiceFormProps) {
               onChange={(e) => update({ paymentTerms: e.target.value })}
             />
           </div>
+          <div>
+            <label className={labelClass}>Payment Link (QR Code)</label>
+            <input
+              className={inputClass}
+              placeholder="https://paypal.me/..."
+              value={data.paymentLink || ''}
+              onChange={(e) => update({ paymentLink: e.target.value })}
+            />
+          </div>
         </div>
+
+        {/* Bank Details */}
         <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Bank Details</h3>
+          <div>
+            <label className={labelClass}>Bank Name</label>
+            <input
+              className={inputClass}
+              placeholder="e.g. Chase Bank"
+              value={data.bankDetails?.bankName || ''}
+              onChange={(e) => update({ bankDetails: { ...data.bankDetails!, bankName: e.target.value } })}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Account Name</label>
+            <input
+              className={inputClass}
+              placeholder="e.g. John Doe / Acme Corp"
+              value={data.bankDetails?.accountName || ''}
+              onChange={(e) => update({ bankDetails: { ...data.bankDetails!, accountName: e.target.value } })}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Account / IBAN Number</label>
+            <input
+              className={inputClass}
+              placeholder="e.g. 123456789"
+              value={data.bankDetails?.accountNumber || ''}
+              onChange={(e) => update({ bankDetails: { ...data.bankDetails!, accountNumber: e.target.value } })}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className={labelClass}>Routing Number</label>
+              <input
+                className={inputClass}
+                placeholder="Optional"
+                value={data.bankDetails?.routingNumber || ''}
+                onChange={(e) => update({ bankDetails: { ...data.bankDetails!, routingNumber: e.target.value } })}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>SWIFT / BIC</label>
+              <input
+                className={inputClass}
+                placeholder="Optional"
+                value={data.bankDetails?.swiftBic || ''}
+                onChange={(e) => update({ bankDetails: { ...data.bankDetails!, swiftBic: e.target.value } })}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Notes */}
+        <div className="rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-4 space-y-3 h-full">
           <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Notes</h3>
           <textarea
-            className={`${inputClass} resize-none`}
-            rows={4}
+            className={`${inputClass} resize-none h-32`}
             placeholder="Thank you for your business!"
             value={data.notes}
             onChange={(e) => update({ notes: e.target.value })}
+          />
+        </div>
+
+        {/* Signature */}
+        <div className="h-full">
+          <SignaturePad 
+            initialSignature={data.signature}
+            onSave={(sig) => update({ signature: sig })} 
+            onClear={() => update({ signature: undefined })} 
           />
         </div>
       </div>

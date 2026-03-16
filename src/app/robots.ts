@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://buildwithriz.com/sitemap.xml',
+        sitemap: 'https://www.buildwithriz.com/sitemap.xml',
     };
 }

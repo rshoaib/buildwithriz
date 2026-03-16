@@ -22,8 +22,8 @@ These are the priority topics for the `@[/content-pipeline]` to target next.
 
 ### Priority 1: High Intent "How To" Topics
 - [ ] how to write an invoice for freelance work (MSV: Med / KD: Low)
-- [ ] what happens if a client doesn't pay an invoice (MSV: High / KD: Med)
-- [ ] how to calculate late fees on an invoice (MSV: Med / KD: Low)
+- [x] what happens if a client doesn't pay an invoice (MSV: High / KD: Med)
+- [x] how to calculate late fees on an invoice (MSV: Med / KD: Low)
 - [ ] invoice payment terms explained (MSV: High / KD: Med)
 
 ### Priority 2: Comparisons & Explanations

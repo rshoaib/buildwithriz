@@ -21,6 +21,14 @@ export const defaultInvoice: InvoiceData = {
     discountRate: 0,
     notes: '',
     paymentTerms: 'Net 30',
+    status: 'unpaid',
+    bankDetails: {
+        bankName: '',
+        accountName: '',
+        accountNumber: '',
+        routingNumber: '',
+        swiftBic: '',
+    },
 };
 
 export function calculateSubtotal(items: InvoiceData['items']): number {

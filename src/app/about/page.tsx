@@ -4,11 +4,11 @@ import { FileText, Shield, Globe, Zap, Heart, Code, Rocket } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'About — BuildWithRiz | Free Developer Tools',
   description: 'BuildWithRiz provides free, privacy-friendly online tools for freelancers and small businesses. No signup, no data stored. Learn about our mission and the developer behind the project.',
-  alternates: { canonical: 'https://buildwithriz.com/about' },
+  alternates: { canonical: 'https://www.buildwithriz.com/about' },
   openGraph: {
     title: 'About — BuildWithRiz',
     description: 'Free, privacy-friendly online tools for freelancers and small businesses.',
-    url: 'https://buildwithriz.com/about',
+    url: 'https://www.buildwithriz.com/about',
   },
 };
 

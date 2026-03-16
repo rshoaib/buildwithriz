@@ -15,6 +15,8 @@ import {
   PDFDownloadLink,
 } from '@react-pdf/renderer';
 import { Download } from 'lucide-react';
+import QRCode from 'qrcode';
+import { useState, useEffect } from 'react';
 
 const baseStyles = PDFStyleSheet.create({
   page: { padding: 40, fontSize: 10, fontFamily: 'Helvetica', color: '#1a1a1a' },
@@ -50,9 +52,17 @@ const baseStyles = PDFStyleSheet.create({
   footerText: { fontSize: 7, color: '#9ca3af' },
   // Minimal header (no colored bar)
   minimalHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: '#e5e7eb' },
+  extrasContainer: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 },
+  qrContainer: { width: 80, alignItems: 'center' },
+  qrImage: { width: 70, height: 70 },
+  qrText: { fontSize: 7, color: '#6b7280', marginTop: 4, textAlign: 'center' },
+  signatureContainer: { width: 120, alignItems: 'flex-start' },
+  signatureImage: { height: 50, objectFit: 'contain' },
+  signatureLine: { width: 120, height: 1, backgroundColor: '#1a1a1a', marginTop: 4 },
+  signatureText: { fontSize: 8, color: '#6b7280', marginTop: 4 },
 });
 
-function InvoicePDF({ data, theme = 'modern' }: { data: InvoiceData; theme?: TemplateStyle }) {
+function InvoicePDF({ data, theme = 'modern', qrCodeDataUrl }: { data: InvoiceData; theme?: TemplateStyle; qrCodeDataUrl: string | null }) {
   const symbol = getCurrencySymbol(data.currency);
   const subtotal = calculateSubtotal(data.items);
   const tax = calculateTax(subtotal, data.taxRate);
@@ -177,6 +187,28 @@ function InvoicePDF({ data, theme = 'modern' }: { data: InvoiceData; theme?: Tem
           </PDFView>
         ) : null}
 
+        {/* Extras: Signature and QR Code */}
+        <PDFView style={baseStyles.extrasContainer}>
+          <PDFView style={baseStyles.signatureContainer}>
+            {data.signature ? (
+              <>
+                <PDFImage src={data.signature} style={baseStyles.signatureImage} />
+                <PDFView style={baseStyles.signatureLine} />
+                <PDFText style={baseStyles.signatureText}>Authorized Signature</PDFText>
+              </>
+            ) : null}
+          </PDFView>
+
+          <PDFView style={baseStyles.qrContainer}>
+            {qrCodeDataUrl && data.paymentLink ? (
+              <>
+                <PDFImage src={qrCodeDataUrl} style={baseStyles.qrImage} />
+                <PDFText style={baseStyles.qrText}>Scan to Pay</PDFText>
+              </>
+            ) : null}
+          </PDFView>
+        </PDFView>
+
         {/* Footer */}
         <PDFView style={baseStyles.footer}>
           <PDFText style={baseStyles.footerText}>Generated for free at buildwithriz.com</PDFText>
@@ -193,6 +225,25 @@ interface PdfGeneratorProps {
 
 export default function PdfGenerator({ data, theme = 'modern' }: PdfGeneratorProps) {
   const t = getTheme(theme);
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string | null>(null);
+
+  // Generate QR code if paymentLink exists
+  useEffect(() => {
+    async function generateQR() {
+      if (data.paymentLink) {
+        try {
+          const url = await QRCode.toDataURL(data.paymentLink, { margin: 1, color: { dark: '#000000', light: '#ffffff' } });
+          setQrCodeDataUrl(url);
+        } catch (err) {
+          console.error('Failed to generate QR code', err);
+          setQrCodeDataUrl(null);
+        }
+      } else {
+        setQrCodeDataUrl(null);
+      }
+    }
+    generateQR();
+  }, [data.paymentLink]);
   // Map theme to button gradient colors
   const buttonGradients: Record<TemplateStyle, string> = {
     modern: 'from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-blue-500/25 hover:shadow-blue-500/40',
@@ -204,7 +255,7 @@ export default function PdfGenerator({ data, theme = 'modern' }: PdfGeneratorPro
 
   return (
     <PDFDownloadLink
-      document={<InvoicePDF data={data} theme={theme} />}
+      document={<InvoicePDF data={data} theme={theme} qrCodeDataUrl={qrCodeDataUrl} />}
       fileName={`${data.invoiceNumber || 'receipt'}.pdf`}
     >
       {({ loading }) => (

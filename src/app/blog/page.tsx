@@ -2,21 +2,35 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { articles } from '@/data/articles';
+import { supabase } from '@/lib/supabase';
+import { BlogArticle } from '@/data/articles'; // Only for type, ideally extract type later
 
 export const metadata: Metadata = {
   title: 'Blog — Free Invoicing Tips & Guides | BuildWithRiz',
   description:
     'Practical guides on invoicing, freelancing, and running a small business. Tips on creating professional invoices, getting paid faster, and managing your finances.',
-  alternates: { canonical: 'https://buildwithriz.com/blog' },
+  alternates: { canonical: 'https://www.buildwithriz.com/blog' },
   openGraph: {
     title: 'Blog — BuildWithRiz',
     description: 'Invoicing tips, freelancing guides, and small business resources.',
-    url: 'https://buildwithriz.com/blog',
+    url: 'https://www.buildwithriz.com/blog',
   },
 };
 
-export default function Blog() {
+export const revalidate = 3600; // revalidate at most every hour
+
+export default async function Blog() {
+  const { data: articles, error } = await supabase
+    .from('blog_posts')
+    .select('slug, title, description, date, readTime, heroImage')
+    .order('date', { ascending: false });
+
+  if (error || !articles) {
+    console.error('Error fetching articles:', error);
+  }
+
+  const posts = articles || [];
+
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Blog</h1>
@@ -26,7 +40,7 @@ export default function Blog() {
       </p>
 
       <div className="space-y-6">
-        {articles.map((article) => (
+        {posts.map((article) => (
           <Link
             key={article.slug}
             href={`/blog/${article.slug}`}

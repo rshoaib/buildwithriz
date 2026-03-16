@@ -5,6 +5,13 @@ export interface LineItem {
     rate: number;
 }
 
+export interface ClientProfile {
+    id: string;
+    name: string;
+    email: string;
+    address: string;
+}
+
 export interface InvoiceData {
     // Logo
     logo: string;
@@ -37,6 +44,20 @@ export interface InvoiceData {
     discountRate: number;
     notes: string;
     paymentTerms: string;
+    paymentLink?: string;
+    signature?: string;
+
+    // Bank Details
+    bankDetails?: {
+        bankName: string;
+        accountName: string;
+        accountNumber: string;
+        routingNumber?: string;
+        swiftBic?: string;
+    };
+
+    // Status
+    status?: 'unpaid' | 'paid';
 }
 
 export type TemplateStyle = 'modern' | 'classic' | 'minimal' | 'bold' | 'forest';

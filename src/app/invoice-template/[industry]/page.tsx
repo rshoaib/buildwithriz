@@ -30,12 +30,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         openGraph: {
             title: ind.title,
             description: ind.metaDescription,
-            url: `https://buildwithriz.com/invoice-template/${ind.slug}`,
+            url: `https://www.buildwithriz.com/invoice-template/${ind.slug}`,
             siteName: 'BuildWithRiz',
             type: 'website',
         },
         alternates: {
-            canonical: `https://buildwithriz.com/invoice-template/${ind.slug}`,
+            canonical: `https://www.buildwithriz.com/invoice-template/${ind.slug}`,
         },
     };
 }
@@ -58,11 +58,11 @@ export default async function IndustryTemplatePage({ params }: PageProps) {
             '@type': 'WebPage',
             name: ind.title,
             description: ind.metaDescription,
-            url: `https://buildwithriz.com/invoice-template/${ind.slug}`,
+            url: `https://www.buildwithriz.com/invoice-template/${ind.slug}`,
             isPartOf: {
                 '@type': 'WebSite',
                 name: 'BuildWithRiz',
-                url: 'https://buildwithriz.com',
+                url: 'https://www.buildwithriz.com',
             },
         },
         {

@@ -5,6 +5,8 @@ import { getCurrencySymbol, formatCurrency } from '@/data/currencies';
 import { calculateSubtotal, calculateTax, calculateDiscount, calculateTotal } from '@/data/defaults';
 import { getLabels } from '@/data/languages';
 import { getTheme } from '@/data/themes';
+import QRCode from 'qrcode';
+import { useState, useEffect } from 'react';
 
 interface InvoicePreviewProps {
   data: InvoiceData;
@@ -19,6 +21,25 @@ export default function InvoicePreview({ data, theme = 'modern' }: InvoicePrevie
   const total = calculateTotal(data.items, data.taxRate, data.discountRate);
   const labels = getLabels(data.language);
   const t = getTheme(theme).preview;
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string | null>(null);
+
+  // Generate QR code if paymentLink exists
+  useEffect(() => {
+    async function generateQR() {
+      if (data.paymentLink) {
+        try {
+          const url = await QRCode.toDataURL(data.paymentLink, { margin: 1, color: { dark: '#000000', light: '#ffffff' } });
+          setQrCodeDataUrl(url);
+        } catch (err) {
+          console.error('Failed to generate QR code for preview', err);
+          setQrCodeDataUrl(null);
+        }
+      } else {
+        setQrCodeDataUrl(null);
+      }
+    }
+    generateQR();
+  }, [data.paymentLink]);
 
   return (
     <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
@@ -161,11 +182,29 @@ export default function InvoicePreview({ data, theme = 'modern' }: InvoicePrevie
           </div>
         </div>
 
-        {/* Notes */}
-        {data.notes && (
-          <div className="border-t border-gray-100 pt-3">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{labels.notes}</p>
-            <p className="text-xs text-gray-600 whitespace-pre-line">{data.notes}</p>
+        {/* Extras: Signature and QR Code */}
+        {(data.signature || (qrCodeDataUrl && data.paymentLink)) && (
+          <div className="flex justify-between items-start pt-6 border-t border-gray-100 mt-6">
+            <div className="w-48 text-left">
+              {data.signature && (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={data.signature} alt="Signature" className="h-14 object-contain mb-1" />
+                  <div className="w-full h-px bg-gray-800 mb-1"></div>
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">Authorized Signature</p>
+                </>
+              )}
+            </div>
+            
+            <div className="text-center w-24">
+              {qrCodeDataUrl && data.paymentLink && (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={qrCodeDataUrl} alt="Scan to Pay QR Code" className="w-16 h-16 mx-auto mb-1" />
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">Scan to Pay</p>
+                </>
+              )}
+            </div>
           </div>
         )}
       </div>

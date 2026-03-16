@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Free Invoice Generator — Create & Download PDF Invoices",
     description:
       "Create professional invoices for free. No signup required. Download as PDF instantly.",
-    url: "https://buildwithriz.com",
+    url: "https://www.buildwithriz.com",
     siteName: "BuildWithRiz",
     locale: "en_US",
     type: "website",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://buildwithriz.com",
+    canonical: "https://www.buildwithriz.com",
   },
 };
 
@@ -56,7 +56,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "BuildWithRiz Free Invoice Generator",
-    url: "https://buildwithriz.com",
+    url: "https://www.buildwithriz.com",
     description: "Create professional invoices for free. No signup, no data stored.",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Any",
@@ -78,8 +78,8 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "BuildWithRiz",
-    url: "https://buildwithriz.com",
-    logo: "https://buildwithriz.com/favicon.ico",
+    url: "https://www.buildwithriz.com",
+    logo: "https://www.buildwithriz.com/favicon.ico",
     contactPoint: {
       "@type": "ContactPoint",
       email: "contact@buildwithriz.com",
@@ -225,8 +225,8 @@ export default function RootLayout({
         {/* Footer */}
         <footer className="no-print bg-gray-900 dark:bg-gray-950 text-gray-400 mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="md:col-span-1">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
                     <FileText size={14} className="text-white" />
@@ -244,8 +244,24 @@ export default function RootLayout({
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/" className="hover:text-white transition">Invoice Generator</Link></li>
                   <li><Link href="/receipt-generator" className="hover:text-white transition">Receipt Generator</Link></li>
-                  <li><Link href="/invoice-template/web-designer" className="hover:text-white transition">Invoice Templates</Link></li>
                   <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-3 text-sm">Templates</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><Link href="/invoice-template/accountant" className="hover:text-white transition">Accountant Invoice</Link></li>
+                  <li><Link href="/invoice-template/consultant" className="hover:text-white transition">Consultant Invoice</Link></li>
+                  <li><Link href="/invoice-template/contractor" className="hover:text-white transition">Contractor Invoice</Link></li>
+                  <li><Link href="/invoice-template/copywriter" className="hover:text-white transition">Copywriter Invoice</Link></li>
+                  <li><Link href="/invoice-template/developer" className="hover:text-white transition">Developer Invoice</Link></li>
+                  <li><Link href="/invoice-template/graphic-designer" className="hover:text-white transition">Graphic Designer Invoice</Link></li>
+                  <li><Link href="/invoice-template/marketing-agency" className="hover:text-white transition">Marketing Agency Invoice</Link></li>
+                  <li><Link href="/invoice-template/personal-trainer" className="hover:text-white transition">Personal Trainer Invoice</Link></li>
+                  <li><Link href="/invoice-template/photographer" className="hover:text-white transition">Photographer Invoice</Link></li>
+                  <li><Link href="/invoice-template/tutor" className="hover:text-white transition">Tutor Invoice</Link></li>
+                  <li><Link href="/invoice-template/videographer" className="hover:text-white transition">Videographer Invoice</Link></li>
+                  <li><Link href="/invoice-template/web-designer" className="hover:text-white transition">Web Designer Invoice</Link></li>
                 </ul>
               </div>
               <div>

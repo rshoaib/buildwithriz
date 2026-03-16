@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
-import { articles } from '@/data/articles';
+import { supabase } from '@/lib/supabase';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -11,7 +11,12 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
+  const { data: articles } = await supabase.from('blog_posts').select('slug');
+  if (!articles) return [];
+  
   return articles.map((article) => ({
     slug: article.slug,
   }));
@@ -19,21 +24,26 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = articles.find((a) => a.slug === slug);
+  const { data: article } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
   if (!article) return {};
 
   return {
     title: `${article.title} | BuildWithRiz`,
     description: article.description,
-    keywords: article.keywords,
-    alternates: { canonical: `https://buildwithriz.com/blog/${article.slug}` },
+    keywords: article.keywords, // comes back as array from Supabase text[]
+    alternates: { canonical: `https://www.buildwithriz.com/blog/${article.slug}` },
     openGraph: {
       title: article.title,
       description: article.description,
-      url: `https://buildwithriz.com/blog/${article.slug}`,
+      url: `https://www.buildwithriz.com/blog/${article.slug}`,
       type: 'article',
       publishedTime: article.date,
-      images: [{ url: `https://buildwithriz.com${article.heroImage}` }],
+      images: [{ url: `https://www.buildwithriz.com${article.heroImage}` }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -45,9 +55,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params;
-  const article = articles.find((a) => a.slug === slug);
+  
+  const { data: article, error } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .single();
 
-  if (!article) {
+  if (error || !article) {
     notFound();
   }
 
@@ -61,15 +76,15 @@ export default async function BlogPost({ params }: PageProps) {
       author: {
         '@type': 'Organization',
         name: 'BuildWithRiz',
-        url: 'https://buildwithriz.com',
+        url: 'https://www.buildwithriz.com',
       },
       publisher: {
         '@type': 'Organization',
         name: 'BuildWithRiz',
-        url: 'https://buildwithriz.com',
+        url: 'https://www.buildwithriz.com',
       },
-      image: `https://buildwithriz.com${article.heroImage}`,
-      mainEntityOfPage: `https://buildwithriz.com/blog/${article.slug}`,
+      image: `https://www.buildwithriz.com${article.heroImage}`,
+      mainEntityOfPage: `https://www.buildwithriz.com/blog/${article.slug}`,
     },
   ];
 

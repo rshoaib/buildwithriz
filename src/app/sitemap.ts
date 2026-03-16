@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { articles } from '@/data/articles';
+import { supabase } from '@/lib/supabase';
 import { industries } from '@/data/industries';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://buildwithriz.com';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const baseUrl = 'https://www.buildwithriz.com';
 
     const staticPages: MetadataRoute.Sitemap = [
         {
@@ -50,7 +50,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    const blogPages: MetadataRoute.Sitemap = articles.map((article) => ({
+    const { data: articles } = await supabase.from('blog_posts').select('slug, date');
+    const posts = articles || [];
+
+    const blogPages: MetadataRoute.Sitemap = posts.map((article) => ({
         url: `${baseUrl}/blog/${article.slug}`,
         lastModified: new Date(article.date),
         changeFrequency: 'monthly' as const,
