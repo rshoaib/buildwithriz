@@ -29,7 +29,7 @@ These are the priority topics for the `@[/content-pipeline]` to target next.
 ### Priority 2: Comparisons & Explanations
 - [x] proforma invoice vs commercial invoice
 - [x] quote vs estimate vs invoice: what's the difference?
-- [ ] cash accounting vs accrual accounting for freelancers
+- [x] cash accounting vs accrual accounting for freelancers
 - [ ] do I need to charge tax on my invoices?
 
 ### Priority 3: Industry Specific Guides
