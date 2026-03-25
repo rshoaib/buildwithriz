@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
-import { BlogArticle } from '@/data/articles'; // Only for type, ideally extract type later
 
 export const metadata: Metadata = {
   title: 'Blog — Free Invoicing Tips & Guides | BuildWithRiz',
