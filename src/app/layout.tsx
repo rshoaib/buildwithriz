@@ -275,7 +275,13 @@ export default function RootLayout({
               </div>
             </div>
             <div className="border-t border-gray-800 dark:border-gray-700 mt-8 pt-6 text-center text-xs">
-              <p>&copy; {new Date().getFullYear()} BuildWithRiz. All rights reserved. No user data is collected or stored.</p>
+              <p className="mb-3">&copy; {new Date().getFullYear()} BuildWithRiz. All rights reserved. No user data is collected or stored.</p>
+              <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
+                <a href="https://tinypdftools.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">PDF Tools</a>
+                <a href="https://onlineimageshrinker.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Image Compressor</a>
+                <a href="https://dailysmartcalc.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Smart Calculators</a>
+                <a href="https://mycalcfinance.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Finance Calculators</a>
+              </div>
             </div>
           </div>
         </footer>
