@@ -11,6 +11,7 @@ import {
   View as PDFView,
   Text as PDFText,
   Image as PDFImage,
+  Link as PDFLink,
   StyleSheet as PDFStyleSheet,
   PDFDownloadLink,
 } from '@react-pdf/renderer';
@@ -211,7 +212,9 @@ function InvoicePDF({ data, theme = 'modern', qrCodeDataUrl }: { data: InvoiceDa
 
         {/* Footer */}
         <PDFView style={baseStyles.footer}>
-          <PDFText style={baseStyles.footerText}>Generated for free at buildwithriz.com</PDFText>
+          <PDFLink src="https://www.buildwithriz.com?ref=pdf" style={{ textDecoration: 'none' }}>
+            <PDFText style={baseStyles.footerText}>Generated for free at buildwithriz.com</PDFText>
+          </PDFLink>
         </PDFView>
       </PDFPage>
     </PDFDoc>
