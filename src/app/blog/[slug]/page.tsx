@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -143,6 +144,7 @@ export default async function BlogPost({ params }: PageProps) {
       <article className="prose prose-gray prose-sm sm:prose-base max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             h2: ({ children }) => (
               <h2 className="text-xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b border-gray-100">

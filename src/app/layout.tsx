@@ -274,7 +274,7 @@ export default function RootLayout({
                 </ul>
               </div>
             </div>
-            <div className="border-t border-gray-800 dark:border-gray-700 mt-8 pt-6 text-center text-xs">
+            <div className="border-t border-gray-800 dark:border-gray-700 mt-8 pt-6 pb-6 text-center text-xs">
               <p className="mb-3">&copy; {new Date().getFullYear()} BuildWithRiz. All rights reserved. No user data is collected or stored.</p>
               <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
                 <a href="https://tinypdftools.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">PDF Tools</a>
