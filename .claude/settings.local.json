@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__1c3eb5be-db84-4db6-94e5-1228261bef87__site-explorer-domain-rating",
+      "mcp__1c3eb5be-db84-4db6-94e5-1228261bef87__site-explorer-backlinks-stats",
+      "WebSearch",
+      "mcp__scheduled-tasks__list_scheduled_tasks"
+    ]
+  }
+}
