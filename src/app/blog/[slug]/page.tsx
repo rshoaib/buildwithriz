@@ -1,42 +1,31 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import { getAllPostSlugs, getPostBySlug } from '@/lib/posts';
+import HeroSvg from '@/components/blog/HeroSvg';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 3600;
-
-export async function generateStaticParams() {
-  const { data: articles } = await supabase.from('blog_posts').select('slug');
-  if (!articles) return [];
-  
-  return articles.map((article) => ({
-    slug: article.slug,
-  }));
+export function generateStaticParams() {
+  return getAllPostSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const { data: article } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const article = getPostBySlug(slug);
 
   if (!article) return {};
 
   return {
     title: `${article.title} | BuildWithRiz`,
     description: article.description,
-    keywords: article.keywords, // comes back as array from Supabase text[]
+    keywords: article.keywords,
     alternates: { canonical: `https://www.buildwithriz.com/blog/${article.slug}` },
     openGraph: {
       title: article.title,
@@ -44,7 +33,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://www.buildwithriz.com/blog/${article.slug}`,
       type: 'article',
       publishedTime: article.date,
-      images: [{ url: `https://www.buildwithriz.com${article.heroImage}` }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -56,14 +44,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params;
-  
-  const { data: article, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const article = getPostBySlug(slug);
 
-  if (error || !article) {
+  if (!article) {
     notFound();
   }
 
@@ -84,7 +67,6 @@ export default async function BlogPost({ params }: PageProps) {
         name: 'BuildWithRiz',
         url: 'https://www.buildwithriz.com',
       },
-      image: `https://www.buildwithriz.com${article.heroImage}`,
       mainEntityOfPage: `https://www.buildwithriz.com/blog/${article.slug}`,
     },
   ];
@@ -105,15 +87,9 @@ export default async function BlogPost({ params }: PageProps) {
         Back to Blog
       </Link>
 
-      {/* Hero Image */}
+      {/* Hero Illustration (inline SVG — no external assets) */}
       <div className="relative w-full h-48 sm:h-64 md:h-80 rounded-xl overflow-hidden mb-6">
-        <Image
-          src={article.heroImage}
-          alt={article.title}
-          fill
-          className="object-cover"
-          priority
-        />
+        <HeroSvg slug={article.heroKey} className="absolute inset-0 w-full h-full" />
       </div>
 
       {/* Article Header */}

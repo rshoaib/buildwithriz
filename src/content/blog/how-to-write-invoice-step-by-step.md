@@ -1,32 +1,19 @@
-import { createClient } from '@supabase/supabase-js';
+---
+slug: "how-to-write-invoice-step-by-step"
+title: "How to Write an Invoice: A Step-by-Step Guide for Beginners (2026)"
+description: "Learn how to write a professional invoice from scratch. This step-by-step guide covers every field, common mistakes, and how to create polished invoices for free — no signup required."
+date: "2026-03-30"
+readTime: "8 min read"
+heroKey: "how-to-write-invoice-step-by-step"
+keywords:
+  - "how to write an invoice"
+  - "how to create an invoice step by step"
+  - "invoice writing guide"
+  - "beginner invoice guide"
+  - "write a professional invoice"
+---
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE env vars.');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-async function main() {
-  const post = {
-    slug: 'how-to-write-invoice-step-by-step',
-    title: "How to Write an Invoice: A Step-by-Step Guide for Beginners (2026)",
-    description:
-      'Learn how to write a professional invoice from scratch. This step-by-step guide covers every field, common mistakes, and how to create polished invoices for free — no signup required.',
-    date: '2026-03-29',
-    readTime: '8 min read',
-    keywords: [
-      'how to write an invoice',
-      'how to create an invoice step by step',
-      'invoice writing guide',
-      'beginner invoice guide',
-      'write a professional invoice',
-    ],
-    heroImage: '/images/blog/how-to-write-invoice-hero.png',
-    content: `## Why a Good Invoice Matters More Than You Think
+## Why a Good Invoice Matters More Than You Think
 
 Writing an invoice sounds simple. You list what you did, how much it costs, and send it off. But here's what most beginners get wrong: a poorly written invoice doesn't just look unprofessional — it actively delays your payment.
 
@@ -217,30 +204,4 @@ You don't need expensive software to look professional. Our **[free invoice gene
 - ✅ Add your custom logo
 - ✅ Works on any device
 
-**[Create Your First Invoice Now →](/)**`,
-  };
-
-  // Check current count first
-  const { data: allPosts } = await supabase.from('blog_posts').select('slug, date').order('date', { ascending: false });
-  console.log(`Current article count: ${allPosts?.length || 0}`);
-  if (allPosts?.[0]) {
-    console.log(`Last published: ${allPosts[0].date} — ${allPosts[0].slug}`);
-  }
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .upsert(post, { onConflict: 'slug' })
-    .select();
-
-  if (error) {
-    console.error('Error inserting article:', error.message);
-  } else {
-    console.log('✅ Article inserted successfully:', post.slug);
-  }
-
-  // Final count
-  const { data: finalPosts } = await supabase.from('blog_posts').select('slug');
-  console.log(`Total articles now: ${finalPosts?.length || 0}`);
-}
-
-main();
+**[Create Your First Invoice Now →](/)**

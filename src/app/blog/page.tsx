@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { getAllPosts } from '@/lib/posts';
+import HeroSvg from '@/components/blog/HeroSvg';
 
 export const metadata: Metadata = {
   title: 'Blog — Free Invoicing Tips & Guides | BuildWithRiz',
@@ -16,19 +16,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // revalidate at most every hour
-
-export default async function Blog() {
-  const { data: articles, error } = await supabase
-    .from('blog_posts')
-    .select('slug, title, description, date, readTime, heroImage')
-    .order('date', { ascending: false });
-
-  if (error || !articles) {
-    console.error('Error fetching articles:', error);
-  }
-
-  const posts = articles || [];
+export default function Blog() {
+  const posts = getAllPosts();
 
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -47,12 +36,10 @@ export default async function Blog() {
           >
             <div className="sm:flex">
               <div className="sm:w-64 sm:flex-shrink-0">
-                <div className="relative h-48 sm:h-full w-full">
-                  <Image
-                    src={article.heroImage}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-300"
+                <div className="relative h-48 sm:h-full w-full overflow-hidden">
+                  <HeroSvg
+                    slug={article.heroKey}
+                    className="absolute inset-0 w-full h-full group-hover:scale-105 transition duration-300"
                   />
                 </div>
               </div>

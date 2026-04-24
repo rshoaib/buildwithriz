@@ -1,25 +1,19 @@
-import { createClient } from '@supabase/supabase-js';
+---
+slug: "cash-vs-accrual-accounting-freelancers"
+title: "Cash vs Accrual Accounting for Freelancers (2026)"
+description: "Confused by cash vs accrual accounting? Learn which method works best for freelancers, how each affects your invoices and taxes, and pick the right one for your business."
+date: "2026-03-21"
+readTime: "9 min read"
+heroKey: "cash-vs-accrual-accounting-freelancers"
+keywords:
+  - "cash vs accrual accounting"
+  - "cash accounting vs accrual accounting for freelancers"
+  - "cash basis accounting explained"
+  - "accrual accounting freelancer"
+  - "freelance bookkeeping method"
+---
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE env vars.');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-async function main() {
-  const post = {
-    slug: 'cash-vs-accrual-accounting-freelancers',
-    title: 'Cash vs Accrual Accounting for Freelancers (2026)',
-    description: 'Confused by cash vs accrual accounting? Learn which method works best for freelancers, how each affects your invoices and taxes, and pick the right one for your business.',
-    date: new Date().toISOString().split('T')[0],
-    readTime: '9 min read',
-    keywords: ['cash vs accrual accounting', 'cash accounting vs accrual accounting for freelancers', 'cash basis accounting explained', 'accrual accounting freelancer', 'freelance bookkeeping method'],
-    heroImage: '/images/blog/cash-vs-accrual-accounting-hero.png',
-    content: `# Cash vs Accrual Accounting for Freelancers (2026)
+# Cash vs Accrual Accounting for Freelancers (2026)
 
 Every freelancer eventually faces a deceptively important decision: **should I track my income when I receive payment, or when I send the invoice?** That single choice is the difference between cash and accrual accounting — and it directly impacts your taxes, your cash flow visibility, and how you run your entire business.
 
@@ -257,19 +251,4 @@ Choosing between cash and accrual accounting is one of the most impactful financ
 
 Whatever method you choose, professional invoicing is the foundation of good financial management. Our **[free invoice generator](/)** helps you create clean, itemized invoices with clear [payment terms](/blog/invoice-payment-terms-explained), automatic calculations, and instant PDF downloads — all without creating an account or storing any data.
 
-**[Create Your Free Invoice →](/)**`
-  };
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .upsert(post, { onConflict: 'slug' })
-    .select();
-
-  if (error) {
-    console.error('Error inserting article:', error.message);
-  } else {
-    console.log('✅ Article inserted successfully:', post.slug);
-  }
-}
-
-main();
+**[Create Your Free Invoice →](/)**

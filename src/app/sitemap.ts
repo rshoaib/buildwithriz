@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { supabase } from '@/lib/supabase';
+import { getAllPosts } from '@/lib/posts';
 import { industries } from '@/data/industries';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://www.buildwithriz.com';
 
     const staticPages: MetadataRoute.Sitemap = [
@@ -50,8 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    const { data: articles } = await supabase.from('blog_posts').select('slug, date');
-    const posts = articles || [];
+    const posts = getAllPosts();
 
     const blogPages: MetadataRoute.Sitemap = posts.map((article) => ({
         url: `${baseUrl}/blog/${article.slug}`,

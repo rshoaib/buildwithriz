@@ -1,25 +1,18 @@
-import { createClient } from '@supabase/supabase-js';
+---
+slug: "how-to-write-invoice-freelance-work"
+title: "How to Write an Invoice for Freelance Work (The 2026 Guide)"
+description: "Learn the essential elements of a freelance invoice and discover best practices to ensure you get paid on time for your remote work."
+date: "2026-03-14"
+readTime: "5 min read"
+heroKey: "how-to-write-invoice-freelance-work"
+keywords:
+  - "how to write an invoice for freelance work"
+  - "freelance invoice"
+  - "invoice requirements for freelancers"
+  - "get paid faster freelance"
+---
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE env vars.');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-async function main() {
-  const post = {
-    slug: 'how-to-write-invoice-freelance-work',
-    title: 'How to Write an Invoice for Freelance Work (The 2026 Guide)',
-    description: 'Learn the essential elements of a freelance invoice and discover best practices to ensure you get paid on time for your remote work.',
-    date: new Date().toISOString().split('T')[0],
-    readTime: '5 min read',
-    keywords: ['how to write an invoice for freelance work', 'freelance invoice', 'invoice requirements for freelancers', 'get paid faster freelance'],
-    heroImage: '/images/blog/how-to-write-freelance-invoice.png',
-    content: `# How to Write an Invoice for Freelance Work (The 2026 Guide)
+# How to Write an Invoice for Freelance Work (The 2026 Guide)
 
 As a freelancer, your invoice is often the final touchpoint you have with a client on a project. It’s not just a request for money; it’s a reflection of your professionalism. 
 
@@ -38,7 +31,7 @@ Your invoice should clearly identify who is billing whom.
 
 ### 2. A Unique Invoice Number
 Never send an invoice without a unique, sequential invoice number. This is crucial for both your bookkeeping and your client's records. 
-*   *Tip:* You don't have to start at \`001\`. You can use a system like \`2026-001\` or include the client's initials like \`ACME-100\`. 
+*   *Tip:* You don't have to start at `001`. You can use a system like `2026-001` or include the client's initials like `ACME-100`. 
 
 ### 3. Invoice Date and Payment Due Date
 *   **Issue Date:** The exact date you are sending the invoice.
@@ -78,19 +71,4 @@ Instead of fighting with margins and fonts, use our [free invoice generator](/) 
 
 There are **no accounts to create**, and the tool is **100% free forever**. Better yet, for your privacy and security, all data is processed locally right in your browser. We never save your financial data or your clients' information on our servers. 
 
-Need a different format? We also offer a [proforma invoice generator](/tools/proforma-invoice-generator) and a [free receipt generator](/tools/receipt-generator) tailored for small businesses.`
-  };
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .upsert(post, { onConflict: 'slug' })
-    .select();
-
-  if (error) {
-    console.error('Error inserting article:', error.message);
-  } else {
-    console.log('✅ Article inserted successfully:', post.slug);
-  }
-}
-
-main();
+Need a different format? We also offer a [proforma invoice generator](/tools/proforma-invoice-generator) and a [free receipt generator](/tools/receipt-generator) tailored for small businesses.

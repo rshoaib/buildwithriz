@@ -1,32 +1,20 @@
-import { createClient } from '@supabase/supabase-js';
+---
+slug: "quote-vs-estimate-vs-invoice"
+title: "Quote vs Estimate vs Invoice: What's the Difference? (2026)"
+description: "Confused by quotes, estimates, and invoices? Learn exactly when to use each document, the key differences, and how they fit into your freelance billing workflow."
+date: "2026-03-18"
+readTime: "9 min read"
+heroKey: "quote-vs-estimate-vs-invoice"
+keywords:
+  - "quote vs estimate vs invoice"
+  - "difference between quote and estimate"
+  - "estimate vs invoice"
+  - "what is a quote in business"
+  - "freelance billing documents"
+  - "when to send an estimate"
+---
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE env vars.');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-async function main() {
-  const post = {
-    slug: 'quote-vs-estimate-vs-invoice',
-    title: "Quote vs Estimate vs Invoice: What's the Difference? (2026)",
-    description: 'Confused by quotes, estimates, and invoices? Learn exactly when to use each document, the key differences, and how they fit into your freelance billing workflow.',
-    date: '2026-03-18',
-    readTime: '9 min read',
-    keywords: [
-      'quote vs estimate vs invoice',
-      'difference between quote and estimate',
-      'estimate vs invoice',
-      'what is a quote in business',
-      'freelance billing documents',
-      'when to send an estimate',
-    ],
-    heroImage: '/images/blog/quote-vs-estimate-vs-invoice-hero.png',
-    content: `## Why These Three Documents Matter
+## Why These Three Documents Matter
 
 If you are a freelancer, contractor, or small business owner, you have probably been asked to "send an estimate," "provide a quote," or "invoice me for that." These terms get thrown around interchangeably — but they are **not the same thing**. Each document serves a distinct purpose in the billing workflow, and confusing them can lead to lost revenue, scope disputes, and delayed payments.
 
@@ -232,25 +220,4 @@ Whether you need an estimate, a quote, or a final invoice, having clean, profess
 
 All our tools are 100% free, require no signup, and process everything securely in your browser. Your data never leaves your device.
 
-**[Get Started Now →](/)**`,
-  };
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .upsert(post, { onConflict: 'slug' })
-    .select();
-
-  if (error) {
-    console.error('Error inserting article:', error.message);
-  } else {
-    console.log('✅ Article inserted successfully:', post.slug);
-    
-    // Verify count
-    const { count } = await supabase
-      .from('blog_posts')
-      .select('*', { count: 'exact', head: true });
-    console.log(`📦 Total articles in database: ${count}`);
-  }
-}
-
-main();
+**[Get Started Now →](/)**

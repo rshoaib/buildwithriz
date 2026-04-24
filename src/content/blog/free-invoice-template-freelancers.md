@@ -1,33 +1,20 @@
-import { createClient } from '@supabase/supabase-js';
+---
+slug: "free-invoice-template-freelancers"
+title: "Free Invoice Template for Freelancers: Download & Create Instantly (2026)"
+description: "Get a free invoice template designed for freelancers. Choose from multiple formats, customize in seconds, or use our free online generator — no signup, no data stored."
+date: "2026-03-23"
+readTime: "10 min read"
+heroKey: "free-invoice-template-freelancers"
+keywords:
+  - "free invoice template for freelancers"
+  - "freelance invoice template free"
+  - "invoice template download free"
+  - "best invoice template 2026"
+  - "simple invoice template"
+  - "freelancer invoice format"
+---
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE env vars.');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-async function main() {
-  const post = {
-    slug: 'free-invoice-template-freelancers',
-    title: 'Free Invoice Template for Freelancers: Download & Create Instantly (2026)',
-    description:
-      'Get a free invoice template designed for freelancers. Choose from multiple formats, customize in seconds, or use our free online generator — no signup, no data stored.',
-    date: '2026-03-23',
-    readTime: '10 min read',
-    keywords: [
-      'free invoice template for freelancers',
-      'freelance invoice template free',
-      'invoice template download free',
-      'best invoice template 2026',
-      'simple invoice template',
-      'freelancer invoice format',
-    ],
-    heroImage: '/images/blog/free-invoice-template-freelancers-hero.png',
-    content: `## Why Every Freelancer Needs a Professional Invoice Template
+## Why Every Freelancer Needs a Professional Invoice Template
 
 If you are a freelancer, your invoice is the single most important document in your business. It is the difference between getting paid on time and chasing payments for weeks. Yet many freelancers still cobble together invoices in Google Docs, copy-paste from old emails, or — worst of all — send vague payment requests with no structure at all.
 
@@ -51,7 +38,7 @@ Always address the invoice to the specific person or department responsible for 
 
 ### 3. Unique Invoice Number
 
-Assign a **sequential, unique number** to every invoice. This is critical for your own bookkeeping and for your client's records. Use a clear format like \`INV-2026-001\` or \`ACME-015\` (client initials + number).
+Assign a **sequential, unique number** to every invoice. This is critical for your own bookkeeping and for your client's records. Use a clear format like `INV-2026-001` or `ACME-015` (client initials + number).
 
 ### 4. Invoice Date and Due Date
 
@@ -179,7 +166,7 @@ Even with a great template, these common mistakes can still slow down your payme
 
 ### 1. Missing Invoice Numbers
 
-Without a unique invoice number, your client's accounting department cannot properly file or track your payment. Always use a sequential system like \`INV-2026-001\`.
+Without a unique invoice number, your client's accounting department cannot properly file or track your payment. Always use a sequential system like `INV-2026-001`.
 
 ### 2. Vague Line Items
 
@@ -233,19 +220,4 @@ Stop wasting time formatting invoices in Word documents. Our **[free invoice gen
 - ✅ Download instant PDF
 - ✅ Works on desktop and mobile
 
-**[Create Your Free Invoice Now →](/)**`,
-  };
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .upsert(post, { onConflict: 'slug' })
-    .select();
-
-  if (error) {
-    console.error('Error inserting article:', error.message);
-  } else {
-    console.log('✅ Article inserted successfully:', post.slug);
-  }
-}
-
-main();
+**[Create Your Free Invoice Now →](/)**

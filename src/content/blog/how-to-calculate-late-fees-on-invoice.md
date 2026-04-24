@@ -1,25 +1,18 @@
-import { createClient } from '@supabase/supabase-js';
+---
+slug: "how-to-calculate-late-fees-on-invoice"
+title: "How to Calculate Late Fees on an Invoice (With Examples) - 2026"
+description: "Learn the standard methods for calculating late fees on overdue invoices, legal guidelines, and how to communicate late payment charges professionally."
+date: "2026-03-25"
+readTime: "6 min read"
+heroKey: "how-to-calculate-late-fees-on-invoice"
+keywords:
+  - "calculate late fees invoice"
+  - "invoice late fee percentage"
+  - "how to charge late fees on an invoice"
+  - "overdue invoice fees"
+---
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing SUPABASE env vars.');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-async function main() {
-  const post = {
-    slug: 'how-to-calculate-late-fees-on-invoice',
-    title: 'How to Calculate Late Fees on an Invoice (With Examples) - 2026',
-    description: 'Learn the standard methods for calculating late fees on overdue invoices, legal guidelines, and how to communicate late payment charges professionally.',
-    date: new Date().toISOString().split('T')[0],
-    readTime: '6 min read',
-    keywords: ['calculate late fees invoice', 'invoice late fee percentage', 'how to charge late fees on an invoice', 'overdue invoice fees'],
-    heroImage: '/images/blog/how-to-calculate-late-fees.png',
-    content: `# How to Calculate Late Fees on an Invoice (With Examples)
+# How to Calculate Late Fees on an Invoice (With Examples)
 
 Getting paid on time is critical for the survival of any freelance business or small agency. Unfortunately, overdue invoices are a common reality.
 
@@ -56,7 +49,7 @@ Most businesses charge between **1% and 2% per month** that the invoice is late.
 **How to calculate a monthly percentage fee:**
 Let's say a client owes you $5,000, and your terms state a 1.5% monthly late fee. 
 
-1. Calculate the fee: \`$5,000 * 0.015 = $75\`
+1. Calculate the fee: `$5,000 * 0.015 = $75`
 2. If the invoice is exactly one month late, add $75 to the total.
 3. If it remains unpaid for a second month, you typically assess the fee on the *original* invoice amount (simple interest), meaning another $75 is added.
 
@@ -69,9 +62,9 @@ For larger contracts or severely delinquent accounts, you might calculate daily 
 **How to calculate daily interest:**
 Assume your contract specifies a 12% annual interest rate for late payments, and a $2,000 invoice is 15 days overdue.
 
-1. **Calculate the daily rate:** Divide the annual rate by 365. \`12% / 365 = 0.0328% per day\`
-2. **Calculate the daily interest amount:** Multiply the invoice total by the daily rate. \`$2,000 * 0.000328 = $0.66 per day\`
-3. **Multiply by days overdue:** Multiply the daily amount by the days late. \`$0.66 * 15 days = $9.90\`
+1. **Calculate the daily rate:** Divide the annual rate by 365. `12% / 365 = 0.0328% per day`
+2. **Calculate the daily interest amount:** Multiply the invoice total by the daily rate. `$2,000 * 0.000328 = $0.66 per day`
+3. **Multiply by days overdue:** Multiply the daily amount by the days late. `$0.66 * 15 days = $9.90`
 
 The total late fee for those 15 days would be $9.90, bringing the new invoice total to $2,009.90. 
 
@@ -112,19 +105,3 @@ When a client triggers a late fee, you should generate an updated, revised invoi
 Want to make sure your payment terms are crystal clear so you get paid on time? Stop messing around with messy Word documents and Excel sheets.
 
 Use our [free invoice generator](/) to create a beautiful, professional PDF invoice in under two minutes. It’s 100% free, requires no sign-up, and all data is processed securely right in your browser.
-`
-  };
-
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .upsert(post, { onConflict: 'slug' })
-    .select();
-
-  if (error) {
-    console.error('Error inserting article:', error.message);
-  } else {
-    console.log('✅ Article inserted successfully:', post.slug);
-  }
-}
-
-main();
