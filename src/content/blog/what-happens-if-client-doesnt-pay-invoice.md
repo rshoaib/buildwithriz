@@ -11,6 +11,7 @@ keywords:
   - "client not paying invoice"
   - "freelance debt collection"
   - "late payment fees"
+updated_at: "2026-04-25"
 ---
 
 
@@ -93,4 +94,11 @@ Do not let amateur invoices cost you money. Our **[free invoice generator](/)** 
 - 100% free forever
 
 **[Create Your Professional Invoice Now →](/)**
-        
+
+---
+
+## Related guides
+
+- [How to Calculate Late Fees on an Invoice (With Examples) - 2026](/blog/how-to-calculate-late-fees-on-invoice)
+- [Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster](/blog/invoice-payment-terms-explained)
+- [How to Send an Invoice via Email: Complete Guide to Getting Paid Faster (2026)](/blog/how-to-send-invoice-via-email)

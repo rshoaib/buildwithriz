@@ -11,6 +11,7 @@ keywords:
   - "cash basis accounting explained"
   - "accrual accounting freelancer"
   - "freelance bookkeeping method"
+updated_at: "2026-04-25"
 ---
 
 # Cash vs Accrual Accounting for Freelancers (2026)
@@ -252,3 +253,11 @@ Choosing between cash and accrual accounting is one of the most impactful financ
 Whatever method you choose, professional invoicing is the foundation of good financial management. Our **[free invoice generator](/)** helps you create clean, itemized invoices with clear [payment terms](/blog/invoice-payment-terms-explained), automatic calculations, and instant PDF downloads — all without creating an account or storing any data.
 
 **[Create Your Free Invoice →](/)**
+
+---
+
+## Related guides
+
+- [Best Free Tools for Freelancers in 2026: 15 Apps That Replace Paid Software](/blog/best-free-tools-freelancers-2026)
+- [How to Set Your Freelance Rates in 2026 (Without Guessing)](/blog/how-to-set-freelance-rates-2026)
+- [How to Set Up Recurring Invoices for Freelancers (2026 Guide)](/blog/how-to-set-up-recurring-invoices)

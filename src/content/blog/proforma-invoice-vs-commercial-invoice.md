@@ -11,6 +11,7 @@ keywords:
   - "commercial invoice meaning"
   - "freelance proforma invoice"
   - "proforma vs regular invoice"
+updated_at: "2026-04-25"
 ---
 
 
@@ -96,4 +97,11 @@ Our **[free invoice generator](/)** lets you create both. Just change the docume
 - 100% free and private
 
 **[Create Your First Invoice Now →](/)**
-        
+
+---
+
+## Related guides
+
+- [Quote vs Estimate vs Invoice: What's the Difference? (2026)](/blog/quote-vs-estimate-vs-invoice)
+- [How to Create a Professional Invoice: Complete Guide for Freelancers (2026)](/blog/how-to-create-professional-invoice)
+- [Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster](/blog/invoice-payment-terms-explained)

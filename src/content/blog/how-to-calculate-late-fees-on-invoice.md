@@ -12,7 +12,7 @@ keywords:
   - "overdue invoice fees"
 meta_title: "How to Calculate Late Fees on an Invoice (Examples)"
 meta_description: "Calculate late fees on overdue invoices: standard methods, legal limits, and professional wording to charge clients without losing the relationship."
-updated_at: "2026-04-24"
+updated_at: "2026-04-25"
 ---
 
 # How to Calculate Late Fees on an Invoice (With Examples)
@@ -105,4 +105,11 @@ When a client triggers a late fee, you should generate an updated, revised invoi
 
 ## Create Professional Invoices in Seconds
 
-Want to make sure your payment terms are crystal clear so you get paid on time? Stop mes
+Want to make sure your payment terms are crystal clear so you get paid on time? Stop messing with fragile Word templates and use our **[free invoice generator](/)** — every invoice includes a dedicated line for your late-fee policy, and the whole thing takes under two minutes.
+
+---
+
+## Related guides
+
+- [Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster](/blog/invoice-payment-terms-explained)
+- [What Happens If a Client Doesn't Pa

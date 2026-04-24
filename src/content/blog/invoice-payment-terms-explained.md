@@ -12,6 +12,7 @@ keywords:
   - "freelancer payment terms"
   - "invoice due date explained"
   - "net 30 payment terms"
+updated_at: "2026-04-25"
 ---
 
 
@@ -177,4 +178,11 @@ Clear payment terms are the foundation of a healthy freelance business. Choose t
 Ready to create a professional invoice with clear payment terms? Our **[free invoice generator](/)** handles everything — multiple currencies, detailed line items, and instant PDF downloads. No signup, no data stored, completely private.
 
 **[Create Your Free Invoice →](/)**
-    
+
+---
+
+## Related guides
+
+- [How to Calculate Late Fees on an Invoice (With Examples) - 2026](/blog/how-to-calculate-late-fees-on-invoice)
+- [What Happens If a Client Doesn't Pay an Invoice? (2026)](/blog/what-happens-if-client-doesnt-pay-invoice)
+- [How to Send an Invoice via Email: Complete Guide to Getting Paid Faster (2026)](/blog/how-to-send-invoice-via-email)
