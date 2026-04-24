@@ -26,7 +26,8 @@ type HeroKey =
   | 'what-happens-if-client-doesnt-pay-invoice'
   | 'proforma-invoice-vs-commercial-invoice'
   | 'how-to-create-professional-invoice'
-  | 'invoice-payment-terms-explained';
+  | 'invoice-payment-terms-explained'
+  | 'how-to-invoice-international-clients';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -542,6 +543,55 @@ const heroes: Record<HeroKey, JSX.Element> = {
     </g>,
     'g-terms',
   ),
+
+  // International clients — globe with currency tags and a passing invoice envelope
+  'how-to-invoice-international-clients': wrap(
+    ['#0ea5e9', '#0c4a6e'],
+    <g>
+      <circle cx="280" cy="200" r="110" fill="#fff" opacity="0.95" />
+      <circle cx="280" cy="200" r="110" fill="none" stroke="#0c4a6e" strokeWidth="3" />
+      <ellipse cx="280" cy="200" rx="110" ry="40" fill="none" stroke="#0c4a6e" strokeWidth="1.5" opacity="0.5" />
+      <ellipse cx="280" cy="200" rx="110" ry="80" fill="none" stroke="#0c4a6e" strokeWidth="1.5" opacity="0.5" />
+      <ellipse cx="280" cy="200" rx="40" ry="110" fill="none" stroke="#0c4a6e" strokeWidth="1.5" opacity="0.5" />
+      <line x1="280" y1="90" x2="280" y2="310" stroke="#0c4a6e" strokeWidth="1.5" opacity="0.5" />
+      <path d="M235 170 Q255 160 275 175 Q290 185 275 200 Q255 210 240 195 Z" fill="#38bdf8" />
+      <path d="M295 215 Q320 210 330 230 Q325 250 305 245 Q290 240 295 215 Z" fill="#38bdf8" />
+      <path d="M220 225 Q240 220 245 240 Q235 255 218 245 Z" fill="#38bdf8" />
+      <g transform="translate(460, 110)">
+        <rect width="100" height="56" rx="10" fill="#fbbf24" />
+        <text x="50" y="25" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#78350f" fontFamily="sans-serif">
+          USD
+        </text>
+        <text x="50" y="45" textAnchor="middle" fontSize="11" fill="#78350f" fontFamily="sans-serif">
+          $ 2,400
+        </text>
+      </g>
+      <g transform="translate(580, 170)">
+        <rect width="100" height="56" rx="10" fill="#4ade80" />
+        <text x="50" y="25" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#14532d" fontFamily="sans-serif">
+          EUR
+        </text>
+        <text x="50" y="45" textAnchor="middle" fontSize="11" fill="#14532d" fontFamily="sans-serif">
+          € 2,208
+        </text>
+      </g>
+      <g transform="translate(460, 230)">
+        <rect width="100" height="56" rx="10" fill="#c084fc" />
+        <text x="50" y="25" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#3b0764" fontFamily="sans-serif">
+          GBP
+        </text>
+        <text x="50" y="45" textAnchor="middle" fontSize="11" fill="#3b0764" fontFamily="sans-serif">
+          £ 1,896
+        </text>
+      </g>
+      <path d="M380 170 Q440 90 560 110" fill="none" stroke="#fff" strokeWidth="2" strokeDasharray="6 6" opacity="0.8" />
+      <g transform="translate(410, 290)">
+        <rect width="60" height="40" rx="4" fill="#fff" stroke="#0c4a6e" strokeWidth="2" />
+        <path d="M0 0 L30 22 L60 0" fill="none" stroke="#0c4a6e" strokeWidth="2" />
+      </g>
+    </g>,
+    'g-intl',
+  ),
 };
 
 // Fallback SVG used when a slug doesn't match a known hero.
@@ -586,4 +636,3 @@ export default function HeroSvg({ slug, className }: HeroSvgProps) {
     </div>
   );
 }
-     
