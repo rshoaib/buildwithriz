@@ -68,4 +68,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    const posts = getAllPosts()
+    const posts = getAllPosts();
+
+    const blogPages: MetadataRoute.Sitemap = posts.map((article) => ({
+        url: `${baseUrl}/blog/${article.slug}`,
+        lastModified: new Date(article.date),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+    }));
+
+    const templatePages: MetadataRoute.Sitemap = industries.map((ind) => ({
+        url: `${baseUrl}/invoice-template/${ind.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+    }));
+
+    return [...staticPages, ...blogPages, ...templatePages];
+}
