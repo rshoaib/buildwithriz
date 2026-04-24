@@ -5,8 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import InvoiceForm from '@/components/InvoiceForm';
 import InvoicePreview from '@/components/InvoicePreview';
 import ThemeSelector from '@/components/ThemeSelector';
-import HeroSection from '@/components/sections/HeroSection';
-import HowItWorks from '@/components/sections/HowItWorks';
 import WhyInvoicing from '@/components/sections/WhyInvoicing';
 import TrustSignals from '@/components/sections/TrustSignals';
 import FeaturesSection from '@/components/sections/FeaturesSection';
@@ -55,7 +53,12 @@ function HomeContent() {
   const isFirstLoad = useRef(true);
   const templateDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Load templates, theme, and draft from localStorage on mount
+  // Load templates, theme, and draft from localStorage on mount.
+  // This is a legitimate use of an effect with setState: it's reading from
+  // an external system (localStorage + window.location) that is not
+  // available during SSR. useSyncExternalStore is the alternative for a
+  // single value, but this effect coordinates multiple reads + precedence
+  // rules across four keys, so a mount-once effect is the clearer choice.
   useEffect(() => {
     try {
       const stored = localStorage.getItem(TEMPLATES_KEY);
@@ -104,7 +107,12 @@ function HomeContent() {
     };
   }, [invoice]);
 
-  // Due date auto-calculation from payment terms
+  // Due date auto-calculation from payment terms.
+  // The current `invoice.dueDate` is intentionally NOT in the dep array: we
+  // only want to recompute dueDate when the inputs (paymentTerms/invoiceDate)
+  // change, not when the user manually edits the dueDate field. Rewriting as
+  // derived state would require tracking "has the user manually overridden",
+  // so we keep the effect and document the setState as intentional.
   useEffect(() => {
     const terms = invoice.paymentTerms.trim().toLowerCase();
     let days: number | null = null;
@@ -126,9 +134,13 @@ function HomeContent() {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invoice.paymentTerms, invoice.invoiceDate]);
 
-  // Load industry template from URL params
+  // Load industry template from URL params.
+  // This effect synchronizes component state with an external system (the
+  // URL / router). Setting state in response to a route change is the
+  // documented Next.js App Router pattern for this scenario.
   useEffect(() => {
     const templateSlug = searchParams.get('template');
     if (templateSlug) {

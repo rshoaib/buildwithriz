@@ -1,28 +1,53 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
-export default function DarkModeToggle() {
-    const [dark, setDark] = useState(false);
-    const [mounted, setMounted] = useState(false);
+const STORAGE_KEY = 'buildwithriz-dark';
+const LOCAL_EVENT = 'buildwithriz-dark-changed';
 
+function subscribe(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener(LOCAL_EVENT, callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener(LOCAL_EVENT, callback);
+  };
+}
+
+function getDarkSnapshot(): boolean {
+  return localStorage.getItem(STORAGE_KEY) === 'true';
+}
+
+function getDarkServerSnapshot(): boolean {
+  return false;
+}
+
+// Separate store just for the "is client" flag - replaces the old `mounted`
+// state pattern so we don't call setState inside an effect.
+const emptySubscribe = () => () => {};
+const getIsClient = () => true;
+const getIsClientServer = () => false;
+
+export default function DarkModeToggle() {
+    const isClient = useSyncExternalStore(emptySubscribe, getIsClient, getIsClientServer);
+    const dark = useSyncExternalStore(subscribe, getDarkSnapshot, getDarkServerSnapshot);
+
+    // Sync the DOM class whenever `dark` changes. No setState here - this
+    // effect only pushes state to an external system (the <html> classList).
     useEffect(() => {
-        setMounted(true);
-        const saved = localStorage.getItem('buildwithriz-dark');
-        const isDark = saved === 'true';
-        setDark(isDark);
-        document.documentElement.classList.toggle('dark', isDark);
-    }, []);
+        if (!isClient) return;
+        document.documentElement.classList.toggle('dark', dark);
+    }, [dark, isClient]);
 
     const toggle = () => {
         const next = !dark;
-        setDark(next);
-        document.documentElement.classList.toggle('dark', next);
-        localStorage.setItem('buildwithriz-dark', String(next));
+        localStorage.setItem(STORAGE_KEY, String(next));
+        // Notify the useSyncExternalStore subscribers in this tab.
+        window.dispatchEvent(new Event(LOCAL_EVENT));
     };
 
-    if (!mounted) return <div className="w-8 h-8" />;
+    if (!isClient) return <div className="w-8 h-8" />;
 
     return (
         <button

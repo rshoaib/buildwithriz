@@ -12,27 +12,34 @@ interface SignaturePadProps {
 
 export default function SignaturePad({ onSave, onClear, initialSignature }: SignaturePadProps) {
   const sigCanvas = useRef<SignatureCanvas>(null);
-  const [hasSignature, setHasSignature] = useState(!!initialSignature);
+  // `cleared` tracks whether the user explicitly wiped the pad this session.
+  // Combined with `initialSignature` it gives us hasSignature purely by
+  // derivation - no setState inside an effect.
+  const [cleared, setCleared] = useState(false);
+  const [drawn, setDrawn] = useState(false);
+  const hasSignature = drawn || (!cleared && !!initialSignature);
 
-  // Set initial signature if provided
+  // Paint the initial signature onto the canvas imperatively. This effect
+  // only writes to an external system (the canvas ref), never to React state.
   useEffect(() => {
     if (initialSignature && sigCanvas.current) {
       sigCanvas.current.fromDataURL(initialSignature);
-      setHasSignature(true);
     }
   }, [initialSignature]);
 
   const clear = () => {
     sigCanvas.current?.clear();
-    setHasSignature(false);
+    setDrawn(false);
+    setCleared(true);
     onClear();
   };
 
   const handleEnd = () => {
     if (sigCanvas.current?.isEmpty()) {
-      setHasSignature(false);
+      setDrawn(false);
     } else {
-      setHasSignature(true);
+      setDrawn(true);
+      setCleared(false);
       const dataUrl = sigCanvas.current?.getTrimmedCanvas().toDataURL('image/png');
       if (dataUrl) {
         onSave(dataUrl);

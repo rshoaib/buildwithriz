@@ -1,10 +1,51 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react';
 import { Users, Save, Trash2, CheckCircle } from 'lucide-react';
 import { ClientProfile } from '@/types/invoice';
 
 const CLIENTS_KEY = 'buildwithriz-clients';
+const LOCAL_EVENT = 'buildwithriz-clients-changed';
+
+// useSyncExternalStore-backed reader for the clients list. Avoids the
+// setState-in-effect pattern and keeps the list in sync across tabs.
+function subscribeClients(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener(LOCAL_EVENT, callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener(LOCAL_EVENT, callback);
+  };
+}
+
+// Cache the parsed array so successive calls during the same snapshot
+// return the same reference (required by useSyncExternalStore).
+let cachedRaw: string | null = null;
+let cachedParsed: ClientProfile[] = [];
+function getClientsSnapshot(): ClientProfile[] {
+  const raw = typeof localStorage === 'undefined' ? null : localStorage.getItem(CLIENTS_KEY);
+  if (raw === cachedRaw) return cachedParsed;
+  cachedRaw = raw;
+  try {
+    cachedParsed = raw ? (JSON.parse(raw) as ClientProfile[]) : [];
+  } catch {
+    cachedParsed = [];
+  }
+  return cachedParsed;
+}
+const EMPTY_CLIENTS: ClientProfile[] = [];
+function getClientsServerSnapshot(): ClientProfile[] {
+  return EMPTY_CLIENTS;
+}
+
+function writeClients(clients: ClientProfile[]) {
+  try {
+    localStorage.setItem(CLIENTS_KEY, JSON.stringify(clients));
+    window.dispatchEvent(new Event(LOCAL_EVENT));
+  } catch {
+    // ignore - quota exceeded or localStorage unavailable
+  }
+}
 
 interface ClientAddressBookProps {
   currentClient: {
@@ -16,22 +57,14 @@ interface ClientAddressBookProps {
 }
 
 export default function ClientAddressBook({ currentClient, onSelectClient }: ClientAddressBookProps) {
-  const [clients, setClients] = useState<ClientProfile[]>([]);
+  const clients = useSyncExternalStore(
+    subscribeClients,
+    getClientsSnapshot,
+    getClientsServerSnapshot,
+  );
   const [showDropdown, setShowDropdown] = useState(false);
   const [showSavedFeedback, setShowSavedFeedback] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Load clients on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(CLIENTS_KEY);
-      if (stored) {
-        setClients(JSON.parse(stored));
-      }
-    } catch {
-      // ignore
-    }
-  }, []);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -58,14 +91,7 @@ export default function ClientAddressBook({ currentClient, onSelectClient }: Cli
       address: currentClient.address.trim(),
     };
 
-    const newClients = [newClient, ...clients];
-    setClients(newClients);
-    
-    try {
-      localStorage.setItem(CLIENTS_KEY, JSON.stringify(newClients));
-    } catch {
-      // ignore
-    }
+    writeClients([newClient, ...clients]);
 
     setShowSavedFeedback(true);
     setTimeout(() => setShowSavedFeedback(false), 2000);
@@ -73,13 +99,7 @@ export default function ClientAddressBook({ currentClient, onSelectClient }: Cli
 
   const deleteClient = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    const newClients = clients.filter(c => c.id !== id);
-    setClients(newClients);
-    try {
-      localStorage.setItem(CLIENTS_KEY, JSON.stringify(newClients));
-    } catch {
-      // ignore
-    }
+    writeClients(clients.filter(c => c.id !== id));
   };
 
   return (
@@ -120,7 +140,7 @@ export default function ClientAddressBook({ currentClient, onSelectClient }: Cli
         <div className="absolute top-full left-0 mt-1 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden">
           {clients.length === 0 ? (
             <div className="p-3 text-center text-xs text-gray-500 dark:text-gray-400">
-              No saved clients yet.<br/>Fill out the details below and click "Save Client".
+              No saved clients yet.<br/>Fill out the details below and click &quot;Save Client&quot;.
             </div>
           ) : (
             <div className="max-h-48 overflow-y-auto">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
@@ -96,13 +96,17 @@ function MobileNavOverlay({ open, onClose }: { open: boolean; onClose: () => voi
   );
 }
 
+// Hydration-safe "is this running on the client?" flag. Needed because
+// MobileNavOverlay uses createPortal(document.body, ...) which requires
+// `document` to exist. useSyncExternalStore avoids the setState-in-effect
+// pattern previously used with a `mounted` state.
+const emptySubscribe = () => () => {};
+const getIsClient = () => true;
+const getIsClientServer = () => false;
+
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(emptySubscribe, getIsClient, getIsClientServer);
 
   const close = useCallback(() => setOpen(false), []);
 
