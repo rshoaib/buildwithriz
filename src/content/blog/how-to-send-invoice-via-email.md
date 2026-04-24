@@ -13,6 +13,9 @@ keywords:
   - "invoice email subject line"
   - "professional invoice email"
   - "follow up unpaid invoice email"
+meta_title: "How to Send an Invoice via Email (2026 Guide)"
+meta_description: "Send invoices by email and get paid 30% faster. Proven subject lines, templates, follow-up scripts, and security tips freelancers actually use."
+updated_at: "2026-04-24"
 ---
 
 You finished the work. Now you need to get paid.
@@ -377,8 +380,4 @@ Include your preferred payment method in both the email body and the invoice PDF
 
 ### How many times should I follow up on an unpaid invoice?
 
-At minimum three times: once the day after the due date, again at 7 days overdue, and a final notice at 14-30 days. [Clients who get a follow-up within 3 days of a missed due date typically pay within a week](https://www.8am.com/blog/invoice-email-template/). After 30 days with no response, it's time to escalate — here's our full guide on [what to do when clients don't pay](/blog/what-happens-if-client-doesnt-pay-invoice).
-
----
-
-Ready to create the invoice you'll attach to that email? The **[free invoice generator](/)** builds a professional PDF in under two minutes — no signup, no data stored. Fill in your details, preview it, and download.
+At minimum three times: once the day after the due date, again at 7 days overdue, and a final notice at 14-30 days. [Clients who get a follow-up within 3 days of a missed due date typically pay within a week](https://www.8am.com/blog/invoice-email-template/). After 30 days with no response, it's time to escalate — here's our full guide on [what to do when clients don't pay](/blog/what-happens-if-clie

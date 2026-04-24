@@ -10,6 +10,9 @@ keywords:
   - "freelance invoice"
   - "invoice requirements for freelancers"
   - "get paid faster freelance"
+meta_title: "How to Write an Invoice for Freelance Work (2026)"
+meta_description: "Everything freelancers need to invoice remote clients: required fields, payment terms, and templates to get paid on time for your work."
+updated_at: "2026-04-24"
 ---
 
 # How to Write an Invoice for Freelance Work (The 2026 Guide)
@@ -69,6 +72,4 @@ You didn't become a freelancer to spend your time formatting spreadsheets. You w
 
 Instead of fighting with margins and fonts, use our [free invoice generator](/) to create a stunning, professional PDF invoice in under two minutes by simply filling out a clean form.
 
-There are **no accounts to create**, and the tool is **100% free forever**. Better yet, for your privacy and security, all data is processed locally right in your browser. We never save your financial data or your clients' information on our servers. 
-
-Need a different format? We also offer a [proforma invoice generator](/tools/proforma-invoice-generator) and a [free receipt generator](/tools/receipt-generator) tailored for small businesses.
+There are **no accounts to create**, and the tool is **100% free forever**. Better yet, for your privacy and security, all data is processed locally right in your browser. We never save your financial 

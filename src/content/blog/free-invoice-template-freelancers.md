@@ -12,6 +12,9 @@ keywords:
   - "best invoice template 2026"
   - "simple invoice template"
   - "freelancer invoice format"
+meta_title: "Free Invoice Template for Freelancers (2026)"
+meta_description: "Free invoice templates for freelancers. Multiple formats, instant customization, and a free online generator — no signup, no data stored."
+updated_at: "2026-04-24"
 ---
 
 ## Why Every Freelancer Needs a Professional Invoice Template
@@ -212,12 +215,4 @@ An **invoice** is sent *before* payment to request payment for services. A **rec
 
 ## Start Invoicing Like a Pro — For Free
 
-Stop wasting time formatting invoices in Word documents. Our **[free invoice generator](/)** gives you a professional, polished PDF in under two minutes. No signup, no data stored on our servers, 100% private.
-
-- ✅ Add your custom logo
-- ✅ Choose from 30+ currencies
-- ✅ Auto-calculate subtotals and tax
-- ✅ Download instant PDF
-- ✅ Works on desktop and mobile
-
-**[Create Your Free Invoice Now →](/)**
+Stop wasting time formatting invoices in Word documents. Our **[free invoice generator](/)** gives you a professional, polished PDF in under two minutes. No signup, no da

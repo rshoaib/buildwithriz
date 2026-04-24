@@ -10,6 +10,9 @@ keywords:
   - "freelance pricing guide"
   - "freelance hourly rate calculator"
   - "how much to charge as a freelancer"
+meta_title: "How to Set Your Freelance Rates in 2026 (Guide)"
+meta_description: "Set freelance rates that win work and respect your time. Hourly vs project math, rate calculators, and proven negotiation scripts for 2026."
+updated_at: "2026-04-24"
 ---
 
 # How to Set Your Freelance Rates in 2026 (Without Guessing)
@@ -162,6 +165,4 @@ Setting freelance rates isn't about picking a number that feels right. It's math
 
 Start with your minimum viable rate. Research market benchmarks. Choose a pricing model that rewards your efficiency. And raise your rates at least once a year.
 
-When you're ready to send a professional invoice at your new rate, use our [free invoice generator](/) — no signup, no fees, beautiful PDF in 30 seconds.
-
-*Need help structuring your freelance invoices? Check out our guide on [how to write an invoice step by step](/blog/how-to-write-invoice-step-by-step).*
+When you're ready to send a professional invoice at your new ra

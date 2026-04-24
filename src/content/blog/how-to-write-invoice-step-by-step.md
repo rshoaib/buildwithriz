@@ -11,6 +11,9 @@ keywords:
   - "invoice writing guide"
   - "beginner invoice guide"
   - "write a professional invoice"
+meta_title: "How to Write an Invoice: Step-by-Step Beginner Guide"
+meta_description: "Write a professional invoice from scratch. Every field explained, common mistakes to avoid, plus a free generator — no signup required."
+updated_at: "2026-04-24"
 ---
 
 ## Why a Good Invoice Matters More Than You Think
@@ -196,12 +199,4 @@ At least two. Bank transfer and one digital option (PayPal, Stripe, or Wise) cov
 
 ## Start Writing Professional Invoices Today
 
-You don't need expensive software to look professional. Our **[free invoice generator](/)** creates clean, polished PDF invoices in seconds — with your logo, itemized line items, automatic calculations, and support for 30+ currencies.
-
-- ✅ No signup required
-- ✅ 100% private — data stays in your browser
-- ✅ Professional PDF output
-- ✅ Add your custom logo
-- ✅ Works on any device
-
-**[Create Your First Invoice Now →](/)**
+You don't need expensive software to look professional. Our **[free invoice generator](/)** creates clean, polished PDF invoices in seconds — with your logo, itemized line items, automatic
