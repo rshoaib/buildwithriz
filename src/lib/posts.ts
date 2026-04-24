@@ -19,6 +19,16 @@ export interface BlogPost {
   heroKey: string;
   keywords: string[];
   content: string;
+  /**
+   * SEO overrides populated by the weekly GSC audit task.
+   * When absent, the page falls back to `title` / `description`.
+   * The visible article heading always uses `title`; `metaTitle`
+   * only drives the <title> tag, OG card, and Twitter card.
+   */
+  metaTitle?: string;
+  metaDescription?: string;
+  /** ISO date (YYYY-MM-DD) of the most recent SEO/content refresh. */
+  updatedAt?: string;
 }
 
 const POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
@@ -101,6 +111,9 @@ function readPostFile(slug: string): BlogPost | null {
     heroKey: (data.heroKey as string) ?? slug,
     keywords: Array.isArray(data.keywords) ? (data.keywords as string[]) : [],
     content: body.trim(),
+    metaTitle: (data.meta_title as string) || undefined,
+    metaDescription: (data.meta_description as string) || undefined,
+    updatedAt: (data.updated_at as string) || undefined,
   };
 }
 

@@ -22,22 +22,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!article) return {};
 
+  // SEO fields: prefer the SEO-only overrides (metaTitle / metaDescription),
+  // fall back to the visible article title / description. Lets the weekly
+  // GSC audit tune the SERP snippet without changing the on-page heading.
+  const seoTitle = article.metaTitle ?? article.title;
+  const seoDescription = article.metaDescription ?? article.description;
+
   return {
-    title: `${article.title} | BuildWithRiz`,
-    description: article.description,
+    title: `${seoTitle} | BuildWithRiz`,
+    description: seoDescription,
     keywords: article.keywords,
     alternates: { canonical: `https://www.buildwithriz.com/blog/${article.slug}` },
     openGraph: {
-      title: article.title,
-      description: article.description,
+      title: seoTitle,
+      description: seoDescription,
       url: `https://www.buildwithriz.com/blog/${article.slug}`,
       type: 'article',
       publishedTime: article.date,
+      modifiedTime: article.updatedAt ?? article.date,
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
-      description: article.description,
+      title: seoTitle,
+      description: seoDescription,
     },
   };
 }
@@ -57,6 +64,7 @@ export default async function BlogPost({ params }: PageProps) {
       headline: article.title,
       description: article.description,
       datePublished: article.date,
+      dateModified: article.updatedAt ?? article.date,
       author: {
         '@type': 'Organization',
         name: 'BuildWithRiz',
