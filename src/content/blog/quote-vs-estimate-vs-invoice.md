@@ -46,7 +46,7 @@ Use an estimate when the project scope is still being defined or when there are 
 
 **Pro tip:** Always include a disclaimer on your estimates, such as: *"This estimate is based on the information provided and may change as the project scope is finalized."*
 
-A clean, itemized estimate format makes it easier for clients to say yes and prevents scope creep later.
+A clean, itemized estimate format makes it easier for clients to say yes and prevents scope creep later. You can put one together in minutes with our **[free estimate maker](/tools/estimate-maker)**.
 
 ---
 
@@ -217,15 +217,9 @@ Within **24 hours**. The value of your work is highest in the client's mind righ
 
 Whether you need an estimate, a quote, or a final invoice, having clean, professional documents builds trust and gets you paid faster.
 
+- **[Create a Free Estimate →](/tools/estimate-maker)** — Perfect for initial project proposals
 - **[Create a Free Invoice →](/)** — Professional PDF invoices in under two minutes
+- **[Create a Purchase Order →](/tools/purchase-order-generator)** — For procurement and supplier payments
 - **[Generate a Free Receipt →](/receipt-generator)** — Clean receipts for completed payments
 
-All our tools are 100% free, require no signup, and process everything securely in your browser. Your data never leaves your device.
-
----
-
-## Related guides
-
-- [Proforma Invoice vs. Commercial Invoice: What Freelancers Need to Know (2026)](/blog/proforma-invoice-vs-commercial-invoice)
-- [How to Create a Professional Invoice: Complete Guide for Freelancers (2026)](/blog/how-to-create-professional-invoice)
-- [Ho
+All our tools are 100% free, require no signup, and process everything securely in your browser. Your data 
