@@ -27,7 +27,8 @@ type HeroKey =
   | 'proforma-invoice-vs-commercial-invoice'
   | 'how-to-create-professional-invoice'
   | 'invoice-payment-terms-explained'
-  | 'how-to-invoice-international-clients';
+  | 'how-to-invoice-international-clients'
+  | 'payment-reminder-email-templates-freelancers';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -591,6 +592,44 @@ const heroes: Record<HeroKey, JSX.Element> = {
       </g>
     </g>,
     'g-intl',
+  ),
+
+  // Payment reminders — envelope with bell + escalating reminder badges
+  'payment-reminder-email-templates-freelancers': wrap(
+    ['#6366f1', '#831843'],
+    <g>
+      <rect x="220" y="120" width="280" height="180" rx="10" fill="#fff" opacity="0.97" />
+      <path d="M220 132 L360 226 L500 132" fill="none" stroke="#6366f1" strokeWidth="3" />
+      <path d="M220 300 L320 210 M500 300 L400 210" stroke="#6366f1" strokeWidth="3" fill="none" />
+      <rect x="250" y="155" width="100" height="6" rx="2" fill="#c7d2fe" />
+      <rect x="250" y="170" width="60" height="4" rx="2" fill="#e0e7ff" />
+      <g transform="translate(490, 90)">
+        <path d="M30 0 C 16 0 6 12 6 28 L6 50 L0 60 L60 60 L54 50 L54 28 C54 12 44 0 30 0 Z" fill="#fbbf24" stroke="#fff" strokeWidth="2" />
+        <circle cx="30" cy="68" r="6" fill="#fbbf24" stroke="#fff" strokeWidth="2" />
+        <circle cx="50" cy="6" r="5" fill="#ef4444" />
+      </g>
+      <g fontFamily="sans-serif" fontWeight="bold" fontSize="11" fill="#fff">
+        <g transform="translate(560, 150)">
+          <rect width="86" height="28" rx="14" fill="#10b981" />
+          <text x="43" y="19" textAnchor="middle">T-3 nudge</text>
+        </g>
+        <g transform="translate(560, 192)">
+          <rect width="86" height="28" rx="14" fill="#f59e0b" />
+          <text x="43" y="19" textAnchor="middle">T+7 follow</text>
+        </g>
+        <g transform="translate(560, 234)">
+          <rect width="86" height="28" rx="14" fill="#dc2626" />
+          <text x="43" y="19" textAnchor="middle">T+30 final</text>
+        </g>
+      </g>
+      <path d="M510 164 L548 164" stroke="#fff" strokeWidth="2" strokeDasharray="4 3" opacity="0.7" />
+      <path d="M510 206 L548 206" stroke="#fff" strokeWidth="2" strokeDasharray="4 3" opacity="0.7" />
+      <path d="M510 248 L548 248" stroke="#fff" strokeWidth="2" strokeDasharray="4 3" opacity="0.7" />
+      <circle cx="160" cy="180" r="4" fill="#fff" opacity="0.5" />
+      <circle cx="180" cy="240" r="3" fill="#fff" opacity="0.4" />
+      <circle cx="140" cy="280" r="5" fill="#fff" opacity="0.3" />
+    </g>,
+    'g-reminders',
   ),
 };
 
