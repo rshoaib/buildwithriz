@@ -28,7 +28,8 @@ type HeroKey =
   | 'how-to-create-professional-invoice'
   | 'invoice-payment-terms-explained'
   | 'how-to-invoice-international-clients'
-  | 'payment-reminder-email-templates-freelancers';
+  | 'payment-reminder-email-templates-freelancers'
+  | 'how-to-ask-clients-for-upfront-deposit';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -630,6 +631,95 @@ const heroes: Record<HeroKey, JSX.Element> = {
       <circle cx="140" cy="280" r="5" fill="#fff" opacity="0.3" />
     </g>,
     'g-reminders',
+  ),
+
+  // Upfront deposit — signed contract with 50% deposit badge + cash arrow before kickoff
+  'how-to-ask-clients-for-upfront-deposit': wrap(
+    ['#0ea5e9', '#0f172a'],
+    <g>
+      <rect x="180" y="110" width="220" height="200" rx="12" fill="#fff" opacity="0.97" />
+      <rect x="200" y="132" width="140" height="8" rx="2" fill="#0f172a" />
+      <rect x="200" y="150" width="100" height="5" rx="2" fill="#94a3b8" />
+      {[0, 1, 2, 3].map((i) => (
+        <rect
+          key={i}
+          x="200"
+          y={175 + i * 14}
+          width={i === 3 ? 110 : 180}
+          height="5"
+          rx="2"
+          fill="#cbd5e1"
+        />
+      ))}
+      <path
+        d="M205 252 Q230 238 250 252 T295 252 T340 252"
+        stroke="#0ea5e9"
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <text x="205" y="290" fontSize="11" fontFamily="sans-serif" fill="#475569">
+        Signed
+      </text>
+      <g transform="translate(440, 130)">
+        <rect width="160" height="100" rx="14" fill="#10b981" />
+        <text
+          x="80"
+          y="46"
+          textAnchor="middle"
+          fontSize="32"
+          fontWeight="bold"
+          fontFamily="sans-serif"
+          fill="#fff"
+        >
+          50%
+        </text>
+        <text
+          x="80"
+          y="74"
+          textAnchor="middle"
+          fontSize="13"
+          fontFamily="sans-serif"
+          fill="#ecfdf5"
+        >
+          DEPOSIT
+        </text>
+      </g>
+      <path
+        d="M410 200 Q470 270 540 240"
+        stroke="#fff"
+        strokeWidth="3"
+        fill="none"
+        strokeDasharray="6 5"
+        opacity="0.8"
+      />
+      <polygon points="538,232 552,238 540,250" fill="#fff" opacity="0.85" />
+      <g transform="translate(470, 270)">
+        <circle r="28" fill="#fbbf24" />
+        <text
+          textAnchor="middle"
+          y="6"
+          fontSize="22"
+          fontWeight="bold"
+          fontFamily="sans-serif"
+          fill="#78350f"
+        >
+          $
+        </text>
+      </g>
+      <text
+        x="600"
+        y="320"
+        textAnchor="end"
+        fontSize="13"
+        fontFamily="sans-serif"
+        fill="#fff"
+        opacity="0.85"
+      >
+        Paid before kickoff
+      </text>
+    </g>,
+    'g-deposit',
   ),
 };
 
