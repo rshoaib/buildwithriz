@@ -30,7 +30,8 @@ type HeroKey =
   | 'how-to-invoice-international-clients'
   | 'payment-reminder-email-templates-freelancers'
   | 'how-to-ask-clients-for-upfront-deposit'
-  | 'flat-fee-vs-hourly-pricing-freelancers';
+  | 'flat-fee-vs-hourly-pricing-freelancers'
+  | 'how-to-invoice-for-scope-creep-change-orders';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -822,6 +823,104 @@ const heroes: Record<HeroKey, JSX.Element> = {
       </g>
     </g>,
     'g-flat-vs-hourly',
+  ),
+
+  // Scope creep / change order — original scope box, expanding arrow, CO-001 badge added
+  'how-to-invoice-for-scope-creep-change-orders': wrap(
+    ['#f97316', '#7c2d12'],
+    <g>
+      <rect x="160" y="110" width="200" height="220" rx="10" fill="#fff" opacity="0.97" />
+      <rect x="160" y="110" width="200" height="40" rx="10" fill="#7c2d12" />
+      <text
+        x="260"
+        y="137"
+        textAnchor="middle"
+        fontSize="13"
+        fontWeight="bold"
+        fill="#fff"
+        fontFamily="sans-serif"
+      >
+        ORIGINAL SCOPE
+      </text>
+      {[0, 1, 2, 3].map((i) => (
+        <g key={`s-${i}`}>
+          <rect x="180" y={170 + i * 24} width="120" height="6" rx="2" fill="#fed7aa" />
+          <rect x="320" y={170 + i * 24} width="20" height="6" rx="2" fill="#f97316" />
+        </g>
+      ))}
+      <line x1="180" y1="280" x2="340" y2="280" stroke="#f97316" strokeWidth="2" />
+      <rect x="180" y="290" width="160" height="28" rx="4" fill="#fef3c7" />
+      <text
+        x="260"
+        y="309"
+        textAnchor="middle"
+        fontSize="11"
+        fontWeight="bold"
+        fill="#92400e"
+        fontFamily="sans-serif"
+      >
+        $4,800
+      </text>
+      <path
+        d="M370 220 Q410 200 450 220"
+        stroke="#fff"
+        strokeWidth="3"
+        fill="none"
+        strokeDasharray="6 4"
+        opacity="0.85"
+      />
+      <polygon points="448,212 462,222 446,232" fill="#fff" opacity="0.85" />
+      <rect x="470" y="110" width="180" height="220" rx="10" fill="#fff" opacity="0.97" />
+      <rect x="470" y="110" width="180" height="40" rx="10" fill="#10b981" />
+      <text
+        x="560"
+        y="137"
+        textAnchor="middle"
+        fontSize="13"
+        fontWeight="bold"
+        fill="#fff"
+        fontFamily="sans-serif"
+      >
+        CO-001
+      </text>
+      {[0, 1].map((i) => (
+        <g key={`co-${i}`}>
+          <rect x="490" y={170 + i * 24} width="100" height="6" rx="2" fill="#bbf7d0" />
+          <rect x="610" y={170 + i * 24} width="20" height="6" rx="2" fill="#10b981" />
+        </g>
+      ))}
+      <line x1="490" y1="220" x2="630" y2="220" stroke="#10b981" strokeWidth="2" />
+      <rect x="490" y="232" width="140" height="34" rx="4" fill="#dcfce7" />
+      <text
+        x="560"
+        y="247"
+        textAnchor="middle"
+        fontSize="9"
+        fill="#065f46"
+        fontFamily="sans-serif"
+      >
+        + extra work
+      </text>
+      <text
+        x="560"
+        y="261"
+        textAnchor="middle"
+        fontSize="13"
+        fontWeight="bold"
+        fill="#065f46"
+        fontFamily="sans-serif"
+      >
+        +$650
+      </text>
+      <g transform="translate(490, 280)">
+        <circle cx="14" cy="14" r="14" fill="#10b981" />
+        <path d="M7 14 L12 19 L22 9" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="36" y="19" fontSize="11" fontWeight="600" fill="#065f46" fontFamily="sans-serif">
+          Approved
+        </text>
+      </g>
+    </g>,
+    'g-scope-creep',
   ),
 };
 
