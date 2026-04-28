@@ -29,7 +29,8 @@ type HeroKey =
   | 'invoice-payment-terms-explained'
   | 'how-to-invoice-international-clients'
   | 'payment-reminder-email-templates-freelancers'
-  | 'how-to-ask-clients-for-upfront-deposit';
+  | 'how-to-ask-clients-for-upfront-deposit'
+  | 'flat-fee-vs-hourly-pricing-freelancers';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -720,6 +721,107 @@ const heroes: Record<HeroKey, JSX.Element> = {
       </text>
     </g>,
     'g-deposit',
+  ),
+  // Flat-fee vs hourly — clock card vs fixed-fee package card with VS in the middle
+  'flat-fee-vs-hourly-pricing-freelancers': wrap(
+    ['#22d3ee', '#7c3aed'],
+    <g>
+      <rect x="160" y="100" width="200" height="220" rx="14" fill="#fff" opacity="0.97" />
+      <rect x="160" y="100" width="200" height="44" rx="14" fill="#0e7490" />
+      <text
+        x="260"
+        y="128"
+        textAnchor="middle"
+        fontSize="15"
+        fontWeight="bold"
+        fill="#fff"
+        fontFamily="sans-serif"
+      >
+        HOURLY
+      </text>
+      <g transform="translate(220, 168)">
+        <circle cx="40" cy="40" r="36" fill="#fff" stroke="#0e7490" strokeWidth="3" />
+        <line x1="40" y1="40" x2="40" y2="18" stroke="#0e7490" strokeWidth="3" strokeLinecap="round" />
+        <line x1="40" y1="40" x2="58" y2="50" stroke="#0e7490" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="40" cy="40" r="3" fill="#0e7490" />
+        {[0, 3, 6, 9].map((i) => {
+          const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+          const x1 = 40 + Math.cos(angle) * 28;
+          const y1 = 40 + Math.sin(angle) * 28;
+          const x2 = 40 + Math.cos(angle) * 33;
+          const y2 = 40 + Math.sin(angle) * 33;
+          return (
+            <line
+              key={i}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="#0e7490"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          );
+        })}
+      </g>
+      <rect x="180" y="266" width="160" height="34" rx="6" fill="#cffafe" />
+      <text
+        x="260"
+        y="288"
+        textAnchor="middle"
+        fontSize="13"
+        fontWeight="bold"
+        fill="#0e7490"
+        fontFamily="sans-serif"
+      >
+        $/hour
+      </text>
+      <rect x="440" y="100" width="200" height="220" rx="14" fill="#fff" opacity="0.97" />
+      <rect x="440" y="100" width="200" height="44" rx="14" fill="#7c3aed" />
+      <text
+        x="540"
+        y="128"
+        textAnchor="middle"
+        fontSize="15"
+        fontWeight="bold"
+        fill="#fff"
+        fontFamily="sans-serif"
+      >
+        FLAT FEE
+      </text>
+      <g transform="translate(490, 170)">
+        <rect width="100" height="76" rx="8" fill="#ede9fe" stroke="#7c3aed" strokeWidth="3" />
+        <path d="M0 22 L100 22" stroke="#7c3aed" strokeWidth="3" />
+        <path d="M50 0 L50 76" stroke="#7c3aed" strokeWidth="3" strokeDasharray="4 3" />
+        <circle cx="50" cy="22" r="10" fill="#fbbf24" stroke="#7c3aed" strokeWidth="2" />
+      </g>
+      <rect x="460" y="266" width="160" height="34" rx="6" fill="#ede9fe" />
+      <text
+        x="540"
+        y="288"
+        textAnchor="middle"
+        fontSize="13"
+        fontWeight="bold"
+        fill="#7c3aed"
+        fontFamily="sans-serif"
+      >
+        $/project
+      </text>
+      <g transform="translate(370, 195)">
+        <circle r="30" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
+        <text
+          textAnchor="middle"
+          y="6"
+          fontSize="22"
+          fontWeight="bold"
+          fontFamily="sans-serif"
+          fill="#78350f"
+        >
+          VS
+        </text>
+      </g>
+    </g>,
+    'g-flat-vs-hourly',
   ),
 };
 
