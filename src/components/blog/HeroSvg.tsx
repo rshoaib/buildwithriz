@@ -31,7 +31,8 @@ type HeroKey =
   | 'payment-reminder-email-templates-freelancers'
   | 'how-to-ask-clients-for-upfront-deposit'
   | 'flat-fee-vs-hourly-pricing-freelancers'
-  | 'how-to-invoice-for-scope-creep-change-orders';
+  | 'how-to-invoice-for-scope-creep-change-orders'
+  | 'freelance-invoice-numbering-best-practices';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -921,6 +922,62 @@ const heroes: Record<HeroKey, JSX.Element> = {
       </g>
     </g>,
     'g-scope-creep',
+  ),
+
+  // Invoice numbering — stack of numbered invoice cards with prefix labels
+  'freelance-invoice-numbering-best-practices': wrap(
+    ['#0ea5e9', '#0c4a6e'],
+    <g>
+      {/* Three stacked invoice cards, each tagged with a sequential number */}
+      {[0, 1, 2].map((i) => {
+        const x = 240 + i * 18;
+        const y = 200 - i * 18;
+        return (
+          <g key={i}>
+            <rect x={x} y={y} width="240" height="170" rx="10" fill="#fff" opacity={0.95 - i * 0.1} />
+            <rect x={x + 16} y={y + 18} width="60" height="10" rx="2" fill="#0ea5e9" />
+            <rect x={x + 16} y={y + 36} width="120" height="6" rx="2" fill="#cbd5e1" />
+            <rect x={x + 16} y={y + 50} width="100" height="6" rx="2" fill="#e2e8f0" />
+            <rect x={x + 16} y={y + 64} width="140" height="6" rx="2" fill="#e2e8f0" />
+            <rect x={x + 16} y={y + 78} width="80" height="6" rx="2" fill="#e2e8f0" />
+            <text
+              x={x + 224}
+              y={y + 28}
+              textAnchor="end"
+              fontSize="13"
+              fontWeight="bold"
+              fill="#0c4a6e"
+              fontFamily="monospace"
+            >
+              {`INV-2026-00${3 - i}`}
+            </text>
+          </g>
+        );
+      })}
+      {/* Hash symbol badge in the upper right */}
+      <circle cx="600" cy="130" r="46" fill="#fbbf24" />
+      <text
+        x="600"
+        y="148"
+        textAnchor="middle"
+        fontSize="56"
+        fontWeight="bold"
+        fill="#0c4a6e"
+        fontFamily="sans-serif"
+      >
+        #
+      </text>
+      {/* Sequential arrow under the stack */}
+      <path
+        d="M260 320 L520 320"
+        stroke="#fbbf24"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeDasharray="2 8"
+      />
+      <path d="M520 320 l-10 -6 l0 12 z" fill="#fbbf24" />
+    </g>,
+    'g-invoice-numbering',
   ),
 };
 
