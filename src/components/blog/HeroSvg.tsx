@@ -32,7 +32,8 @@ type HeroKey =
   | 'how-to-ask-clients-for-upfront-deposit'
   | 'flat-fee-vs-hourly-pricing-freelancers'
   | 'how-to-invoice-for-scope-creep-change-orders'
-  | 'freelance-invoice-numbering-best-practices';
+  | 'freelance-invoice-numbering-best-practices'
+  | 'how-to-handle-invoice-disputes-with-clients';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -978,6 +979,84 @@ const heroes: Record<HeroKey, JSX.Element> = {
       <path d="M520 320 l-10 -6 l0 12 z" fill="#fbbf24" />
     </g>,
     'g-invoice-numbering',
+  ),
+
+  // Invoice disputes — disputed invoice on the left, resolved on the right with a handshake arrow
+  'how-to-handle-invoice-disputes-with-clients': wrap(
+    ['#f59e0b', '#7c2d12'],
+    <g>
+      {/* Disputed invoice on the left */}
+      <g transform="translate(110, 90)">
+        <rect width="220" height="220" rx="10" fill="#fff" opacity="0.95" />
+        <rect width="220" height="40" rx="10" fill="#dc2626" />
+        <rect y="30" width="220" height="10" fill="#dc2626" />
+        <text x="20" y="27" fontSize="16" fontWeight="bold" fill="#fff" fontFamily="sans-serif">
+          INVOICE
+        </text>
+        <text x="200" y="27" textAnchor="end" fontSize="11" fill="#fee2e2" fontFamily="monospace">
+          #INV-042
+        </text>
+        {[0, 1, 2, 3].map((i) => (
+          <g key={i}>
+            <rect x="20" y={64 + i * 20} width="120" height="6" rx="2" fill="#cbd5e1" />
+            <rect x="160" y={64 + i * 20} width="40" height="6" rx="2" fill="#e2e8f0" />
+          </g>
+        ))}
+        <g transform="translate(150, 175) rotate(-14)">
+          <rect x="-58" y="-15" width="116" height="30" rx="3" fill="none" stroke="#dc2626" strokeWidth="3" />
+          <text textAnchor="middle" y="6" fontSize="15" fontWeight="bold" fill="#dc2626" fontFamily="sans-serif">
+            DISPUTED
+          </text>
+        </g>
+        <circle cx="200" cy="60" r="14" fill="#fbbf24" />
+        <text x="200" y="66" textAnchor="middle" fontSize="18" fontWeight="bold" fill="#7c2d12" fontFamily="sans-serif">
+          ?
+        </text>
+      </g>
+
+      <g transform="translate(350, 175)">
+        <ellipse cx="0" cy="0" rx="22" ry="16" fill="#fff" opacity="0.95" />
+        <path d="M-6 14 l-4 10 l14 -8 z" fill="#fff" opacity="0.95" />
+        <text x="0" y="5" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#7c2d12" fontFamily="sans-serif">
+          ?
+        </text>
+        <ellipse cx="56" cy="36" rx="22" ry="16" fill="#fff" opacity="0.95" />
+        <path d="M62 50 l-4 10 l14 -8 z" fill="#fff" opacity="0.95" />
+        <text x="56" y="41" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#065f46" fontFamily="sans-serif">
+          OK
+        </text>
+        <path d="M-10 70 L100 70" stroke="#fde68a" strokeWidth="6" strokeLinecap="round" />
+        <path d="M100 70 l-12 -8 l0 16 z" fill="#fde68a" />
+      </g>
+
+      <g transform="translate(470, 90)">
+        <rect width="220" height="220" rx="10" fill="#fff" opacity="0.95" />
+        <rect width="220" height="40" rx="10" fill="#10b981" />
+        <rect y="30" width="220" height="10" fill="#10b981" />
+        <text x="20" y="27" fontSize="16" fontWeight="bold" fill="#fff" fontFamily="sans-serif">
+          INVOICE
+        </text>
+        <text x="200" y="27" textAnchor="end" fontSize="11" fill="#d1fae5" fontFamily="monospace">
+          #INV-042R
+        </text>
+        {[0, 1, 2, 3].map((i) => (
+          <g key={i}>
+            <rect x="20" y={64 + i * 20} width="120" height="6" rx="2" fill="#cbd5e1" />
+            <rect x="160" y={64 + i * 20} width="40" height="6" rx="2" fill="#e2e8f0" />
+          </g>
+        ))}
+        <g transform="translate(150, 175) rotate(-12)">
+          <circle r="32" fill="none" stroke="#10b981" strokeWidth="3" />
+          <circle r="26" fill="none" stroke="#10b981" strokeWidth="1.5" />
+          <text textAnchor="middle" y="5" fontSize="13" fontWeight="bold" fill="#10b981" fontFamily="sans-serif">
+            RESOLVED
+          </text>
+        </g>
+        <circle cx="200" cy="60" r="14" fill="#10b981" />
+        <path d="M194 60 l4 4 l8 -8" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+    </g>,
+    'g-invoice-disputes',
   ),
 };
 
