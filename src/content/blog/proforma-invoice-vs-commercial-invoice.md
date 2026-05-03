@@ -11,7 +11,9 @@ keywords:
   - "commercial invoice meaning"
   - "freelance proforma invoice"
   - "proforma vs regular invoice"
-updated_at: "2026-04-25"
+meta_title: "Proforma Invoice vs Commercial Invoice (2026 Guide)"
+meta_description: "Proforma vs commercial invoice: when to send each, what fields differ, and how freelancers use proformas to secure deposits before delivery."
+updated_at: "2026-04-26"
 ---
 
 

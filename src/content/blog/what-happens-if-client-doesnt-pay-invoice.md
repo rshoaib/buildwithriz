@@ -11,7 +11,9 @@ keywords:
   - "client not paying invoice"
   - "freelance debt collection"
   - "late payment fees"
-updated_at: "2026-04-25"
+meta_title: "What If a Client Doesn't Pay Your Invoice? (2026 Guide)"
+meta_description: "What to do when a client doesn't pay an invoice: the exact steps to collect, when to escalate, and how to protect your cash flow as a freelancer."
+updated_at: "2026-04-26"
 ---
 
 

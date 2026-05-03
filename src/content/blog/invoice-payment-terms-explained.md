@@ -12,7 +12,9 @@ keywords:
   - "freelancer payment terms"
   - "invoice due date explained"
   - "net 30 payment terms"
-updated_at: "2026-04-25"
+meta_title: "Invoice Payment Terms Explained: Net 15 vs Net 30 (2026)"
+meta_description: "Master invoice payment terms like Net 15 vs Net 30. Proven strategies to get paid 2x faster and stop the late-payment cycle for freelancers."
+updated_at: "2026-04-26"
 ---
 
 
