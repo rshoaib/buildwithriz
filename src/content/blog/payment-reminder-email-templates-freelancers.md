@@ -14,7 +14,7 @@ keywords:
   - "payment reminder template freelancer"
 meta_title: "Payment Reminder Email Templates for Freelancers (2026)"
 meta_description: "5 payment reminder email templates that get freelance clients to pay overdue invoices — from gentle nudge to final notice, plus timing tips."
-updated_at: "2026-04-26"
+updated_at: "2026-05-03"
 ---
 
 Roughly 29% of freelance invoices end up being paid late, and 65% of freelancers wait more than 30 days to get paid at all. The single biggest lever you have between sending an invoice and getting paid is the reminder email — and most freelancers either send one too late, send one that's too aggressive, or send nothing at all and quietly resent the client for a month.
@@ -189,7 +189,7 @@ If the final notice has gone out and you still haven't been paid, you have four 
 3. **Small-claims court.** In the U.S., most jurisdictions allow individuals to file for amounts up to roughly $5,000-$15,000 without an attorney. The U.S. Small Business Administration's [overview of small-business legal options](https://www.sba.gov/) is a good starting point.
 4. **A collections agency.** Agencies typically take 25-50% of the recovered amount, but you only pay if they collect. Worth it for invoices over a few thousand dollars; rarely worth it for smaller ones.
 
-For most freelance invoices under a few hundred dollars, the honest answer is: send the five-touch sequence, do the phone call, and if the client still ghosts, write the loss off and stop working with them. The hourly cost of pursuing it past that point usually exceeds the invoice.
+For most freelance invoices under a few hundred dollars, the honest answer is: send the five-touch sequence, do the phone call, and if the client still ghosts, write the loss off and stop working with them. The hourly cost of pursuing it past that point usually exceeds the invoice. If the non-payment stems from a real dispute over scope or quality rather than just slow accounting, see [how to handle invoice disputes with clients](/blog/how-to-handle-invoice-disputes-with-clients) before sending a demand letter.
 
 ## Automating the schedule so you don't have to remember
 
@@ -208,7 +208,7 @@ Freelancers who get paid fastest treat reminders as a normal part of operations 
 ## Sources
 
 - [How often do freelancers get paid late? — HelloBonsai](https://www.hellobonsai.com/blog/late-freelance-payment) — referenced 29% late-payment rate and the gender gap.
-- [Global Freelance Client Payment Delay Report 2026 — Jobbers](https://www.jobbers.io/the-global-freelance-client-payment-delay-report-2025-why-63-of-freelancers-wait-over-30-days-to-get-paid/) — referenced "65% wait over 30 days" figure.
+- [Global Freelance Client Payment Delay Report 2025 — Jobbers](https://www.jobbers.io/the-global-freelance-client-payment-delay-report-2025-why-63-of-freelancers-wait-over-30-days-to-get-paid/) — referenced "65% wait over 30 days" figure.
 - [How to write payment reminder emails to freelance clients — HelloBonsai](https://www.hellobonsai.com/blog/payment-reminder-email-to-client) — tone-progression guidance.
 - [Payment Reminder Message Examples — Square](https://squareup.com/us/en/the-bottom-line/reaching-customers/payment-reminder-message) — subject-line and timing best practices.
 - [U.S. Small Business Administration](https://www.sba.gov/) — small-claims and demand-letter context.

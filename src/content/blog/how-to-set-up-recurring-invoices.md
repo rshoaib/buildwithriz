@@ -14,7 +14,7 @@ keywords:
   - "recurring invoice vs retainer"
 meta_title: "How to Set Up Recurring Invoices (2026 Freelancer Guide)"
 meta_description: "Set up recurring invoices for retainer clients. Step-by-step billing terms, templates, automation tools, and tips to get paid on time, every time."
-updated_at: "2026-04-26"
+updated_at: "2026-05-03"
 ---
 
 <p>Freelancers lose thousands of dollars every year not because they do bad work, but because they bill inconsistently. According to <a href="https://www.demandsage.com/freelance-statistics/" target="_blank" rel="noopener">Demand Sage</a>, 76.4 million Americans freelanced in 2025 — and a staggering 44% of them report irregular cash flow as their top financial stressor.</p>
@@ -296,3 +296,5 @@ updated_at: "2026-04-26"
 - [How to Send an Invoice via Email: Complete Guide to Getting Paid Faster (2026)](/blog/how-to-send-invoice-via-email)
 - [Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster](/blog/invoice-payment-terms-explained)
 - [How to Create a Professional Invoice: Complete Guide for Freelancers (2026)](/blog/how-to-create-professional-invoice)
+- [How to Handle Invoice Disputes with Clients](/blog/how-to-handle-invoice-disputes-with-clients)
+- [Freelance Invoice Numbering Best Practices](/blog/freelance-invoice-numbering-best-practices)

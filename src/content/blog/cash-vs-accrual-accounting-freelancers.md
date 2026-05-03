@@ -1,7 +1,7 @@
 ---
 slug: "cash-vs-accrual-accounting-freelancers"
 title: "Cash vs Accrual Accounting for Freelancers (2026)"
-description: "Confused by cash vs accrual accounting? Learn which method works best for freelancers, how each affects your invoices and taxes, and pick the right one for your business."
+description: "Cash vs accrual accounting for freelancers — how each method affects your invoices, taxes, and cash flow, plus how to pick the right one in 2026."
 date: "2026-03-21"
 readTime: "9 min read"
 heroKey: "cash-vs-accrual-accounting-freelancers"
@@ -11,7 +11,10 @@ keywords:
   - "cash basis accounting explained"
   - "accrual accounting freelancer"
   - "freelance bookkeeping method"
-updated_at: "2026-04-25"
+  - "IRS Form 3115"
+meta_title: "Cash vs Accrual Accounting for Freelancers (2026)"
+meta_description: "Cash vs accrual accounting for freelancers: how each method affects taxes and cash flow, plus how to pick — and switch — without IRS headaches."
+updated_at: "2026-05-03"
 ---
 
 # Cash vs Accrual Accounting for Freelancers (2026)

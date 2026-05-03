@@ -14,7 +14,7 @@ keywords:
   - "net 30 payment terms"
 meta_title: "Invoice Payment Terms Explained: Net 15 vs Net 30 (2026)"
 meta_description: "Master invoice payment terms like Net 15 vs Net 30. Proven strategies to get paid 2x faster and stop the late-payment cycle for freelancers."
-updated_at: "2026-04-26"
+updated_at: "2026-05-03"
 ---
 
 
@@ -188,3 +188,5 @@ Ready to create a professional invoice with clear payment terms? Our **[free inv
 - [How to Calculate Late Fees on an Invoice (With Examples) - 2026](/blog/how-to-calculate-late-fees-on-invoice)
 - [What Happens If a Client Doesn't Pay an Invoice? (2026)](/blog/what-happens-if-client-doesnt-pay-invoice)
 - [How to Send an Invoice via Email: Complete Guide to Getting Paid Faster (2026)](/blog/how-to-send-invoice-via-email)
+- [Flat Fee vs Hourly Pricing for Freelancers](/blog/flat-fee-vs-hourly-pricing-freelancers)
+- [How to Handle Invoice Disputes with Clients](/blog/how-to-handle-invoice-disputes-with-clients)

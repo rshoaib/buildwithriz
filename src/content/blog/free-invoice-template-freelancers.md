@@ -1,7 +1,7 @@
 ---
 slug: "free-invoice-template-freelancers"
 title: "Free Invoice Template for Freelancers: Download & Create Instantly (2026)"
-description: "Get a free invoice template designed for freelancers. Choose from multiple formats, customize in seconds, or use our free online generator — no signup, no data stored."
+description: "Free invoice templates built for freelancers. Multiple formats, instant customization, or use our free online generator — no signup, no data stored."
 date: "2026-03-23"
 readTime: "10 min read"
 heroKey: "free-invoice-template-freelancers"
@@ -14,7 +14,7 @@ keywords:
   - "freelancer invoice format"
 meta_title: "Free Invoice Template for Freelancers (2026)"
 meta_description: "Free invoice templates for freelancers. Multiple formats, instant customization, and a free online generator — no signup, no data stored."
-updated_at: "2026-04-25"
+updated_at: "2026-05-03"
 ---
 
 ## Why Every Freelancer Needs a Professional Invoice Template
@@ -223,4 +223,5 @@ Stop wasting time formatting invoices in Word documents. Our **[free invoice gen
 
 - [How to Create a Professional Invoice: Complete Guide for Freelancers (2026)](/blog/how-to-create-professional-invoice)
 - [Best Free Tools for Freelancers in 2026: 15 Apps That Replace Paid Software](/blog/best-free-tools-freelancers-2026)
-- [How to Write an Invoice: A Step-by-Step 
+- [How to Write an Invoice: A Step-by-Step Guide for Beginners (2026)](/blog/how-to-write-invoice-step-by-step)
+- [Freelance Invoice Numbering Best Practices](/blog/freelance-invoice-numbering-best-practices)

@@ -1,7 +1,7 @@
 ---
 slug: "how-to-create-professional-invoice"
 title: "How to Create a Professional Invoice: Complete Guide for Freelancers (2026)"
-description: "Learn how to create professional invoices that get you paid faster. Covers essential fields, best practices, common mistakes, and a free invoice generator — no signup required."
+description: "Create professional invoices that get paid faster. Essential fields, best practices, common mistakes, and a free generator — no signup required."
 date: "2026-03-08"
 readTime: "10 min read"
 heroKey: "how-to-create-professional-invoice"
@@ -13,7 +13,7 @@ keywords:
   - "invoice best practices 2026"
 meta_title: "How to Create a Professional Invoice (2026 Guide)"
 meta_description: "Step-by-step guide to creating professional invoices that get paid faster. Essential fields, best practices, and a free generator — no signup."
-updated_at: "2026-04-25"
+updated_at: "2026-05-03"
 ---
 
 
@@ -206,4 +206,6 @@ Ready to send your first professional invoice? Use our **[free invoice generator
 ## Related guides
 
 - [How to Write an Invoice: A Step-by-Step Guide for Beginners (2026)](/blog/how-to-write-invoice-step-by-step)
-- [Free Invoice Template for Freelancers: Download & Create In
+- [Free Invoice Template for Freelancers: Download & Create Instantly (2026)](/blog/free-invoice-template-freelancers)
+- [Freelance Invoice Numbering Best Practices](/blog/freelance-invoice-numbering-best-practices)
+- [How to Invoice for Scope Creep & Change Orders](/blog/how-to-invoice-for-scope-creep-change-orders)
