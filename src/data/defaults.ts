@@ -1,5 +1,11 @@
 import { InvoiceData } from '@/types/invoice';
 
+// IMPORTANT: dynamic fields (invoice number, dates) MUST stay empty
+// at module-load time. `Date.now()` and `new Date()` evaluated here
+// produce different values on the SSR server vs the client at
+// hydration, which surfaces as a "text didn't match" hydration error
+// in <InvoicePreview />. The homepage `useEffect` populates these
+// fields client-side on mount. See `src/app/page.tsx`.
 export const defaultInvoice: InvoiceData = {
     logo: '',
     language: 'en',
@@ -10,9 +16,9 @@ export const defaultInvoice: InvoiceData = {
     toName: '',
     toEmail: '',
     toAddress: '',
-    invoiceNumber: `INV-${String(Date.now()).slice(-6)}`,
-    invoiceDate: new Date().toISOString().split('T')[0],
-    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    invoiceNumber: '',
+    invoiceDate: '',
+    dueDate: '',
     currency: 'USD',
     items: [
         { id: '1', description: '', quantity: 1, rate: 0 },

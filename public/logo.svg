@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="BuildWithRiz logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <g transform="translate(96 96)" fill="#ffffff">
+    <rect x="32" y="0" width="256" height="320" rx="24" fill="#ffffff" opacity="0.18"/>
+    <rect x="0" y="32" width="256" height="320" rx="24" fill="#ffffff"/>
+    <rect x="40" y="88" width="176" height="14" rx="7" fill="#1d4ed8"/>
+    <rect x="40" y="128" width="120" height="10" rx="5" fill="#94a3b8"/>
+    <rect x="40" y="160" width="176" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="40" y="180" width="176" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="40" y="200" width="140" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="40" y="240" width="80" height="10" rx="5" fill="#94a3b8"/>
+    <rect x="136" y="240" width="80" height="10" rx="5" fill="#1d4ed8"/>
+  </g>
+</svg>

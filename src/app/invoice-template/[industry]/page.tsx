@@ -17,6 +17,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const ind = getIndustry(slug);
     if (!ind) return {};
 
+    const ogUrl = `/og?kind=template&title=${encodeURIComponent(ind.title)}`;
+
     return {
         title: `${ind.title} | BuildWithRiz`,
         description: ind.metaDescription,
@@ -33,6 +35,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             url: `https://www.buildwithriz.com/invoice-template/${ind.slug}`,
             siteName: 'BuildWithRiz',
             type: 'website',
+            images: [
+                {
+                    url: ogUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: ind.title,
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: ind.title,
+            description: ind.metaDescription,
+            images: [ogUrl],
         },
         alternates: {
             canonical: `https://www.buildwithriz.com/invoice-template/${ind.slug}`,
@@ -52,18 +68,44 @@ export default async function IndustryTemplatePage({ params }: PageProps) {
     const tax = subtotal * (taxRate / 100);
     const total = subtotal + tax;
 
+    const templateUrl = `https://www.buildwithriz.com/invoice-template/${ind.slug}`;
+
     const jsonLd = [
         {
             '@context': 'https://schema.org',
             '@type': 'WebPage',
             name: ind.title,
             description: ind.metaDescription,
-            url: `https://www.buildwithriz.com/invoice-template/${ind.slug}`,
+            url: templateUrl,
             isPartOf: {
                 '@type': 'WebSite',
                 name: 'BuildWithRiz',
                 url: 'https://www.buildwithriz.com',
             },
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'https://www.buildwithriz.com/',
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Invoice Templates',
+                    item: 'https://www.buildwithriz.com/invoice-template',
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: `${ind.name} Invoice`,
+                    item: templateUrl,
+                },
+            ],
         },
         {
             '@context': 'https://schema.org',

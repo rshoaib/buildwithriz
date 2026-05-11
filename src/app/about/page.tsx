@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
-import { FileText, Shield, Globe, Zap, Heart, Code, Rocket } from 'lucide-react';
+import { FileText, Shield, Globe, Zap, Heart, Code, Rocket, User } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About — BuildWithRiz | Free Developer Tools',
-  description: 'BuildWithRiz provides free, privacy-friendly online tools for freelancers and small businesses. No signup, no data stored. Learn about our mission and the developer behind the project.',
+  description:
+    'BuildWithRiz provides free, privacy-friendly online tools for freelancers and small businesses. Meet the developer behind the project.',
   alternates: { canonical: 'https://www.buildwithriz.com/about' },
   openGraph: {
     title: 'About — BuildWithRiz',
@@ -12,9 +13,28 @@ export const metadata: Metadata = {
   },
 };
 
+const authorJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Riz',
+  url: 'https://www.buildwithriz.com/about#author',
+  jobTitle: 'Founder & Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'BuildWithRiz',
+    url: 'https://www.buildwithriz.com',
+  },
+  description:
+    'Software developer building free, privacy-first online tools for freelancers, contractors, and small businesses. Writes practical guides on invoicing, freelance pricing, and getting paid on time.',
+};
+
 export default function About() {
   return (
     <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(authorJsonLd) }}
+      />
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">About BuildWithRiz</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8 text-base leading-relaxed">
         BuildWithRiz is a growing collection of free, privacy-first online tools designed
@@ -77,7 +97,7 @@ export default function About() {
         </p>
       </section>
 
-      <section>
+      <section className="mb-8">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
           <Rocket size={18} className="text-blue-600 dark:text-blue-400" />
           What&apos;s Next
@@ -90,6 +110,38 @@ export default function About() {
           like to see, we would love to hear from you on our{' '}
           <a href="/contact" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">contact page</a>.
         </p>
+      </section>
+
+      {/* Author bio — also the target of /about#author links from blog
+          post bylines. Keep the id and content in sync with the Person
+          JSON-LD at the top of this file. */}
+      <section
+        id="author"
+        className="scroll-mt-24 bg-gray-50 dark:bg-gray-800 rounded-xl p-5 sm:p-6 border border-gray-100 dark:border-gray-700"
+      >
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+          <User size={18} className="text-blue-600 dark:text-blue-400" />
+          About the Author
+        </h2>
+        <div className="flex items-start gap-4">
+          <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-2xl sm:text-3xl flex items-center justify-center">
+            R
+          </div>
+          <div className="flex-1">
+            <p className="font-semibold text-gray-900 dark:text-white text-base">
+              Riz
+            </p>
+            <p className="text-xs text-blue-600 dark:text-blue-400 mb-2">
+              Founder &amp; Developer, BuildWithRiz
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+              Software developer building free, privacy-first online tools for
+              freelancers, contractors, and small businesses. Writes practical
+              guides on invoicing, freelance pricing, and getting paid on time —
+              drawn from years of freelance and product-building experience.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
   );

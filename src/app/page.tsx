@@ -15,6 +15,7 @@ import DisclaimerSection from '@/components/sections/DisclaimerSection';
 import dynamic from 'next/dynamic';
 import { defaultInvoice, calculateTotal } from '@/data/defaults';
 import { getIndustry } from '@/data/industries';
+import { HOME_FAQS } from '@/data/faqs';
 import { InvoiceData, SavedTemplate, TemplateStyle } from '@/types/invoice';
 import {
   CheckCircle,
@@ -62,6 +63,17 @@ function HomeContent() {
   // single value, but this effect coordinates multiple reads + precedence
   // rules across four keys, so a mount-once effect is the clearer choice.
   useEffect(() => {
+    // Build the fresh-client-side defaults once. These intentionally
+    // do NOT live in `defaultInvoice` (module scope) because `Date.now()`
+    // would evaluate differently on the SSR server vs hydration, causing
+    // a text-content hydration mismatch in <InvoicePreview />.
+    const now = Date.now();
+    const freshNumber = `INV-${String(now).slice(-6)}`;
+    const freshDate = new Date(now).toISOString().split('T')[0];
+    const freshDueDate = new Date(now + 30 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split('T')[0];
+
     try {
       const stored = localStorage.getItem(TEMPLATES_KEY);
       if (stored) {
@@ -71,15 +83,24 @@ function HomeContent() {
       if (savedTheme) {
         setSelectedTheme(savedTheme as TemplateStyle);
       }
-      // Restore auto-saved draft (only if no URL template)
+      // Restore auto-saved draft (only if no URL template). When no draft
+      // exists, seed the dynamic fields from `fresh*` above so the preview
+      // shows a real invoice number / dates after hydration.
       const templateSlug = new URLSearchParams(window.location.search).get('template');
       if (!templateSlug) {
         const draft = localStorage.getItem(DRAFT_KEY);
         if (draft) {
           setInvoice(JSON.parse(draft));
+        } else {
+          setInvoice(prev => ({
+            ...prev,
+            invoiceNumber: prev.invoiceNumber || freshNumber,
+            invoiceDate: prev.invoiceDate || freshDate,
+            dueDate: prev.dueDate || freshDueDate,
+          }));
         }
       }
-      // Auto-increment invoice number
+      // Auto-increment invoice number (wins over the fresh seed above).
       const lastNum = localStorage.getItem(LAST_INV_NUM_KEY);
       if (lastNum && !templateSlug) {
         const match = lastNum.match(/(\d+)$/);
@@ -222,14 +243,23 @@ function HomeContent() {
       localStorage.setItem(LAST_INV_NUM_KEY, invoice.invoiceNumber);
       localStorage.removeItem(DRAFT_KEY);
     } catch { /* ignore */ }
+    const now = Date.now();
     const match = invoice.invoiceNumber.match(/(\d+)$/);
-    let nextNumber = `INV-${String(Date.now()).slice(-6)}`;
+    let nextNumber = `INV-${String(now).slice(-6)}`;
     if (match) {
       const nextNum = String(Number(match[1]) + 1).padStart(match[1].length, '0');
       const prefix = invoice.invoiceNumber.slice(0, invoice.invoiceNumber.length - match[1].length);
       nextNumber = `${prefix}${nextNum}`;
     }
-    setInvoice({ ...defaultInvoice, invoiceNumber: nextNumber });
+    // `defaultInvoice` has empty dynamic fields (to keep SSR/CSR in sync —
+    // see `src/data/defaults.ts`). Reseed them here so the reset preview
+    // doesn't render blank dates.
+    setInvoice({
+      ...defaultInvoice,
+      invoiceNumber: nextNumber,
+      invoiceDate: new Date(now).toISOString().split('T')[0],
+      dueDate: new Date(now + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    });
   };
 
   const handleDraftEmail = () => {
@@ -416,10 +446,58 @@ function HomeContent() {
   );
 }
 
+// Homepage-scoped JSON-LD. Lives on `/` only — every other page either
+// inherits sitewide Organization (root layout) or injects its own
+// page-specific schema (industry templates, blog posts, tool pages).
+const homeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'BuildWithRiz Free Invoice Generator',
+    url: 'https://www.buildwithriz.com/',
+    description:
+      'Create professional invoices for free. No signup, no data stored.',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    featureList: [
+      'Free PDF invoice generation',
+      'No signup required',
+      'Multiple currency support',
+      'Professional templates',
+      'Client-side processing',
+      'Privacy-friendly',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    // Sourced from HOME_FAQS so schema and visible FAQ never drift.
+    mainEntity: HOME_FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  },
+];
+
 export default function Home() {
   return (
-    <Suspense>
-      <HomeContent />
-    </Suspense>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
+      <Suspense>
+        <HomeContent />
+      </Suspense>
+    </>
   );
 }
