@@ -111,13 +111,16 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
-        {/* Google AdSense */}
+        {/* Google AdSense — lazyOnload so it doesn't block interactivity.
+            The site has near-zero ad revenue today; faster page = better UX
+            and better SEO, both of which feed into eventual revenue more
+            than shaving 2 seconds off ad-impression registration. */}
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
         )}
         {/* Header */}

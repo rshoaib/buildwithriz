@@ -26,6 +26,7 @@ import {
   FileText,
   Eye,
   Mail,
+  Download,
 } from 'lucide-react';
 
 const TEMPLATES_KEY = 'buildwithriz-templates';
@@ -51,6 +52,11 @@ function HomeContent() {
   const [showTemplates, setShowTemplates] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<TemplateStyle>('modern');
   const [templateBanner, setTemplateBanner] = useState<string | null>(null);
+  // PdfGenerator pulls in @react-pdf/renderer + qrcode + react-signature-canvas
+  // (~477 KiB chunk, ~450ms scripting). Defer mounting until the user signals
+  // intent to download — saves ~25-35 mobile Lighthouse points.
+  const [pdfMounted, setPdfMounted] = useState(false);
+  const mountPdf = useCallback(() => setPdfMounted(true), []);
   const searchParams = useSearchParams();
   const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isFirstLoad = useRef(true);
@@ -419,7 +425,19 @@ function HomeContent() {
               <ThemeSelector selected={selectedTheme} onChange={handleThemeChange} />
               <InvoicePreview data={invoice} theme={selectedTheme} />
               <div className="mt-4 flex flex-col gap-2">
-                <PdfGenerator data={invoice} theme={selectedTheme} />
+                {pdfMounted ? (
+                  <PdfGenerator data={invoice} theme={selectedTheme} />
+                ) : (
+                  <button
+                    onClick={mountPdf}
+                    onMouseEnter={mountPdf}
+                    onTouchStart={mountPdf}
+                    className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all"
+                  >
+                    <Download size={18} />
+                    Generate &amp; Download PDF
+                  </button>
+                )}
                 <button
                   onClick={handleDraftEmail}
                   className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 transition"
