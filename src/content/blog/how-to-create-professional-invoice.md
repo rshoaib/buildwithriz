@@ -13,7 +13,7 @@ keywords:
   - "invoice best practices 2026"
 meta_title: "How to Create a Professional Invoice (2026 Guide)"
 meta_description: "Step-by-step guide to creating professional invoices that get paid faster. Essential fields, best practices, and a free generator — no signup."
-updated_at: "2026-05-03"
+updated_at: "2026-05-12"
 ---
 
 
@@ -76,6 +76,8 @@ Do not leave clients guessing how to pay you. Include:
 - **Bank transfer details** (account number, routing number, bank name)
 - **Digital payment links** (PayPal, Stripe, Wise)
 - **Accepted payment methods** (credit card, ACH, wire transfer)
+
+If you work with clients in other countries, also specify the billing currency and whether the client or you absorbs exchange-rate risk. Our guide on [how to invoice international clients](/blog/how-to-invoice-international-clients) covers currency selection, VAT requirements, and cross-border payment methods in detail.
 
 ### 8. Notes and Terms
 Add any relevant notes — project milestones, warranty information, or a simple "Thank you for your business." This is also where you can specify late payment fees (typically 1.5% per month) and your cancellation policy.
@@ -162,7 +164,7 @@ Even experienced freelancers make these mistakes. Knowing them will help you avo
 There are many invoicing options available in 2026, ranging from full accounting suites to simple generators. Here is how they compare:
 
 | Feature | Free Generators | Accounting Software | Manual Templates |
-|---------|----------------|-------------------|-----------------|
+|---------|----------------|-------------------|------------------|
 | **Cost** | Free | $10–$50/month | Free |
 | **Speed** | Instant | Moderate | Slow |
 | **Privacy** | Varies (some store data) | Cloud-stored | Your device only |
@@ -193,7 +195,7 @@ Most tax authorities recommend keeping invoices for at least **5-7 years**. Stor
 Absolutely. Free invoice generators produce the same professional PDF output as paid software. The key difference is that free tools typically focus on invoice creation, while paid software adds accounting, time tracking, and client management features.
 
 ### What should I do if a client does not pay?
-First, send a friendly reminder. If there is no response after 7 days, send a formal follow-up referencing the invoice number and due date. For invoices overdue by 30+ days, consider escalating to a collection process or withholding further work until the balance is settled.
+First, send a friendly reminder. If there is no response after 7 days, send a formal follow-up referencing the invoice number and due date. For invoices overdue by 30+ days, consider escalating to a collection process or withholding further work until the balance is settled. To prevent non-payment before it happens, [asking for an upfront deposit](/blog/how-to-ask-clients-for-upfront-deposit) — even 25–50% — gives you meaningful protection with new clients.
 
 ---
 
@@ -209,3 +211,5 @@ Ready to send your first professional invoice? Use our **[free invoice generator
 - [Free Invoice Template for Freelancers: Download & Create Instantly (2026)](/blog/free-invoice-template-freelancers)
 - [Freelance Invoice Numbering Best Practices](/blog/freelance-invoice-numbering-best-practices)
 - [How to Invoice for Scope Creep & Change Orders](/blog/how-to-invoice-for-scope-creep-change-orders)
+- [How to Ask Clients for an Upfront Deposit](/blog/how-to-ask-clients-for-upfront-deposit)
+- [How to Invoice International Clients](/blog/how-to-invoice-international-clients)
