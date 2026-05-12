@@ -33,7 +33,8 @@ type HeroKey =
   | 'flat-fee-vs-hourly-pricing-freelancers'
   | 'how-to-invoice-for-scope-creep-change-orders'
   | 'freelance-invoice-numbering-best-practices'
-  | 'how-to-handle-invoice-disputes-with-clients';
+  | 'how-to-handle-invoice-disputes-with-clients'
+  | 'do-i-need-to-charge-tax-on-invoices';
 
 // Shared style container for all hero illustrations
 const wrap = (
@@ -929,7 +930,6 @@ const heroes: Record<HeroKey, JSX.Element> = {
   'freelance-invoice-numbering-best-practices': wrap(
     ['#0ea5e9', '#0c4a6e'],
     <g>
-      {/* Three stacked invoice cards, each tagged with a sequential number */}
       {[0, 1, 2].map((i) => {
         const x = 240 + i * 18;
         const y = 200 - i * 18;
@@ -955,7 +955,6 @@ const heroes: Record<HeroKey, JSX.Element> = {
           </g>
         );
       })}
-      {/* Hash symbol badge in the upper right */}
       <circle cx="600" cy="130" r="46" fill="#fbbf24" />
       <text
         x="600"
@@ -968,7 +967,6 @@ const heroes: Record<HeroKey, JSX.Element> = {
       >
         #
       </text>
-      {/* Sequential arrow under the stack */}
       <path
         d="M260 320 L520 320"
         stroke="#fbbf24"
@@ -985,7 +983,6 @@ const heroes: Record<HeroKey, JSX.Element> = {
   'how-to-handle-invoice-disputes-with-clients': wrap(
     ['#f59e0b', '#7c2d12'],
     <g>
-      {/* Disputed invoice on the left */}
       <g transform="translate(110, 90)">
         <rect width="220" height="220" rx="10" fill="#fff" opacity="0.95" />
         <rect width="220" height="40" rx="10" fill="#dc2626" />
@@ -1057,6 +1054,51 @@ const heroes: Record<HeroKey, JSX.Element> = {
       </g>
     </g>,
     'g-invoice-disputes',
+  ),
+  // Invoice tax — invoice with highlighted tax line + large % badge
+  'do-i-need-to-charge-tax-on-invoices': wrap(
+    ['#16a34a', '#052e16'],
+    <g>
+      <rect x="240" y="60" width="240" height="294" rx="12" fill="#fff" opacity="0.96" />
+      <rect x="240" y="60" width="240" height="52" rx="12" fill="#15803d" />
+      <rect x="240" y="100" width="240" height="12" fill="#15803d" />
+      <text x="258" y="92" fontSize="20" fontWeight="bold" fill="#fff" fontFamily="sans-serif">
+        INVOICE
+      </text>
+      <rect x="258" y="134" width="140" height="7" rx="2" fill="#bbf7d0" />
+      <rect x="258" y="150" width="100" height="5" rx="2" fill="#d1fae5" />
+      <line x1="258" y1="176" x2="460" y2="176" stroke="#e2e8f0" strokeWidth="1.5" />
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <rect x="258" y={196 + i * 22} width="120" height="5" rx="2" fill="#d1fae5" />
+          <rect x="410" y={196 + i * 22} width="46" height="5" rx="2" fill="#bbf7d0" />
+        </g>
+      ))}
+      <line x1="258" y1="268" x2="460" y2="268" stroke="#d1fae5" strokeWidth="1" />
+      <rect x="258" y="278" width="204" height="28" rx="4" fill="#dcfce7" />
+      <text x="268" y="297" fontSize="11" fontWeight="bold" fill="#15803d" fontFamily="sans-serif">
+        TAX (8.5%)
+      </text>
+      <text x="453" y="297" textAnchor="end" fontSize="11" fontWeight="bold" fill="#15803d" fontFamily="sans-serif">
+        $42.50
+      </text>
+      <rect x="258" y="316" width="204" height="24" rx="4" fill="#15803d" />
+      <text x="268" y="333" fontSize="11" fontWeight="bold" fill="#fff" fontFamily="sans-serif">
+        TOTAL
+      </text>
+      <text x="453" y="333" textAnchor="end" fontSize="11" fontWeight="bold" fill="#fff" fontFamily="sans-serif">
+        $542.50
+      </text>
+      <circle cx="588" cy="152" r="70" fill="#fbbf24" opacity="0.95" />
+      <text x="588" y="180" textAnchor="middle" fontSize="76" fontWeight="bold" fill="#052e16" fontFamily="sans-serif">
+        %
+      </text>
+      <circle cx="140" cy="210" r="48" fill="#fff" opacity="0.12" />
+      <text x="140" y="228" textAnchor="middle" fontSize="58" fontWeight="bold" fill="#fff" opacity="0.82" fontFamily="sans-serif">
+        ?
+      </text>
+    </g>,
+    'g-invoice-tax',
   ),
 };
 
