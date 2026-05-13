@@ -13,7 +13,7 @@ keywords:
   - "invoice best practices 2026"
 meta_title: "How to Create a Professional Invoice (2026 Guide)"
 meta_description: "Step-by-step guide to creating professional invoices that get paid faster. Essential fields, best practices, and a free generator — no signup."
-updated_at: "2026-05-12"
+updated_at: "2026-05-13"
 ---
 
 
@@ -76,8 +76,6 @@ Do not leave clients guessing how to pay you. Include:
 - **Bank transfer details** (account number, routing number, bank name)
 - **Digital payment links** (PayPal, Stripe, Wise)
 - **Accepted payment methods** (credit card, ACH, wire transfer)
-
-If you work with clients in other countries, also specify the billing currency and whether the client or you absorbs exchange-rate risk. Our guide on [how to invoice international clients](/blog/how-to-invoice-international-clients) covers currency selection, VAT requirements, and cross-border payment methods in detail.
 
 ### 8. Notes and Terms
 Add any relevant notes — project milestones, warranty information, or a simple "Thank you for your business." This is also where you can specify late payment fees (typically 1.5% per month) and your cancellation policy.
@@ -186,7 +184,7 @@ Most online tools require you to create an account and upload your business data
 An **invoice** is sent before payment to request payment for services or goods. A **receipt** is sent after payment to confirm the transaction. You should always send an invoice first, then provide a receipt once paid.
 
 ### Do I need to charge sales tax on my freelance invoices?
-This depends on your jurisdiction, the type of service, and where your client is located. In many cases, freelancers are required to collect and remit sales tax. Consult a tax professional for your specific situation.
+This depends on your jurisdiction, the type of service, and where your client is located. In the US, most service-based freelancers don't owe sales tax — but several states tax certain services, and digital products are treated differently. UK and EU freelancers may need to charge VAT once they cross registration thresholds, while Canada and Australia use GST with their own limits. Our guide on [invoice tax rules for freelancers](/blog/do-i-need-to-charge-tax-on-invoices) covers each region with a quick-reference table. When your situation is complex, consult a qualified tax professional.
 
 ### How long should I keep my invoices?
 Most tax authorities recommend keeping invoices for at least **5-7 years**. Store both digital and physical copies in a well-organized system for easy retrieval during audits.
@@ -195,7 +193,7 @@ Most tax authorities recommend keeping invoices for at least **5-7 years**. Stor
 Absolutely. Free invoice generators produce the same professional PDF output as paid software. The key difference is that free tools typically focus on invoice creation, while paid software adds accounting, time tracking, and client management features.
 
 ### What should I do if a client does not pay?
-First, send a friendly reminder. If there is no response after 7 days, send a formal follow-up referencing the invoice number and due date. For invoices overdue by 30+ days, consider escalating to a collection process or withholding further work until the balance is settled. To prevent non-payment before it happens, [asking for an upfront deposit](/blog/how-to-ask-clients-for-upfront-deposit) — even 25–50% — gives you meaningful protection with new clients.
+First, send a friendly reminder. If there is no response after 7 days, send a formal follow-up referencing the invoice number and due date. For invoices overdue by 30+ days, consider escalating to a collection process or withholding further work until the balance is settled.
 
 ---
 
@@ -211,5 +209,4 @@ Ready to send your first professional invoice? Use our **[free invoice generator
 - [Free Invoice Template for Freelancers: Download & Create Instantly (2026)](/blog/free-invoice-template-freelancers)
 - [Freelance Invoice Numbering Best Practices](/blog/freelance-invoice-numbering-best-practices)
 - [How to Invoice for Scope Creep & Change Orders](/blog/how-to-invoice-for-scope-creep-change-orders)
-- [How to Ask Clients for an Upfront Deposit](/blog/how-to-ask-clients-for-upfront-deposit)
-- [How to Invoice International Clients](/blog/how-to-invoice-international-clients)
+- [Do I Need to Charge Tax on My Invoices? A Freelancer's Guide](/blog/do-i-need-to-charge-tax-on-invoices)
