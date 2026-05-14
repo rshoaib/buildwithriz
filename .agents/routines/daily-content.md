@@ -79,6 +79,7 @@ updated_at: "<YYYY-MM-DD today>"
 - **Never skip pre-commit hooks** (`--no-verify`) or `--no-gpg-sign`.
 - **Never force-push.**
 - **Avoid AI-tell phrasing:** "in today's fast-paced world", "navigate the complexities", "leverage", "delve into", "it's important to note", "a comprehensive guide to", "robust solution". Use the second-person ("you", "your") in the site's brand voice (read `.agents/context/site-context.md`).
+- **Never write to Supabase.** This site is file-based (Next.js — content lives under `app/blog/ or content/ (inspect)` in the repo). The only legitimate target for new content is a git commit on the default branch. If you see a Supabase MCP connector attached to this routine, ignore it for content writes — that connector is shared across all routines but only `easyorder-bot` legitimately uses Supabase for content. Writing content to Supabase from this routine will contaminate the orderviachat database (verified incident: 2026-05-14 with online-image-shrinker).
 
 ## After the change
 
