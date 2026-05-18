@@ -7,6 +7,8 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import MobileNav from "@/components/MobileNav";
+import { industries } from "@/data/industries";
+import { tools } from "@/data/tools";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -172,26 +174,26 @@ export default function RootLayout({
               <div>
                 <h4 className="font-semibold text-white mb-3 text-sm">Tools</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><Link href="/" className="hover:text-white transition">Invoice Generator</Link></li>
-                  <li><Link href="/receipt-generator" className="hover:text-white transition">Receipt Generator</Link></li>
+                  {tools.map((tool) => (
+                    <li key={tool.slug}>
+                      <Link href={tool.path} className="hover:text-white transition">{tool.name}</Link>
+                    </li>
+                  ))}
                   <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold text-white mb-3 text-sm">Templates</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><Link href="/invoice-template/accountant" className="hover:text-white transition">Accountant Invoice</Link></li>
-                  <li><Link href="/invoice-template/consultant" className="hover:text-white transition">Consultant Invoice</Link></li>
-                  <li><Link href="/invoice-template/contractor" className="hover:text-white transition">Contractor Invoice</Link></li>
-                  <li><Link href="/invoice-template/copywriter" className="hover:text-white transition">Copywriter Invoice</Link></li>
-                  <li><Link href="/invoice-template/developer" className="hover:text-white transition">Developer Invoice</Link></li>
-                  <li><Link href="/invoice-template/graphic-designer" className="hover:text-white transition">Graphic Designer Invoice</Link></li>
-                  <li><Link href="/invoice-template/marketing-agency" className="hover:text-white transition">Marketing Agency Invoice</Link></li>
-                  <li><Link href="/invoice-template/personal-trainer" className="hover:text-white transition">Personal Trainer Invoice</Link></li>
-                  <li><Link href="/invoice-template/photographer" className="hover:text-white transition">Photographer Invoice</Link></li>
-                  <li><Link href="/invoice-template/tutor" className="hover:text-white transition">Tutor Invoice</Link></li>
-                  <li><Link href="/invoice-template/videographer" className="hover:text-white transition">Videographer Invoice</Link></li>
-                  <li><Link href="/invoice-template/web-designer" className="hover:text-white transition">Web Designer Invoice</Link></li>
+                  {[...industries]
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((ind) => (
+                      <li key={ind.slug}>
+                        <Link href={`/invoice-template/${ind.slug}`} className="hover:text-white transition">
+                          {ind.name} Invoice
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
               <div>
