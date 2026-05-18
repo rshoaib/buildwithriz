@@ -12,6 +12,7 @@ keywords:
   - "international freelance invoice template"
   - "invoicing overseas clients"
   - "cross-border invoice freelancer"
+updated_at: "2026-05-18"
 ---
 
 Winning your first overseas client is a huge milestone — until you sit down to send the invoice and realize you have no idea which currency to bill in, who pays the bank fees, or whether you need to collect a tax form first. Invoicing international clients is not much harder than invoicing local ones, but the handful of extra steps can cost you days of delay and a surprising percentage of your payment if you skip them.
@@ -70,6 +71,18 @@ This is where most of the money gets lost. International payment methods vary wi
 - **Stripe** is a strong option if you have a recurring or high-volume relationship and want card payments.
 - **Payoneer** is popular with marketplaces (Upwork, Fiverr) and works well for receiving ACH/local transfers from large enterprises.
 
+At a glance, here's how the main options compare:
+
+| Method | Typical Fee | Settlement Speed | Best For |
+|---|---|---|---|
+| Wise | ~0.4–2.0% of transfer | 1–2 business days | Invoices under $10,000; EU, UK, US, AU, CA clients |
+| Bank wire (SWIFT) | $15–$50 sender fee + possible intermediary fees | 2–5 business days | Enterprise clients; invoices over $5,000 |
+| PayPal | ~4.4% + fixed fee + ~1.5% cross-border surcharge | Instant–1 day | Small, one-off projects |
+| Stripe | 1.5% + standard card rate | 1–2 days | Recurring clients who pay by card |
+| Payoneer | 0–2% (varies by payout type) | 2–3 business days | Marketplace withdrawals (Upwork, Fiverr) |
+
+*Fee ranges are approximate; verify at each provider's site before sending an invoice.*
+
 **Decide and document who pays the fees.** Two common arrangements:
 
 1. The client pays their bank's outgoing wire fee; you absorb receiving fees.
@@ -110,6 +123,22 @@ Cross-border payments take longer than domestic ones. A SWIFT wire can take 3–
 
 If you're new to this, the [BuildWithRiz invoice template](/invoice-template) has a field for terms and late fees built in — fill it in once and you can reuse it for every client.
 
+## Protect yourself with contract clauses before you invoice
+
+Long before the invoice goes out, a short contract clause can prevent the two most common cross-border payment disputes: who pays the transfer fee, and what happens if exchange rates shift between signing and payment.
+
+Include these three clauses in your freelance contract or project agreement:
+
+**Currency and exchange rate clause.** State the invoice currency explicitly and, if billing in a foreign currency, name a reference source for the rate ("EUR/USD mid-market rate on XE.com on the invoice date"). This eliminates ambiguity if the client's bank converts at a different rate.
+
+**Fee allocation clause.** Decide in writing who covers international transfer fees. A simple line works: "Client is responsible for all outgoing and intermediary bank fees. Invoice total is a net amount to be received by contractor." Without this in writing, you'll negotiate the shortfall after the payment lands.
+
+**Governing law.** Specify which country's courts would hear a dispute — for most freelancers, this is your home country. Contracts with no jurisdiction clause often default to whichever side has more legal resources. Having it written down matters if a disagreement escalates.
+
+For some international engagements — particularly goods-based work where the client's customs authority requires advance documentation — you may also need a [proforma invoice](/tools/proforma-invoice-generator) before the final invoice. A proforma confirms the estimated value and description of deliverables without triggering a payment obligation.
+
+Free contract templates for US-based freelancers are published by the [Freelancers Union](https://www.freelancersunion.org/), a nonprofit that advocates for independent workers.
+
 ## Common mistakes to avoid
 
 - **Invoicing in a currency you can't easily receive.** If your bank charges $40 to accept EUR, billing in EUR on a $300 invoice is a bad trade.
@@ -117,6 +146,20 @@ If you're new to this, the [BuildWithRiz invoice template](/invoice-template) ha
 - **Forgetting an intermediary bank line.** Some smaller US banks require an intermediary bank for inbound wires. Ask your bank and include it on the invoice.
 - **Rounding the exchange rate in the client's favor "to keep things simple."** You will lose money every time. Use the mid-market rate from a public source.
 - **Sending the invoice from a generic Gmail address** for an enterprise client. Most AP systems auto-flag or bounce these. Use a branded email if you can.
+
+## What to do when an international payment doesn't arrive on time
+
+Cross-border wires are slower than domestic transfers and occasionally get held by a correspondent bank without warning. Here's a straightforward process for following up:
+
+**Wait 5–7 business days after the due date before escalating.** SWIFT wires within the EU or US often arrive in 2–3 days, but inter-regional transfers through multiple correspondent banks can take a full week. Give it that window before sending your first follow-up.
+
+**Ask the client for the SWIFT trace number.** This is a unique reference ID their bank assigned to the outgoing wire. Give it to your own bank's international payments team — they can use it to track the transfer through the SWIFT network and tell you whether it's in transit, held, or returned.
+
+**Check whether the payment was returned to the sender.** An incorrect IBAN or missing SWIFT/BIC code is the most common reason wires bounce back. If your bank shows no incoming funds and the client insists they sent it, ask them to check their account for a returned credit. Confirm your bank details in writing and ask them to resend with the corrected routing information.
+
+**Escalate to the client's accounts payable department, not just your day-to-day contact.** Project managers rarely have direct access to finance systems. A professional email to AP — with the invoice PDF, the due date, and any SWIFT trace number — usually resolves things faster than waiting for your contact to forward messages internally.
+
+For persistent non-payment beyond 30 days, the path shifts from payment tracing to collections. The same documented trail of invoices and correspondence you built while using the [free invoice generator](/) is the foundation for either outcome.
 
 ## Your international invoice checklist
 
@@ -143,6 +186,9 @@ Invoicing international clients is mostly about doing your homework before the i
 - [Remitly — How to receive international payments as a freelancer](https://www.remitly.com/blog/business/how-to-receive-international-payments-as-a-freelancer/) (2026)
 - [IRS — About Form W-8 BEN](https://www.irs.gov/forms-pubs/about-form-w-8-ben)
 - [IRS — About Form W-9](https://www.irs.gov/forms-pubs/about-form-w-9)
+- [IRS — Publication 515: Withholding of Tax on Nonresident Aliens and Foreign Entities](https://www.irs.gov/publications/p515)
+- [World Bank — Remittance Prices Worldwide](https://remittanceprices.worldbank.org/) — tracks global cost of international money transfers by corridor
+- [Freelancers Union](https://www.freelancersunion.org/) — free contract templates and resources for independent workers
 - [FreelanceStructure — PayPal Fees for Freelancers](https://freelancestructure.com/paypal-fees-for-freelancers/) (2025)
 
 ---
