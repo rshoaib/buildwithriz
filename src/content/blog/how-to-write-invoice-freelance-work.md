@@ -12,7 +12,7 @@ keywords:
   - "get paid faster freelance"
 meta_title: "How to Write an Invoice for Freelance Work (2026)"
 meta_description: "Everything freelancers need to invoice remote clients: required fields, payment terms, and templates to get paid on time for your work."
-updated_at: "2026-04-25"
+updated_at: "2026-05-20"
 ---
 
 # How to Write an Invoice for Freelance Work (The 2026 Guide)
@@ -66,6 +66,39 @@ Want to incentivize clients to pay immediately? Offer a "Net 10" discount. For e
 ### Automate and Use Templates
 Creating an invoice from scratch in a Word document every time is a massive waste of your valuable, billable hours. Using a structured template ensures you never forget an essential element like an invoice number or a due date.
 
+## What Should a Freelance Invoice Include? Legal and Tax Considerations
+
+Your invoice doubles as a tax document. Per the [IRS recordkeeping guidance for small businesses](https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping), the documents you use to determine gross receipts — including invoices, receipts, and bank deposit slips — must be available for review, and the IRS expects self-employed workers to retain them for at least three years.
+
+A few requirements that catch new freelancers off guard:
+
+*   **Your tax identifier.** If a U.S. client pays you $600 or more in a year, they'll need your Social Security number or EIN on file for a 1099-NEC. Putting your EIN (not your SSN) on invoices keeps your personal details off shared documents — the [IRS self-employed individuals tax center](https://www.irs.gov/businesses/small-businesses-self-employed/self-employed-individuals-tax-center) walks through how to apply.
+*   **Sales tax on services.** A handful of U.S. states tax certain freelance services. Read our breakdown of whether you [need to charge tax on your invoices](/blog/do-i-need-to-charge-tax-on-invoices) before assuming services are exempt.
+*   **Cross-border invoices.** For non-U.S. clients, you may need a VAT or GST line depending on where the client is registered. Our guide to [how to invoice international clients](/blog/how-to-invoice-international-clients) covers VAT, currency conversion, and customs paperwork.
+
+## Hourly vs. Flat-Rate Line Items: How They Compare on an Invoice
+
+The biggest decision when writing your itemized section is whether to bill by the hour or by the deliverable. Each format reads differently to a client's accounts payable team and creates different friction when a client pushes back.
+
+| Aspect | Hourly Line Items | Flat-Rate Line Items |
+| :--- | :--- | :--- |
+| Best for | Open-ended work, retainers, ongoing maintenance | Defined-scope projects with clear deliverables |
+| Required detail | Date, task description, hourly rate, hours worked | Deliverable name, fixed price |
+| Dispute risk | "Why did that task take 4 hours?" | "That wasn't in scope." |
+| Approval speed | Slower — often needs timesheet review | Faster — totals match the signed proposal |
+
+If you blend both on the same invoice, group them under separate subtotals so the client can approve each block independently. Our guide to [flat-fee vs hourly pricing for freelancers](/blog/flat-fee-vs-hourly-pricing-freelancers) goes deeper into when each model wins.
+
+## Common Freelance Invoice Mistakes That Delay Payment
+
+Cash flow remains one of the top operational challenges for small employer firms, per the Federal Reserve's [Small Business Credit Survey](https://www.fedsmallbusiness.org/) — and slow invoicing is a leading contributor. Most delays trace back to a short list of avoidable errors:
+
+*   **No purchase order or reference number on the invoice.** Mid-size and enterprise clients route invoices through procurement software that matches each invoice to an approved PO. Without it, your invoice sits in a review queue.
+*   **Vague task descriptions.** "Design work — $1,200" is a red flag for any accounts payable reviewer. Spell out the deliverable and a one-line description.
+*   **Sending to the wrong inbox.** The project manager is rarely the right recipient. Ask for an `accounts payable` or `billing` email before you finalize the project — our guide to [how to send an invoice via email](/blog/how-to-send-invoice-via-email) covers the exact subject lines that get faster replies.
+
+Run through that list before every send. Pair it with our [step-by-step invoice writing guide](/blog/how-to-write-invoice-step-by-step) when you onboard a new client.
+
 ## Make Your Next Invoice in 2 Minutes
 
 You didn't become a freelancer to spend your time formatting spreadsheets. You want to do the work you love and get paid for it efficiently.
@@ -80,4 +113,6 @@ Need a different document format? We also offer a [proforma invoice generator](/
 
 ## Related guides
 
-- [How to Set Your Freelance Rates in 2026 (Without Guessing)](/blog/how-to-set-free
+- [How to Set Your Freelance Rates in 2026 (Without Guessing)](/blog/how-to-set-freelance-rates-2026)
+- [Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster](/blog/invoice-payment-terms-explained)
+- [How to Send an Invoice via Email: Complete Guide to Getting Paid Faster (2026)](/blog/how-to-send-invoice-via-email)
