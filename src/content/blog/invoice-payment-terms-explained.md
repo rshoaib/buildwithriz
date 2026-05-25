@@ -14,7 +14,7 @@ keywords:
   - "net 30 payment terms"
 meta_title: "Invoice Payment Terms Explained: Net 15 vs Net 30 (2026)"
 meta_description: "Master invoice payment terms like Net 15 vs Net 30. Proven strategies to get paid 2x faster and stop the late-payment cycle for freelancers."
-updated_at: "2026-05-03"
+updated_at: "2026-05-25"
 ---
 
 
@@ -146,6 +146,54 @@ Every professional invoice should display payment terms prominently. Here is wha
 Using a tool like [BuildWithRiz's free invoice generator](/) makes this process effortless. You can set payment terms, add detailed line items, and download a professional PDF — all without creating an account or storing any data.
 
 For a complete walkthrough of creating your first invoice, see our guide on [how to create a professional invoice](/blog/how-to-create-professional-invoice).
+
+---
+
+## When Does the Payment Clock Start? Invoice Date vs. Delivery Date
+
+"Net 30" only tells the client *how long* they have — not *when the countdown begins*. That gap is where most freelancer disputes start. Every Net term counts from a trigger date, and the trigger changes depending on who you bill.
+
+Four triggers you will run into:
+
+- **Invoice date** — the day you issue the invoice. This is the default most freelancers use and the easiest to track.
+- **Invoice receipt date** — the day the client's accounts team logs the invoice. Large companies and government buyers usually pay from this date, not the day you hit send.
+- **Delivery or completion date** — the day the work was accepted. Common in product and construction billing.
+- **End of month (EOM)** — the countdown starts on the last day of the month the invoice was issued, then runs the Net period.
+
+### A worked example
+
+Say you finish a logo on **March 1**, send a Net 30 invoice on **March 5**, and the client's accounts-payable inbox logs it on **March 7**.
+
+- Terms run from the **invoice date** → payment due **April 4**.
+- Terms run from the **receipt date** → payment due **April 6**.
+
+Across a year of monthly retainers, that gap can push your cash flow back a full billing cycle. When you bill a corporate or public-sector client, assume the clock starts on receipt of a *proper* invoice — one with no missing PO number or line-item errors that would let them reset the timer.
+
+That receipt-based rule is written into law for big buyers. Under the U.S. Treasury's [Prompt Payment rule](https://www.fiscal.treasury.gov/prompt-payment/), federal agencies generally must pay a proper invoice within 30 days of receiving it or owe automatic interest. In the UK, [GOV.UK guidance](https://www.gov.uk/invoicing-and-taking-payment-from-customers) sets a default of 30 days from the day the customer gets your invoice unless you agree something else in writing.
+
+**The fix:** print a real calendar due date on every invoice — "Due April 4, 2026" — instead of "Net 30." It settles the argument before it starts.
+
+---
+
+## Payment Terms Abbreviations and Codes (Quick Glossary)
+
+Invoices are full of shorthand, and corporate accounts-payable systems rely on it heavily. Here is what the common codes mean and where you will see them:
+
+| Code | What it means | When you'll see it |
+|------|---------------|--------------------|
+| **Net 7 / 15 / 30 / 60** | Full payment due in that many days | Standard freelance and B2B billing |
+| **Due on Receipt (DOR)** | Pay immediately on getting the invoice | New clients, small jobs |
+| **2/10 Net 30** | 2% discount if paid within 10 days, otherwise full amount in 30 | Clients you want to nudge into paying early |
+| **EOM** | Countdown starts at the end of the invoice month | Suppliers billing on a monthly cycle |
+| **15 MFI** | Due on the 15th of the month following the invoice | Agencies with fixed pay runs |
+| **CIA / PIA** | Cash (or payment) in advance, before work starts | High-risk or first-time projects |
+| **COD** | Cash on delivery | Physical goods, rare for services |
+
+### How to read "2/10 Net 30"
+
+Break it into two halves. The first pair, **2/10**, is the early-payment offer: a 2% discount if the client pays within 10 days. The second half, **Net 30**, is the fallback — the full balance is due in 30 days if they skip the discount. On a $3,000 invoice, paying early saves the client $60 — often enough to move you up their pay queue.
+
+Discount terms only work when a late fee backs them up. If you offer the carrot, state the stick too: most freelancers add 1.5% per month on overdue balances, and [how to calculate late fees on an invoice](/blog/how-to-calculate-late-fees-on-invoice) walks through the math. For business-to-business invoices in the UK, you can also charge [statutory interest of 8% above the Bank of England base rate](https://www.gov.uk/late-commercial-payments-interest-debt-recovery) on overdue payments even if your invoice never mentioned it.
 
 ---
 
