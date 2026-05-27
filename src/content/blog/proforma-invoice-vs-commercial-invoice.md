@@ -13,7 +13,7 @@ keywords:
   - "proforma vs regular invoice"
 meta_title: "Proforma Invoice vs Commercial Invoice (2026 Guide)"
 meta_description: "Proforma vs commercial invoice: when to send each, what fields differ, and how freelancers use proformas to secure deposits before delivery."
-updated_at: "2026-04-26"
+updated_at: "2026-05-27"
 ---
 
 
@@ -88,6 +88,43 @@ However, from an accounting and tax perspective, the transaction is not complete
 
 ---
 
+## How to Convert a Proforma Invoice into a Commercial Invoice
+
+Once your client approves the proforma and pays the deposit, the proforma has done its job. Converting it into the real document is mostly swapping a few fields, not starting over.
+
+The five-step process freelancers use:
+
+1. **Change the title** from "Proforma Invoice" to "Invoice." That single word changes its legal weight.
+2. **Assign a sequential invoice number** from your real sequence — never reuse the proforma's reference, or you'll confuse your books at tax time.
+3. **Confirm the final figures**, updating any line items that shifted during the project (extra revisions, added scope, currency changes).
+4. **Record the deposit** as a paid line so the client sees the remaining balance due.
+5. **Add a real calendar due date** and your late-fee clause. Unsure which terms fit? Our guide on [Net 15 vs Net 30 payment terms](/blog/invoice-payment-terms-explained) breaks it down.
+
+Built the original quote with our [proforma invoice generator](/tools/proforma-invoice-generator)? You can recreate the final bill in the [free invoice generator](/) in under a minute — same layout, just the fields above updated. This commercial invoice is the one tax authorities care about: the IRS expects reported income to be backed by source records like [sales invoices](https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping), which is why the proforma never goes in your books.
+
+---
+
+## Proforma and Commercial Invoices for Customs and International Shipping
+
+If you ship anything physical across a border — printed work, prototypes, branded merchandise — both documents take on a second job: clearing customs.
+
+The proforma usually travels first, so the buyer and customs can estimate duties *before* the shipment leaves. The commercial invoice follows with the goods and is what customs actually clears against.
+
+| What customs checks | Proforma Invoice | Commercial Invoice |
+|---|---|---|
+| **Timing** | Sent before shipping | Travels with the goods |
+| **Purpose at the border** | Estimate duties & taxes | Final basis for clearance |
+| **Binding?** | No — figures can change | Yes — declared value is final |
+| **Required for entry?** | Sometimes, for pre-clearance | Yes, for formal entries |
+
+In the United States, [U.S. Customs and Border Protection](https://www.cbp.gov/trade/basic-import-export) requires a commercial invoice for goods entering the country, showing an accurate description, quantity, and value. The International Trade Administration likewise lists it among the [core export documents](https://www.trade.gov/common-export-documents) used for clearance, with the pro forma serving as the upfront quote.
+
+Two rules keep you out of trouble: never understate value to save a client on duties (that's customs fraud), and make sure the description and value on the commercial invoice match the proforma the buyer planned around — mismatches trigger delays.
+
+Billing abroad for *services* instead of goods? Customs won't apply, but currency and tax handling still will — see [how to invoice international clients](/blog/how-to-invoice-international-clients). For physical exporters, our [free invoice generator](/) can title and itemize a customs-ready commercial invoice.
+
+---
+
 ## Create Your Invoices for Free
 
 Whether you need a proforma quote or a final commercial invoice, formatting matters. A clean, branded document builds immediate trust with new clients.
@@ -107,3 +144,4 @@ Our **[free invoice generator](/)** lets you create both. Just change the docume
 - [Quote vs Estimate vs Invoice: What's the Difference? (2026)](/blog/quote-vs-estimate-vs-invoice)
 - [How to Create a Professional Invoice: Complete Guide for Freelancers (2026)](/blog/how-to-create-professional-invoice)
 - [Invoice Payment Terms Explained (2026): How to Get Paid 2x Faster](/blog/invoice-payment-terms-explained)
+- [How to Invoice International Clients (2026)](/blog/how-to-invoice-international-clients)
